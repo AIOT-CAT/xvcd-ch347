@@ -31,7 +31,7 @@
 
 #define HW_TDO_BUF_SIZE              4096
 #define UCMDPKT_DATA_MAX_BYTES_USBHS 507 // The data length contained in each command packet during USB high-speed operation
-#define UCMDPKT_DATA_MAX_BITS_USBHS  248
+#define UCMDPKT_DATA_MAX_BITS_USBHS  248 // 248
 
 #define KHZ(n) ((n) * (unsigned long)(1000))
 #define MHZ(n) ((n) * (unsigned long)(1000000))
@@ -54,21 +54,8 @@ int io_init(unsigned int index)
 
     iIndex = index;
 
-    // Get the CH347 information
-    RetVal = CH347GetDeviceInfor(index, &DevInfor);
-    if (!RetVal) {
-        printf("Get CH347 Info failed.\n");
-        return -1;
-    }
-
-    // Judge whether CH347 operates in mode 3 (JTAG + UART Mode).
-    if (DevInfor.ChipMode != 3) {
-        printf("The CH347:[%d] not the JTAG mode[3], Current Mode is ==> [%d].\n ", index, DevInfor.ChipMode);
-        return -1;
-    }
-
     // Init the CH347 default clock rate : 30MHz
-    RetVal = CH347Jtag_INIT(iIndex, 4);
+    RetVal = CH347Jtag_INIT(iIndex, 3);
     if (!RetVal)
         return -1;
     printf("CH347:[%d] init done.\n", index);
@@ -81,8 +68,7 @@ int io_set_period(unsigned int index, unsigned int period)
     int i = 0;
     int clockIndex = 0;
     int RetVal;
-    int clock_rate = MHZ(10000) / period;
-    printf("Clock_Rete:%d.\n", clock_rate);
+    long clock_rate = 1000000000 / period;
     int speed_clock[] = {KHZ(468.75), KHZ(937.5), MHZ(1.875), MHZ(3.75), MHZ(7.5), MHZ(15), MHZ(30), MHZ(60)};
     // int speed_clock[] = {MHZ(1.875), MHZ(3.75), MHZ(7.5), MHZ(15), MHZ(30), MHZ(60)};
 
@@ -103,7 +89,6 @@ int io_set_period(unsigned int index, unsigned int period)
     period = MHZ(1000) / speed_clock[i];
     if (period > 10)
         period = period - (period % 10);
-    printf("period = %d.\n", period);
     return period;
 }
 
@@ -138,12 +123,14 @@ int io_scan(const unsigned char *TMS, const unsigned char *TDI, unsigned char *T
 
         for (i = 0; i < length; ++i) {
             v = TCK_L | TMS_L | TDI_L;
-            if (TMS[nb8 + (i / 8)] & (1 << (i & 7)))
+            if (TMS[nb8 + (i / 8)] & (1 << (i & 7))) {
                 v |= TMS_H;
-            if (TDI[nb8 + (i / 8)] & (1 << (i & 7)))
+            }
+            if (TDI[nb8 + (i / 8)] & (1 << (i & 7))) {
                 v |= TDI_H;
+            }
             CmdBuffer[BI++] = v;
-            CmdBuffer[BI++] = v | TCK_H;
+            CmdBuffer[BI++] = v | TCK_H;      
         }
 
         // 添加用于处理大包数据时组包操作参数
@@ -154,8 +141,8 @@ int io_scan(const unsigned char *TMS, const unsigned char *TDI, unsigned char *T
         }
 
         Txlen = length + 3;
-        // RetVal = CH347ReadData(iIndex, buffer + DI, &Txlen);
-        RetVal = CH347ReadData(iIndex, rbuffer, &Txlen);
+        RetVal = CH347ReadData(iIndex, rbuffer, &
+        Txlen);
         if (!RetVal) {
             printf("CH347 read data failed.\n");
             return -1;
@@ -163,7 +150,6 @@ int io_scan(const unsigned char *TMS, const unsigned char *TDI, unsigned char *T
         memcpy(&buffer[DI], &rbuffer[CH347_CMD_HEADER], Txlen);
 
         if (Txlen != (length + 3)) {
-            // RetVal = CH347ReadData(iIndex, buffer + DI + Txlen, &BI);
             RetVal = CH347ReadData(iIndex, rbuffer, &BI);
             if (!RetVal) {
                 printf("CH347 read data failed.\n");

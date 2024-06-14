@@ -12,6 +12,7 @@
 #include "io_ch347.h"
 
 #define VECTOR_IN_SZ 2048
+// #define VECTOR_IN_SZ 4096
 
 #define STRINGIFY(x) #x
 #define TOSTRING(x)  STRINGIFY(x)
@@ -19,7 +20,7 @@
 /*Listen on port 2542.*/
 #define DEFAULT_PORT       2542
 int DEFAULT_JTAG_SPEED = 30000000; // 30 Mhz
-
+    
 static int jtag_state;
 static int verbose = 0;
 
@@ -166,11 +167,11 @@ int handle_data(SOCKET fd, unsigned long frequency)
     do {
         char cmd[16];
         unsigned char buffer[2048], result[2048];
+        // unsigned char buffer[4096], result[4096];
 
         if (sread(fd, cmd, 2) != 1)
             return 1;
-
-        if (memcmp(cmd, "ge", 2) == 0) {
+        if (memcmp(cmd, "ge", 2) == 0) {    // 获取信息
             if (sread(fd, cmd, 6) != 1)
                 return 1;
             memcpy(result, xvcInfo, strlen(xvcInfo));
@@ -184,7 +185,7 @@ int handle_data(SOCKET fd, unsigned long frequency)
                 printf("\t Replied with %s\n", xvcInfo);
             }
             break;
-        } else if (memcmp(cmd, "se", 2) == 0) {
+        } else if (memcmp(cmd, "se", 2) == 0) {  // 速度设置
             if (sread(fd, cmd, 9) != 1)
                 return 1;
             
@@ -198,6 +199,8 @@ int handle_data(SOCKET fd, unsigned long frequency)
             } else {
                 period = 1000000000 / frequency;
             }
+
+            printf("Get the period:%d.\n", period);
 
             actPeriod = io_set_period(iIndex_CH347, (unsigned int)period);
 
@@ -217,17 +220,18 @@ int handle_data(SOCKET fd, unsigned long frequency)
             }
             break;
         } else if (memcmp(cmd, "sh", 2) == 0) {
-            if (sread(fd, cmd, 4) != 1)
+            if (sread(fd, cmd, 4) != 1) {
                 return 1;
+            }
             if (vlevel > 1) {
                 printf("%u : Received command: 'shift'\n", (int)time(NULL));
             }
         } else {
-
             fprintf(stderr, "invalid cmd '%s'\n", cmd);
             return 1;
         }
 
+        // 读取shift数据长度
         if (sread(fd, cmd + 6, 4) != 1) {
             fprintf(stderr, "reading length failed\n");
             return 1;
@@ -246,7 +250,8 @@ int handle_data(SOCKET fd, unsigned long frequency)
             fprintf(stderr, "reading data failed\n");
             return 1;
         }
-        memset(result, 0, nr_bytes);
+        memset(result, 0, sizeof(result));
+
         if (vlevel > 2) {
             printf("\tNumber of Bits  : %d\n", len);
             printf("\tNumber of Bytes : %d \n", nr_bytes);
@@ -255,33 +260,25 @@ int handle_data(SOCKET fd, unsigned long frequency)
             printf("\n");
         }
 
-        //
         // Only allow exiting if the state is rti and the IR
         // has the default value (IDCODE) by going through test_logic_reset.
         // As soon as going through capture_dr or capture_ir no exit is
         // allowed as this will change DR/IR.
-        //
         seen_tlr = (seen_tlr || jtag_state == test_logic_reset) && (jtag_state != capture_dr) && (jtag_state != capture_ir);
 
-        //
         // Due to a weird bug(??) xilinx impacts goes through another "capture_ir"/"capture_dr" cycle after
         // reading IR/DR which unfortunately sets IR to the read-out IR value.
         // Just ignore these transactions.
-        //
         if ((jtag_state == exit1_ir && len == 5 && buffer[0] == 0x17) ||
             (jtag_state == exit1_dr && len == 4 && buffer[0] == 0x0b)) {
             if (verbose)
                 printf("ignoring bogus jtag state movement in jtag_state %d\n", jtag_state);
         } else {
             for (i = 0; i < len; ++i) {
-                //
                 // Do the actual cycle.
-                //
                 int tms = !!(buffer[i / 8] & (1 << (i & 7)));
 
-                //
                 // Track the state.
-                //
                 jtag_state = jtag_step(jtag_state, tms);
             }
             
