@@ -1,55 +1,37 @@
 // xilinx virtual cable demon for jlink jtag
 // use connection string in Impact and another
 // xilinx_xvc host=localhost:2542 disableversioncheck=true
-
+#define _CRT_SECURE_NO_WARNINGS
+#define _WINSOCK_DEPRECATED_NO_WARNINGS
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <unistd.h>
+//#include <unistd.h>
+#include <io.h>
+#include <process.h>
 #include <winsock2.h>
 #include <time.h>
 
 #include "io_ch347.h"
-
+#pragma comment(lib, "Ws2_32.lib")
 #define VECTOR_IN_SZ 2048
 // #define VECTOR_IN_SZ 4096
 
 #define STRINGIFY(x) #x
 #define TOSTRING(x)  STRINGIFY(x)
 
-/*Listen on port 2542.*/
-#define DEFAULT_PORT       2542
+
 int DEFAULT_JTAG_SPEED = 30000000; // 30 Mhz
     
 static int jtag_state;
 static int verbose = 0;
 
+/*Listen on port 2542.*/
+int iPort = 2542;
 static int vlevel = 1;
 unsigned long iIndex_CH347 = 0;
+unsigned char szAddress[32] = "";
 
-/*JTAG state machine.*/
-enum {
-    test_logic_reset,
-    run_test_idle,
-
-    select_dr_scan,
-    capture_dr,
-    shift_dr,
-    exit1_dr,
-    pause_dr,
-    exit2_dr,
-    update_dr,
-
-    select_ir_scan,
-    capture_ir,
-    shift_ir,
-    exit1_ir,
-    pause_ir,
-    exit2_ir,
-    update_ir,
-
-    num_states
-};
 
 static int jtag_step(int state, int tms)
 {
@@ -281,8 +263,8 @@ int handle_data(SOCKET fd, unsigned long frequency)
                 // Track the state.
                 jtag_state = jtag_step(jtag_state, tms);
             }
-            
-            if (io_scan(buffer, buffer + nr_bytes, result, len) < 0) {
+
+            if (io_scan(buffer, buffer + nr_bytes, result, len, jtag_state) < 0) {
                 fprintf(stderr, "io_scan failed\n");
                 exit(1);
             }
@@ -308,6 +290,21 @@ int handle_data(SOCKET fd, unsigned long frequency)
     return 0;
 }
 
+void usage(void)
+{
+    const char use[] =
+        "  Usage:\n"\
+        " -h, --help                     display this message\n"\
+        " -a, --address <host add xxx>   specify host address, default is 127.0.0.1\n"\
+        " -p, --port <port num>          specify socket port, default is 2542\n"\
+        " -i, --index <index num>        specify CH347 index, default is 0\n"\
+        " -s, --speed <ch347 speed>      specify CH347 JTAG speed, default is 30MHz\n"\
+        "\n\n"
+        ;
+    printf(use);
+    exit(0);
+}
+
 int main(int argc, char **argv)
 {
     int ret = 0;
@@ -315,12 +312,38 @@ int main(int argc, char **argv)
     SOCKET s;
     int c;
     struct sockaddr_in address;
-    unsigned short port = DEFAULT_PORT;
+    unsigned short port = iPort;
     unsigned short jtagSpeed = DEFAULT_JTAG_SPEED;
     unsigned int coreId = 0;
-
-    opterr = 0;
-
+    for (int i = 1; i < argc; ++i) {
+        if (!strcmp(argv[i],"-h") || !strcmp(argv[i], "--help")) {
+            usage();
+        }
+        else \
+            if (!strcmp(argv[i], "-a") || !strcmp(argv[i], "--address") && i + 1 < argc) {
+                strcpy(szAddress, argv[i + 1]);
+                ++i;
+            }
+        else \
+            // port
+            if (!strcmp(argv[i], "-p") || !strcmp(argv[i], "--port") && i + 1 < argc) {
+                iPort = atoi(argv[i + 1]);
+                ++i;
+            }
+        else \
+            if (!strcmp(argv[i], "-i") || !strcmp(argv[i], "--index") && i + 1 < argc) {
+                iIndex_CH347 = atoi(argv[i + 1]);
+                ++i;
+            }
+        else \
+             if (!strcmp(argv[i], "-s") || !strcmp(argv[i], "--speed") && i + 1 < argc) {
+                 DEFAULT_JTAG_SPEED = atoi(argv[i + 1]);
+                 ++i;
+             }
+        else {
+            usage();
+        }
+    }
     if (io_init(iIndex_CH347)) {
         fprintf(stderr, "io_init failed\n");
         return 1;
@@ -348,7 +371,7 @@ int main(int argc, char **argv)
     i = 1;
     setsockopt(s, SOL_SOCKET, SO_REUSEADDR, (char *)&i, sizeof i);
 
-    address.sin_addr.s_addr = INADDR_ANY;
+    address.sin_addr.s_addr = strcmp(szAddress, "") ? inet_addr(szAddress) : INADDR_ANY;
     address.sin_port = htons(port);
     address.sin_family = AF_INET;
 
