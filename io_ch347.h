@@ -1,3 +1,6 @@
+#ifndef _IO_CH347_H
+#define _IO_CH347_H
+
 /*JTAG state machine.*/
 enum {
     test_logic_reset,
@@ -26,3 +29,5 @@ int io_init(unsigned int index);
 int io_set_period(unsigned int index, unsigned int period);
 int io_scan(const unsigned char* tms, const unsigned char* tdi, unsigned char* tdo, int len, int state);
 void io_close(void);
+
+#endif
