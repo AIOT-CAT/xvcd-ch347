@@ -86,31 +86,31 @@ int io_init(unsigned int index)
 int io_set_period(unsigned int index, unsigned int period)
 {
     int i = 0;
-	int clockIndex = 0;
-	int RetVal;
-	long clock_rate = 1000000000 / period;
-	int speed_clock[] = { KHZ(468.75), KHZ(937.5), MHZ(1.875), MHZ(3.75), MHZ(7.5), MHZ(15), MHZ(30), MHZ(60) };
-	// int speed_clock[] = {MHZ(1.875), MHZ(3.75), MHZ(7.5), MHZ(15), MHZ(30), MHZ(60)};
+    int clockIndex = 0;
+    int RetVal;
+    long clock_rate = 1000000000 / period;
+    int speed_clock[] = { KHZ(468.75), KHZ(937.5), MHZ(1.875), MHZ(3.75), MHZ(7.5), MHZ(15), MHZ(30), MHZ(60) };
+    // int speed_clock[] = {MHZ(1.875), MHZ(3.75), MHZ(7.5), MHZ(15), MHZ(30), MHZ(60)};
 
-	for (i = 0; i < sizeof(speed_clock) / sizeof(int); i++) {
-		if (clock_rate < speed_clock[i]) {
-			clockIndex = i;
-			break;
-		}
-	}
-	if (clockIndex > 7 || clock_rate > MHZ(60)) {
-		clockIndex = 7;
-	}
-	RetVal = CH347Jtag_INIT(iIndex, clockIndex);
-	if (!RetVal) {
-		printf("CH347 Set Clock failed\n");
-		return -1;
-	}
-	printf("CH347 Set Clock : %d.\n", speed_clock[clockIndex]);
-	period = MHZ(1000) / speed_clock[i];
-	if (period > 10)
-		period = period - (period % 10);
-	return period;
+    for (i = 0; i < sizeof(speed_clock) / sizeof(int); i++) {
+	    if (clock_rate < speed_clock[i]) {
+	        clockIndex = i;
+	        break;
+	    }
+    }
+    if (clockIndex > 7 || clock_rate > MHZ(60)) {
+	    clockIndex = 7;
+    }
+    RetVal = CH347Jtag_INIT(iIndex, clockIndex);
+    if (!RetVal) {
+	    printf("CH347 Set Clock failed\n");
+	    return -1;
+    }
+    printf("CH347 Set Clock : %d.\n", speed_clock[clockIndex]);
+    period = MHZ(1000) / speed_clock[i];
+    if (period > 10)
+	    period = period - (period % 10);
+    return period;
 }
 
 int writeTDI(const uint8_t* tx, uint8_t* rx, uint32_t len, bool end)
