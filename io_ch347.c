@@ -6,7 +6,7 @@
 #include <process.h>
 #include <windows.h>
 #include "io_ch347.h"
-#include "CH347DLL.H"
+#include "CH347/CH347DLL.H"
 #define SINGLEDATA 1
 #define PACKDATA   0
 
