@@ -72,6 +72,7 @@ bool isFull()
 { 
 	return get_obuf_length() == 0; 
 }
+
 int io_init(unsigned int index)
 {
     int RetVal;
