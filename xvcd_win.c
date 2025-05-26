@@ -312,7 +312,6 @@ int main(int argc, char **argv)
     SOCKET s;
     int c;
     struct sockaddr_in address;
-    unsigned short port = iPort;
     unsigned short jtagSpeed = DEFAULT_JTAG_SPEED;
     unsigned int coreId = 0;
     for (int i = 1; i < argc; ++i) {
@@ -372,7 +371,7 @@ int main(int argc, char **argv)
     setsockopt(s, SOL_SOCKET, SO_REUSEADDR, (char *)&i, sizeof i);
 
     address.sin_addr.s_addr = strcmp(szAddress, "") ? inet_addr(szAddress) : INADDR_ANY;
-    address.sin_port = htons(port);
+    address.sin_port = htons(iPort);
     address.sin_family = AF_INET;
 
     iResult = bind(s, (struct sockaddr *)&address, sizeof(address));
