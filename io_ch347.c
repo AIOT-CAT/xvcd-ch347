@@ -15,7 +15,6 @@ typedef uint8_t bool;
 #define true 1
 #define false 0
 int usb_xfer(unsigned wlen, unsigned rlen, unsigned* ract, bool defer);
-int flush() { return usb_xfer(0, 0, 0, false); }
 /*********/
 
 #define JTAGIO_STA_OUT_TDI  (0x10)
@@ -53,9 +52,26 @@ unsigned int iIndex = 0;
 uint8_t ibuf[MAX_BUFFER];
 uint8_t _obuf[MAX_BUFFER];
 uint8_t* obuf = _obuf;
-int get_buffer_size()  { return get_obuf_length(); }
-int get_obuf_length() { return MAX_BUFFER - (obuf - _obuf); }
-bool isFull() { return get_obuf_length() == 0; }
+
+int flush() 
+{ 
+	return usb_xfer(0, 0, 0, false); 
+}
+
+int get_obuf_length() 
+{ 
+	return MAX_BUFFER - (obuf - _obuf); 
+}
+
+int get_buffer_size()  
+{ 
+	return get_obuf_length(); 
+}
+
+bool isFull() 
+{ 
+	return get_obuf_length() == 0; 
+}
 int io_init(unsigned int index)
 {
     int RetVal;
@@ -241,7 +257,7 @@ int io_scan(const unsigned char *TMS, const unsigned char *TDI, unsigned char *T
 		// set tck to low
 		v = TCK_L | TMS_L | TDI_L;
 		unsigned char settck[] = { 0xD2,0x01,0x00,0x00 };
-		int len = 4;
+		unsigned long len = 4;
 		if (!CH347WriteData(iIndex, settck, &len) || len != 4) {
 			printf("%d : CH347WriteData failed.\n", __LINE__);
 			return -1;
