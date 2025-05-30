@@ -21,7 +21,7 @@
 #define TOSTRING(x)  STRINGIFY(x)
 
 
-int DEFAULT_JTAG_SPEED = 30000000; // 30 Mhz
+int DEFAULT_JTAG_SPEED = 3750000; // 3.75 Mhz
     
 static int jtag_state;
 static int verbose = 0;
@@ -184,7 +184,7 @@ int handle_data(SOCKET fd, unsigned long frequency)
 
             printf("Get the period:%d.\n", period);
 
-            actPeriod = io_set_period(iIndex_CH347, (unsigned int)period);
+            actPeriod = io_set_period(iIndex_CH347, /*(unsigned int)period*/frequency);
 
             if (actPeriod < 0) {
                 fprintf(stderr, "Error while setting the JTAG TCK period\n");
@@ -402,6 +402,8 @@ int main(int argc, char **argv)
         puts("Started");
     }
     while (1) {
+        fflush(stdout);
+        fflush(stderr);
         fd_set read = conn, except = conn;
         SOCKET fd;
 

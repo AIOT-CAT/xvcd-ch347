@@ -105,7 +105,7 @@ int io_set_period(unsigned int index, unsigned int period)
     int i = 0;
     int clockIndex = 0;
     int RetVal;
-    long clock_rate = 1000000000 / period;
+    long clock_rate = period;
     int speed_clock[] = { KHZ(468.75), KHZ(937.5), MHZ(1.875), MHZ(3.75), MHZ(7.5), MHZ(15), MHZ(30), MHZ(60) };
     // int speed_clock[] = {MHZ(1.875), MHZ(3.75), MHZ(7.5), MHZ(15), MHZ(30), MHZ(60)};
 
