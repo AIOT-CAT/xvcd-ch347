@@ -2,11 +2,11 @@
  CH347 Xilinx Virtual Cable
  xvcd_ch347 of XVC (Xilinx Virtual Cable) protocol based on xvcd (https://github.com/tmbinc/xvcd) 
  1. compile
-        a. mkdir build
-        b. cd build 
-        c. cmake ../
-        d. windows : ninja.exe
-           Linux   : make
+    a. mkdir build
+    b. cd build 
+    c. cmake ../
+    d. windows : ninja.exe
+       Linux   : make
     Regarding CH347DLLA64.DLL, you can obtain it from here : https://www.wch.cn/downloads/CH341PAR_ZIP.html
  2. About clock
     Support : KHZ(468.75), KHZ(937.5), MHZ(1.875), MHZ(3.75), MHZ(7.5), MHZ(15), MHZ(30), MHZ(60)
