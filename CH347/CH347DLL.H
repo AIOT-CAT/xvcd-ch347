@@ -2,10 +2,10 @@
 **                      Copyright  (C)  WCH  2001-2025                      **
 **                      Web:  http://wch.cn                                 **
 ******************************************************************************/
-// USB×ÜÏß½Ó¿ÚÐ¾Æ¬CH341/7²¢¿ÚÓ¦ÓÃ²ã½Ó¿Ú¿â,CH347/9»ùÓÚ480Mbps¸ßËÙUSB×ÜÏßÀ©Õ¹UART/SPI/I2C/JTAG/SWD
-// CH346»ùÓÚ480Mbps¸ßËÙUSB×ÜÏßÀ©Õ¹UART/SPI SLAVE,UART/PARALLEL SLAVE
+// USBï¿½ï¿½ï¿½ß½Ó¿ï¿½Ð¾Æ¬CH341/7ï¿½ï¿½ï¿½ï¿½Ó¦ï¿½Ã²ï¿½Ó¿Ú¿ï¿½,CH347/9ï¿½ï¿½ï¿½ï¿½480Mbpsï¿½ï¿½ï¿½ï¿½USBï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Õ¹UART/SPI/I2C/JTAG/SWD
+// CH346ï¿½ï¿½ï¿½ï¿½480Mbpsï¿½ï¿½ï¿½ï¿½USBï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Õ¹UART/SPI SLAVE,UART/PARALLEL SLAVE
 // CH347-DLL  V1.4
-// ÔËÐÐ»·¾³: Windows 98/ME, Windows 2000/XP, WIN7/8/10/11,and later.
+// ï¿½ï¿½ï¿½Ð»ï¿½ï¿½ï¿½: Windows 98/ME, Windows 2000/XP, WIN7/8/10/11,and later.
 // support USB chip: CH341, CH341A,CH347,CH339W
 // USB => Parallel, I2C, SPI, JTAG, SWD, PARALLEL,UART ...
 //Notes:
@@ -21,98 +21,98 @@ extern "C" {
 #endif
 
 #ifdef _WIN64
-#define		mOFFSET( s, m )			( (ULONG_PTR) & ( ( ( s * ) 0 ) -> m ) )	// ¶¨Òå»ñÈ¡½á¹¹³ÉÔ±Ïà¶ÔÆ«ÒÆµØÖ·µÄºê
+#define		mOFFSET( s, m )			( (ULONG_PTR) & ( ( ( s * ) 0 ) -> m ) )	// ï¿½ï¿½ï¿½ï¿½ï¿½È¡ï¿½á¹¹ï¿½ï¿½Ô±ï¿½ï¿½ï¿½Æ«ï¿½Æµï¿½Ö·ï¿½Äºï¿½
 #else
-#define		mOFFSET( s, m )			( (ULONG) & ( ( ( s * ) 0 ) -> m ) )	// ¶¨Òå»ñÈ¡½á¹¹³ÉÔ±Ïà¶ÔÆ«ÒÆµØÖ·µÄºê
+#define		mOFFSET( s, m )			( (ULONG) & ( ( ( s * ) 0 ) -> m ) )	// ï¿½ï¿½ï¿½ï¿½ï¿½È¡ï¿½á¹¹ï¿½ï¿½Ô±ï¿½ï¿½ï¿½Æ«ï¿½Æµï¿½Ö·ï¿½Äºï¿½
 #endif
 
 #ifndef		max
-#define		max( a, b )				( ( ( a ) > ( b ) ) ? ( a ) : ( b ) )	// ½Ï´óÖµ
+#define		max( a, b )				( ( ( a ) > ( b ) ) ? ( a ) : ( b ) )	// ï¿½Ï´ï¿½Öµ
 #endif
 
 #ifndef		min
-#define		min( a, b )				( ( ( a ) < ( b ) ) ? ( a ) : ( b ) )	// ½ÏÐ¡Öµ
+#define		min( a, b )				( ( ( a ) < ( b ) ) ? ( a ) : ( b ) )	// ï¿½ï¿½Ð¡Öµ
 #endif
 
 #ifdef		ExAllocatePool
-#undef		ExAllocatePool						// É¾³ý´øTAGµÄÄÚ´æ·ÖÅä
+#undef		ExAllocatePool						// É¾ï¿½ï¿½ï¿½ï¿½TAGï¿½ï¿½ï¿½Ú´ï¿½ï¿½ï¿½ï¿½
 #endif
 
 #ifndef		NTSTATUS
-typedef		LONG	NTSTATUS;					// ·µ»Ø×´Ì¬
+typedef		LONG	NTSTATUS;					// ï¿½ï¿½ï¿½ï¿½×´Ì¬
 #endif
 
-//ÓëCH31DLLºÏÓÃCH341WDMÇý¶¯
+//ï¿½ï¿½CH31DLLï¿½ï¿½ï¿½ï¿½CH341WDMï¿½ï¿½ï¿½ï¿½
 #ifndef _CH341_DLL_H
-typedef	struct	_USB_SETUP_PKT {				// USB¿ØÖÆ´«ÊäµÄ½¨Á¢½×¶ÎµÄÊý¾ÝÇëÇó°ü½á¹¹
-	UCHAR			mUspReqType;				// 00H ÇëÇóÀàÐÍ
-	UCHAR			mUspRequest;				// 01H ÇëÇó´úÂë
+typedef	struct	_USB_SETUP_PKT {				// USBï¿½ï¿½ï¿½Æ´ï¿½ï¿½ï¿½Ä½ï¿½ï¿½ï¿½ï¿½×¶Îµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½á¹¹
+	UCHAR			mUspReqType;				// 00H ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	UCHAR			mUspRequest;				// 01H ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	union	{
 		struct	{
-			UCHAR	mUspValueLow;				// 02H Öµ²ÎÊýµÍ×Ö½Ú
-			UCHAR	mUspValueHigh;				// 03H Öµ²ÎÊý¸ß×Ö½Ú
+			UCHAR	mUspValueLow;				// 02H Öµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö½ï¿½
+			UCHAR	mUspValueHigh;				// 03H Öµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö½ï¿½
 		};
-		USHORT		mUspValue;					// 02H-03H Öµ²ÎÊý
+		USHORT		mUspValue;					// 02H-03H Öµï¿½ï¿½ï¿½ï¿½
 	};
 	union	{
 		struct	{
-			UCHAR	mUspIndexLow;				// 04H Ë÷Òý²ÎÊýµÍ×Ö½Ú
-			UCHAR	mUspIndexHigh;				// 05H Ë÷Òý²ÎÊý¸ß×Ö½Ú
+			UCHAR	mUspIndexLow;				// 04H ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö½ï¿½
+			UCHAR	mUspIndexHigh;				// 05H ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö½ï¿½
 		};
-		USHORT		mUspIndex;					// 04H-05H Ë÷Òý²ÎÊý
+		USHORT		mUspIndex;					// 04H-05H ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	};
-	USHORT			mLength;					// 06H-07H Êý¾Ý½×¶ÎµÄÊý¾Ý³¤¶È
+	USHORT			mLength;					// 06H-07H ï¿½ï¿½ï¿½Ý½×¶Îµï¿½ï¿½ï¿½ï¿½Ý³ï¿½ï¿½ï¿½
 } mUSB_SETUP_PKT, *mPUSB_SETUP_PKT;
 
 
-typedef	struct	_WIN32_COMMAND {				// ¶¨ÒåWIN32ÃüÁî½Ó¿Ú½á¹¹
+typedef	struct	_WIN32_COMMAND {				// ï¿½ï¿½ï¿½ï¿½WIN32ï¿½ï¿½ï¿½ï¿½Ó¿Ú½á¹¹
 	union	{
-		ULONG		mFunction;					// ÊäÈëÊ±Ö¸¶¨¹¦ÄÜ´úÂë»òÕß¹ÜµÀºÅ
-		NTSTATUS	mStatus;					// Êä³öÊ±·µ»Ø²Ù×÷×´Ì¬
+		ULONG		mFunction;					// ï¿½ï¿½ï¿½ï¿½Ê±Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½Ü´ï¿½ï¿½ï¿½ï¿½ï¿½ß¹Üµï¿½ï¿½ï¿½
+		NTSTATUS	mStatus;					// ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½Ø²ï¿½ï¿½ï¿½×´Ì¬
 	};
-	ULONG			mLength;					// ´æÈ¡³¤¶È,·µ»ØºóÐøÊý¾ÝµÄ³¤¶È
+	ULONG			mLength;					// ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½Øºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÝµÄ³ï¿½ï¿½ï¿½
 	union	{
-		mUSB_SETUP_PKT	mSetupPkt;				// USB¿ØÖÆ´«ÊäµÄ½¨Á¢½×¶ÎµÄÊý¾ÝÇëÇó
-		UCHAR			mBuffer[ 512];      	// Êý¾Ý»º³åÇø,³¤¶ÈÎª0ÖÁ255B
+		mUSB_SETUP_PKT	mSetupPkt;				// USBï¿½ï¿½ï¿½Æ´ï¿½ï¿½ï¿½Ä½ï¿½ï¿½ï¿½ï¿½×¶Îµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		UCHAR			mBuffer[ 512];      	// ï¿½ï¿½ï¿½Ý»ï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½Îª0ï¿½ï¿½255B
 	};
 } mWIN32_COMMAND, *mPWIN32_COMMAND;
-// WIN32Ó¦ÓÃ²ã½Ó¿ÚÃüÁî
-#define		IOCTL_CH341_COMMAND		( FILE_DEVICE_UNKNOWN << 16 | FILE_ANY_ACCESS << 14 | 0x0f34 << 2 | METHOD_BUFFERED )	// ×¨ÓÃ½Ó¿Ú
+// WIN32Ó¦ï¿½Ã²ï¿½Ó¿ï¿½ï¿½ï¿½ï¿½ï¿½
+#define		IOCTL_CH341_COMMAND		( FILE_DEVICE_UNKNOWN << 16 | FILE_ANY_ACCESS << 14 | 0x0f34 << 2 | METHOD_BUFFERED )	// ×¨ï¿½Ã½Ó¿ï¿½
 
-#define		mWIN32_COMMAND_HEAD		mOFFSET( mWIN32_COMMAND, mBuffer )	// WIN32ÃüÁî½Ó¿ÚµÄÍ·³¤¶È
+#define		mWIN32_COMMAND_HEAD		mOFFSET( mWIN32_COMMAND, mBuffer )	// WIN32ï¿½ï¿½ï¿½ï¿½Ó¿Úµï¿½Í·ï¿½ï¿½ï¿½ï¿½
 
-#define		mCH341_MAX_NUMBER		32			// ×î¶àÍ¬Ê±Á¬½ÓµÄCH341/7Éè±¸ÊýÁ¿
+#define		mCH341_MAX_NUMBER		32			// ï¿½ï¿½ï¿½Í¬Ê±ï¿½ï¿½ï¿½Óµï¿½CH341/7ï¿½è±¸ï¿½ï¿½ï¿½ï¿½
 
-#define		mMAX_BUFFER_LENGTH		0x1000		// Êý¾Ý»º³åÇø×î´ó³¤¶È4096
+#define		mMAX_BUFFER_LENGTH		0x1000		// ï¿½ï¿½ï¿½Ý»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ó³¤¶ï¿½4096
 
-#define		mMAX_COMMAND_LENGTH		( mWIN32_COMMAND_HEAD + mMAX_BUFFER_LENGTH )	// ×î´óÊý¾Ý³¤¶È¼ÓÉÏÃüÁî½á¹¹Í·µÄ³¤¶È
+#define		mMAX_COMMAND_LENGTH		( mWIN32_COMMAND_HEAD + mMAX_BUFFER_LENGTH )	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý³ï¿½ï¿½È¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½á¹¹Í·ï¿½Ä³ï¿½ï¿½ï¿½
 
-#define		mDEFAULT_BUFFER_LEN		0x0400		// Êý¾Ý»º³åÇøÄ¬ÈÏ³¤¶È1024
+#define		mDEFAULT_BUFFER_LEN		0x0400		// ï¿½ï¿½ï¿½Ý»ï¿½ï¿½ï¿½ï¿½ï¿½Ä¬ï¿½Ï³ï¿½ï¿½ï¿½1024
 
-#define		mDEFAULT_COMMAND_LEN	( mWIN32_COMMAND_HEAD + mDEFAULT_BUFFER_LEN )	// Ä¬ÈÏÊý¾Ý³¤¶È¼ÓÉÏÃüÁî½á¹¹Í·µÄ³¤¶È
+#define		mDEFAULT_COMMAND_LEN	( mWIN32_COMMAND_HEAD + mDEFAULT_BUFFER_LEN )	// Ä¬ï¿½ï¿½ï¿½ï¿½ï¿½Ý³ï¿½ï¿½È¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½á¹¹Í·ï¿½Ä³ï¿½ï¿½ï¿½
 
-// CH341¶ËµãµØÖ·
-#define		mCH347_ENDP_DATA_UP		0x86		// CH347µÄÊý¾Ý¿éÉÏ´«¶ËµãµÄµØÖ·
-#define		mCH347_ENDP_DATA_DOWN	0x06		// CH347µÄÊý¾Ý¿éÏÂ´«¶ËµãµÄµØÖ·
+// CH341ï¿½Ëµï¿½ï¿½Ö·
+#define		mCH347_ENDP_DATA_UP		0x86		// CH347ï¿½ï¿½ï¿½ï¿½ï¿½Ý¿ï¿½ï¿½Ï´ï¿½ï¿½Ëµï¿½Äµï¿½Ö·
+#define		mCH347_ENDP_DATA_DOWN	0x06		// CH347ï¿½ï¿½ï¿½ï¿½ï¿½Ý¿ï¿½ï¿½Â´ï¿½ï¿½Ëµï¿½Äµï¿½Ö·
 
-// Éè±¸²ã½Ó¿ÚÌá¹©µÄ¹ÜµÀ²Ù×÷ÃüÁî
-#define		mPipeDeviceCtrl			0x00000004	// CH347µÄ×ÛºÏ¿ØÖÆ¹ÜµÀ
-#define		mPipeDataUp				0x00000006	// CH347µÄÊý¾Ý¿éÉÏ´«¹ÜµÀ
-#define		mPipeDataDown			0x00000007	// CH347µÄÊý¾Ý¿éÏÂ´«¹ÜµÀ
+// ï¿½è±¸ï¿½ï¿½Ó¿ï¿½ï¿½á¹©ï¿½Ä¹Üµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+#define		mPipeDeviceCtrl			0x00000004	// CH347ï¿½ï¿½ï¿½ÛºÏ¿ï¿½ï¿½Æ¹Üµï¿½
+#define		mPipeDataUp				0x00000006	// CH347ï¿½ï¿½ï¿½ï¿½ï¿½Ý¿ï¿½ï¿½Ï´ï¿½ï¿½Üµï¿½
+#define		mPipeDataDown			0x00000007	// CH347ï¿½ï¿½ï¿½ï¿½ï¿½Ý¿ï¿½ï¿½Â´ï¿½ï¿½Üµï¿½
 
-// Ó¦ÓÃ²ã½Ó¿ÚµÄ¹¦ÄÜ´úÂë
-#define		mFuncNoOperation		0x00000000	// ÎÞ²Ù×÷
-#define		mFuncGetVersion			0x00000001	// »ñÈ¡Çý¶¯³ÌÐò°æ±¾ºÅ
-#define		mFuncGetConfig			0x00000002	// »ñÈ¡USBÉè±¸ÅäÖÃÃèÊö·û
-#define		mFuncSetTimeout			0x00000009	// ÉèÖÃUSBÍ¨Ñ¶³¬Ê±
-#define		mFuncSetExclusive		0x0000000b	// ÉèÖÃ¶ÀÕ¼Ê¹ÓÃ
-#define		mFuncResetDevice		0x0000000c	// ¸´Î»USBÉè±¸
-#define		mFuncResetPipe			0x0000000d	// ¸´Î»USB¹ÜµÀ
-#define		mFuncAbortPipe			0x0000000e	// È¡ÏûUSB¹ÜµÀµÄÊý¾ÝÇëÇó
-#define		mFuncBufferMode			0x00000020	// Éè¶¨»º³åÉÏ´«Ä£Ê½¼°²éÑ¯»º³åÇøÖÐµÄÊý¾Ý³¤¶È
-#define		mFuncBufferModeDn		0x00000021	// Éè¶¨»º³åÏÂ´«Ä£Ê½¼°²éÑ¯»º³åÇøÖÐµÄÊý¾Ý³¤¶È
-#define		mFuncGetVersionEx		0x00000022	// »ñÈ¡Çý¶¯³ÌÐò°æ±¾ºÅ¼°Ð¾Æ¬ÐÍºÅ
-// USBÉè±¸±ê×¼ÇëÇó´úÂë
+// Ó¦ï¿½Ã²ï¿½Ó¿ÚµÄ¹ï¿½ï¿½Ü´ï¿½ï¿½ï¿½
+#define		mFuncNoOperation		0x00000000	// ï¿½Þ²ï¿½ï¿½ï¿½
+#define		mFuncGetVersion			0x00000001	// ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½æ±¾ï¿½ï¿½
+#define		mFuncGetConfig			0x00000002	// ï¿½ï¿½È¡USBï¿½è±¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+#define		mFuncSetTimeout			0x00000009	// ï¿½ï¿½ï¿½ï¿½USBÍ¨Ñ¶ï¿½ï¿½Ê±
+#define		mFuncSetExclusive		0x0000000b	// ï¿½ï¿½ï¿½Ã¶ï¿½Õ¼Ê¹ï¿½ï¿½
+#define		mFuncResetDevice		0x0000000c	// ï¿½ï¿½Î»USBï¿½è±¸
+#define		mFuncResetPipe			0x0000000d	// ï¿½ï¿½Î»USBï¿½Üµï¿½
+#define		mFuncAbortPipe			0x0000000e	// È¡ï¿½ï¿½USBï¿½Üµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+#define		mFuncBufferMode			0x00000020	// ï¿½è¶¨ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½Ä£Ê½ï¿½ï¿½ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ðµï¿½ï¿½ï¿½ï¿½Ý³ï¿½ï¿½ï¿½
+#define		mFuncBufferModeDn		0x00000021	// ï¿½è¶¨ï¿½ï¿½ï¿½ï¿½ï¿½Â´ï¿½Ä£Ê½ï¿½ï¿½ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ðµï¿½ï¿½ï¿½ï¿½Ý³ï¿½ï¿½ï¿½
+#define		mFuncGetVersionEx		0x00000022	// ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½æ±¾ï¿½Å¼ï¿½Ð¾Æ¬ï¿½Íºï¿½
+// USBï¿½è±¸ï¿½ï¿½×¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 #define		mUSB_CLR_FEATURE		0x01
 #define		mUSB_SET_FEATURE		0x03
 #define		mUSB_GET_STATUS			0x00
@@ -125,474 +125,474 @@ typedef	struct	_WIN32_COMMAND {				// ¶¨ÒåWIN32ÃüÁî½Ó¿Ú½á¹¹
 #define		mUSB_SET_INTERF			0x0b
 #define		mUSB_SYNC_FRAME			0x0c
 
-// CH341¿ØÖÆ´«ÊäµÄ³§ÉÌ×¨ÓÃÇëÇóÀàÐÍ
-#define		mCH341_VENDOR_READ		0xC0		// Í¨¹ý¿ØÖÆ´«ÊäÊµÏÖµÄCH341³§ÉÌ×¨ÓÃ¶Á²Ù×÷
-#define		mCH341_VENDOR_WRITE		0x40		// Í¨¹ý¿ØÖÆ´«ÊäÊµÏÖµÄCH341³§ÉÌ×¨ÓÃÐ´²Ù×÷
+// CH341ï¿½ï¿½ï¿½Æ´ï¿½ï¿½ï¿½Ä³ï¿½ï¿½ï¿½×¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+#define		mCH341_VENDOR_READ		0xC0		// Í¨ï¿½ï¿½ï¿½ï¿½ï¿½Æ´ï¿½ï¿½ï¿½Êµï¿½Öµï¿½CH341ï¿½ï¿½ï¿½ï¿½×¨ï¿½Ã¶ï¿½ï¿½ï¿½ï¿½ï¿½
+#define		mCH341_VENDOR_WRITE		0x40		// Í¨ï¿½ï¿½ï¿½ï¿½ï¿½Æ´ï¿½ï¿½ï¿½Êµï¿½Öµï¿½CH341ï¿½ï¿½ï¿½ï¿½×¨ï¿½ï¿½Ð´ï¿½ï¿½ï¿½ï¿½
 
-#define		mCH341A_CMD_I2C_STREAM	0xAA		// I2C½Ó¿ÚµÄÃüÁî°ü,´Ó´Î×Ö½Ú¿ªÊ¼ÎªI2CÃüÁîÁ÷
-#define		mCH341A_CMD_UIO_STREAM	0xAB		// UIO½Ó¿ÚµÄÃüÁî°ü,´Ó´Î×Ö½Ú¿ªÊ¼ÎªÃüÁîÁ÷
-#define		mCH341A_CMD_PIO_STREAM	0xAE		// PIO½Ó¿ÚµÄÃüÁî°ü,´Ó´Î×Ö½Ú¿ªÊ¼ÎªÊý¾ÝÁ÷
-// CH341A¿ØÖÆ´«ÊäµÄ³§ÉÌ×¨ÓÃÇëÇó´úÂë
-#define		mCH341A_BUF_CLEAR		0xB2		// Çå³ýÎ´Íê³ÉµÄÊý¾Ý
-#define		mCH341A_I2C_CMD_X		0x54		// ·¢³öI2C½Ó¿ÚµÄÃüÁî,Á¢¼´Ö´ÐÐ
-#define		mCH341A_DELAY_MS		0x5E		// ÒÔÙñÃëÎªµ¥Î»ÑÓÊ±Ö¸¶¨Ê±¼ä
-#define		mCH341A_GET_VER			0x5F		// »ñÈ¡Ð¾Æ¬°æ±¾
+#define		mCH341A_CMD_I2C_STREAM	0xAA		// I2Cï¿½Ó¿Úµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½Ó´ï¿½ï¿½Ö½Ú¿ï¿½Ê¼ÎªI2Cï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+#define		mCH341A_CMD_UIO_STREAM	0xAB		// UIOï¿½Ó¿Úµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½Ó´ï¿½ï¿½Ö½Ú¿ï¿½Ê¼Îªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+#define		mCH341A_CMD_PIO_STREAM	0xAE		// PIOï¿½Ó¿Úµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½Ó´ï¿½ï¿½Ö½Ú¿ï¿½Ê¼Îªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+// CH341Aï¿½ï¿½ï¿½Æ´ï¿½ï¿½ï¿½Ä³ï¿½ï¿½ï¿½×¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+#define		mCH341A_BUF_CLEAR		0xB2		// ï¿½ï¿½ï¿½Î´ï¿½ï¿½Éµï¿½ï¿½ï¿½ï¿½ï¿½
+#define		mCH341A_I2C_CMD_X		0x54		// ï¿½ï¿½ï¿½ï¿½I2Cï¿½Ó¿Úµï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½Ö´ï¿½ï¿½
+#define		mCH341A_DELAY_MS		0x5E		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½Î»ï¿½ï¿½Ê±Ö¸ï¿½ï¿½Ê±ï¿½ï¿½
+#define		mCH341A_GET_VER			0x5F		// ï¿½ï¿½È¡Ð¾Æ¬ï¿½æ±¾
 
-#define		mCH341A_CMD_I2C_STM_STA	0x74		// I2C½Ó¿ÚµÄÃüÁîÁ÷:²úÉúÆðÊ¼Î»
-#define		mCH341A_CMD_I2C_STM_STO	0x75		// I2C½Ó¿ÚµÄÃüÁîÁ÷:²úÉúÍ£Ö¹Î»
-#define		mCH341A_CMD_I2C_STM_OUT	0x80		// I2C½Ó¿ÚµÄÃüÁîÁ÷:Êä³öÊý¾Ý,Î»5-Î»0Îª³¤¶È,ºóÐø×Ö½ÚÎªÊý¾Ý,0³¤¶ÈÔòÖ»·¢ËÍÒ»¸ö×Ö½Ú²¢·µ»ØÓ¦´ð
-#define		mCH341A_CMD_I2C_STM_IN	0xC0		// I2C½Ó¿ÚµÄÃüÁîÁ÷:ÊäÈëÊý¾Ý,Î»5-Î»0Îª³¤¶È,0³¤¶ÈÔòÖ»½ÓÊÕÒ»¸ö×Ö½Ú²¢·¢ËÍÎÞÓ¦´ð
-#define		mCH341A_CMD_I2C_STM_MAX	( min( 0x3F, mCH341_PACKET_LENGTH ) )	// I2C½Ó¿ÚµÄÃüÁîÁ÷µ¥¸öÃüÁîÊäÈëÊä³öÊý¾ÝµÄ×î´ó³¤¶È
-#define		mCH341A_CMD_I2C_STM_SET	0x60		// I2C½Ó¿ÚµÄÃüÁîÁ÷:ÉèÖÃ²ÎÊý,Î»2=SPIµÄI/OÊý(0=µ¥Èëµ¥³ö,1=Ë«ÈëË«³ö),Î»1Î»0=I2CËÙ¶È(00=µÍËÙ,01=±ê×¼,10=¿ìËÙ,11=¸ßËÙ)
-#define		mCH341A_CMD_I2C_STM_US	0x40		// I2C½Ó¿ÚµÄÃüÁîÁ÷:ÒÔÎ¢ÃëÎªµ¥Î»ÑÓÊ±,Î»3-Î»0ÎªÑÓÊ±Öµ
-#define		mCH341A_CMD_I2C_STM_MS	0x50		// I2C½Ó¿ÚµÄÃüÁîÁ÷:ÒÔÙñÃëÎªµ¥Î»ÑÓÊ±,Î»3-Î»0ÎªÑÓÊ±Öµ
-#define		mCH341A_CMD_I2C_STM_DLY	0x0F		// I2C½Ó¿ÚµÄÃüÁîÁ÷µ¥¸öÃüÁîÑÓÊ±µÄ×î´óÖµ
-#define		mCH341A_CMD_I2C_STM_END	0x00		// I2C½Ó¿ÚµÄÃüÁîÁ÷:ÃüÁî°üÌáÇ°½áÊø
+#define		mCH341A_CMD_I2C_STM_STA	0x74		// I2Cï¿½Ó¿Úµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½:ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¼Î»
+#define		mCH341A_CMD_I2C_STM_STO	0x75		// I2Cï¿½Ó¿Úµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½:ï¿½ï¿½ï¿½ï¿½Í£Ö¹Î»
+#define		mCH341A_CMD_I2C_STM_OUT	0x80		// I2Cï¿½Ó¿Úµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½:ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,Î»5-Î»0Îªï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½ï¿½Ö½ï¿½Îªï¿½ï¿½ï¿½ï¿½,0ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö»ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½Ö½Ú²ï¿½ï¿½ï¿½ï¿½ï¿½Ó¦ï¿½ï¿½
+#define		mCH341A_CMD_I2C_STM_IN	0xC0		// I2Cï¿½Ó¿Úµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½:ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,Î»5-Î»0Îªï¿½ï¿½ï¿½ï¿½,0ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö»ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½Ö½Ú²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó¦ï¿½ï¿½
+#define		mCH341A_CMD_I2C_STM_MAX	( min( 0x3F, mCH341_PACKET_LENGTH ) )	// I2Cï¿½Ó¿Úµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ýµï¿½ï¿½ï¿½ó³¤¶ï¿½
+#define		mCH341A_CMD_I2C_STM_SET	0x60		// I2Cï¿½Ó¿Úµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½:ï¿½ï¿½ï¿½Ã²ï¿½ï¿½ï¿½,Î»2=SPIï¿½ï¿½I/Oï¿½ï¿½(0=ï¿½ï¿½ï¿½ëµ¥ï¿½ï¿½,1=Ë«ï¿½ï¿½Ë«ï¿½ï¿½),Î»1Î»0=I2Cï¿½Ù¶ï¿½(00=ï¿½ï¿½ï¿½ï¿½,01=ï¿½ï¿½×¼,10=ï¿½ï¿½ï¿½ï¿½,11=ï¿½ï¿½ï¿½ï¿½)
+#define		mCH341A_CMD_I2C_STM_US	0x40		// I2Cï¿½Ó¿Úµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½:ï¿½ï¿½Î¢ï¿½ï¿½Îªï¿½ï¿½Î»ï¿½ï¿½Ê±,Î»3-Î»0Îªï¿½ï¿½Ê±Öµ
+#define		mCH341A_CMD_I2C_STM_MS	0x50		// I2Cï¿½Ó¿Úµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½:ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½Î»ï¿½ï¿½Ê±,Î»3-Î»0Îªï¿½ï¿½Ê±Öµ
+#define		mCH341A_CMD_I2C_STM_DLY	0x0F		// I2Cï¿½Ó¿Úµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½Öµ
+#define		mCH341A_CMD_I2C_STM_END	0x00		// I2Cï¿½Ó¿Úµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½:ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½
 
-#define		mCH341A_CMD_UIO_STM_IN	0x00		// UIO½Ó¿ÚµÄÃüÁîÁ÷:ÊäÈëÊý¾ÝD7-D0
-#define		mCH341A_CMD_UIO_STM_DIR	0x40		// UIO½Ó¿ÚµÄÃüÁîÁ÷:Éè¶¨I/O·½ÏòD5-D0,Î»5-Î»0Îª·½ÏòÊý¾Ý
-#define		mCH341A_CMD_UIO_STM_OUT	0x80		// UIO½Ó¿ÚµÄÃüÁîÁ÷:Êä³öÊý¾ÝD5-D0,Î»5-Î»0ÎªÊý¾Ý
-#define		mCH341A_CMD_UIO_STM_US	0xC0		// UIO½Ó¿ÚµÄÃüÁîÁ÷:ÒÔÎ¢ÃëÎªµ¥Î»ÑÓÊ±,Î»5-Î»0ÎªÑÓÊ±Öµ
-#define		mCH341A_CMD_UIO_STM_END	0x20		// UIO½Ó¿ÚµÄÃüÁîÁ÷:ÃüÁî°üÌáÇ°½áÊø
+#define		mCH341A_CMD_UIO_STM_IN	0x00		// UIOï¿½Ó¿Úµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½:ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½D7-D0
+#define		mCH341A_CMD_UIO_STM_DIR	0x40		// UIOï¿½Ó¿Úµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½:ï¿½è¶¨I/Oï¿½ï¿½ï¿½ï¿½D5-D0,Î»5-Î»0Îªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+#define		mCH341A_CMD_UIO_STM_OUT	0x80		// UIOï¿½Ó¿Úµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½:ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½D5-D0,Î»5-Î»0Îªï¿½ï¿½ï¿½ï¿½
+#define		mCH341A_CMD_UIO_STM_US	0xC0		// UIOï¿½Ó¿Úµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½:ï¿½ï¿½Î¢ï¿½ï¿½Îªï¿½ï¿½Î»ï¿½ï¿½Ê±,Î»5-Î»0Îªï¿½ï¿½Ê±Öµ
+#define		mCH341A_CMD_UIO_STM_END	0x20		// UIOï¿½Ó¿Úµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½:ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½
 
-#define		MAX_DEVICE_PATH_SIZE	128			// Éè±¸Ãû³ÆµÄ×î´ó×Ö·ûÊý
-#define		MAX_DEVICE_ID_SIZE		64			// Éè±¸IDµÄ×î´ó×Ö·ûÊý
-#endif _CH341_DLL_H
+#define		MAX_DEVICE_PATH_SIZE	128			// ï¿½è±¸ï¿½ï¿½ï¿½Æµï¿½ï¿½ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½
+#define		MAX_DEVICE_ID_SIZE		64			// ï¿½è±¸IDï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½
+#endif 
 
-// Çý¶¯½Ó¿Ú
+// ï¿½ï¿½ï¿½ï¿½ï¿½Ó¿ï¿½
 #define CH347_USB_VENDOR   0
 #define CH347_USB_HID      2
 #define CH347_USB_VCP      3
 
-// CH347_USB_VENDORÖ§³ÖCH341/CH347T/CH347F/CH339W
+// CH347_USB_VENDORÖ§ï¿½ï¿½CH341/CH347T/CH347F/CH339W
 #define CHIP_TYPE_CH341  0
 #define CHIP_TYPE_CH347  1
 #define CHIP_TYPE_CH347F 2
 #define CHIP_TYPE_CH339W 3
 #define CHIP_TYPE_CH347T CHIP_TYPE_CH347
 
-// Ð¾Æ¬¹¦ÄÜ½Ó¿ÚÀàÐÍ
+// Ð¾Æ¬ï¿½ï¿½ï¿½Ü½Ó¿ï¿½ï¿½ï¿½ï¿½ï¿½
 #define CH347_FUNC_UART          0
 #define CH347_FUNC_SPI_IIC       1
 #define CH347_FUNC_JTAG_IIC      2
-#define CH347_FUNC_JTAG_IIC_SPI  3		// CH347FÍ¬Ê±Ö§³ÖSPI\I2C\JTAG½Ó¿Ú
+#define CH347_FUNC_JTAG_IIC_SPI  3		// CH347FÍ¬Ê±Ö§ï¿½ï¿½SPI\I2C\JTAGï¿½Ó¿ï¿½
 
-#define DEFAULT_READ_TIMEOUT	500		// Ä¬ÈÏ¶Á³¬Ê±ºÁÃëÊý
-#define DEFAULT_WRITE_TIMEOUT	500		// Ä¬ÈÏÐ´³¬Ê±ºÁÃëÊý
+#define DEFAULT_READ_TIMEOUT	500		// Ä¬ï¿½Ï¶ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+#define DEFAULT_WRITE_TIMEOUT	500		// Ä¬ï¿½ï¿½Ð´ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
-#define	mCH347_PACKET_LENGTH	512		// CH347Ö§³ÖµÄÊý¾Ý°üµÄ³¤¶È
+#define	mCH347_PACKET_LENGTH	512		// CH347Ö§ï¿½Öµï¿½ï¿½ï¿½ï¿½Ý°ï¿½ï¿½Ä³ï¿½ï¿½ï¿½
 
 #pragma pack(1) 
 
-//SPI¿ØÖÆÆ÷ÅäÖÃ
+//SPIï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 typedef struct _SPI_CONFIG{
 	UCHAR           iMode;                 // 0-3:SPI Mode0/1/2/3
-	UCHAR           iClock;                // 0=60MHz, 1=30MHz, 2=15MHz, 3=7.5MHz, 4=3.75MHz, 5=1.875MHz, 6=937.5KHz£¬7=468.75KHz
-	UCHAR			iByteOrder;            // 0=µÍÎ»ÔÚÇ°(LSB), 1=¸ßÎ»ÔÚÇ°(MSB)
-	USHORT          iSpiWriteReadInterval; // SPI½Ó¿Ú³£¹æ¶ÁÈ¡Ð´ÈëÊý¾ÝÃüÁî£¬µ¥Î»ÎªuS
-	UCHAR           iSpiOutDefaultData;    // SPI¶ÁÊý¾ÝÊ±Ä¬ÈÏÊä³öÊý¾Ý
-	ULONG			iChipSelect;           // Æ¬Ñ¡¿ØÖÆ, Î»7Îª0ÔòºöÂÔÆ¬Ñ¡¿ØÖÆ, Î»7Îª1Ôò²ÎÊýÓÐÐ§: Î»1Î»0Îª00/01·Ö±ðÑ¡ÔñCS1/CS2Òý½Å×÷ÎªµÍµçÆ½ÓÐÐ§Æ¬Ñ¡
-	UCHAR           CS1Polarity;           // Î»0£ºÆ¬Ñ¡CS1¼«ÐÔ¿ØÖÆ£º0£ºµÍµçÆ½ÓÐÐ§£»1£º¸ßµçÆ½ÓÐÐ§£»
-	UCHAR           CS2Polarity;           // Î»0£ºÆ¬Ñ¡CS2¼«ÐÔ¿ØÖÆ£º0£ºµÍµçÆ½ÓÐÐ§£»1£º¸ßµçÆ½ÓÐÐ§£»
-	USHORT          iIsAutoDeativeCS;      // ²Ù×÷Íê³ÉºóÊÇ·ñ×Ô¶¯³·ÏûÆ¬Ñ¡
-	USHORT          iActiveDelay;          // ÉèÖÃÆ¬Ñ¡ºóÖ´ÐÐ¶ÁÐ´²Ù×÷µÄÑÓÊ±Ê±¼ä,µ¥Î»us
-	ULONG           iDelayDeactive;        // ³·ÏûÆ¬Ñ¡ºóÖ´ÐÐ¶ÁÐ´²Ù×÷µÄÑÓÊ±Ê±¼ä,µ¥Î»us
+	UCHAR           iClock;                // 0=60MHz, 1=30MHz, 2=15MHz, 3=7.5MHz, 4=3.75MHz, 5=1.875MHz, 6=937.5KHzï¿½ï¿½7=468.75KHz
+	UCHAR			iByteOrder;            // 0=ï¿½ï¿½Î»ï¿½ï¿½Ç°(LSB), 1=ï¿½ï¿½Î»ï¿½ï¿½Ç°(MSB)
+	USHORT          iSpiWriteReadInterval; // SPIï¿½Ó¿Ú³ï¿½ï¿½ï¿½ï¿½È¡Ð´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½î£¬ï¿½ï¿½Î»ÎªuS
+	UCHAR           iSpiOutDefaultData;    // SPIï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±Ä¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	ULONG			iChipSelect;           // Æ¬Ñ¡ï¿½ï¿½ï¿½ï¿½, Î»7Îª0ï¿½ï¿½ï¿½ï¿½ï¿½Æ¬Ñ¡ï¿½ï¿½ï¿½ï¿½, Î»7Îª1ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð§: Î»1Î»0Îª00/01ï¿½Ö±ï¿½Ñ¡ï¿½ï¿½CS1/CS2ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îªï¿½Íµï¿½Æ½ï¿½ï¿½Ð§Æ¬Ñ¡
+	UCHAR           CS1Polarity;           // Î»0ï¿½ï¿½Æ¬Ñ¡CS1ï¿½ï¿½ï¿½Ô¿ï¿½ï¿½Æ£ï¿½0ï¿½ï¿½ï¿½Íµï¿½Æ½ï¿½ï¿½Ð§ï¿½ï¿½1ï¿½ï¿½ï¿½ßµï¿½Æ½ï¿½ï¿½Ð§ï¿½ï¿½
+	UCHAR           CS2Polarity;           // Î»0ï¿½ï¿½Æ¬Ñ¡CS2ï¿½ï¿½ï¿½Ô¿ï¿½ï¿½Æ£ï¿½0ï¿½ï¿½ï¿½Íµï¿½Æ½ï¿½ï¿½Ð§ï¿½ï¿½1ï¿½ï¿½ï¿½ßµï¿½Æ½ï¿½ï¿½Ð§ï¿½ï¿½
+	USHORT          iIsAutoDeativeCS;      // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Éºï¿½ï¿½Ç·ï¿½ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½ï¿½Æ¬Ñ¡
+	USHORT          iActiveDelay;          // ï¿½ï¿½ï¿½ï¿½Æ¬Ñ¡ï¿½ï¿½Ö´ï¿½Ð¶ï¿½Ð´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±Ê±ï¿½ï¿½,ï¿½ï¿½Î»us
+	ULONG           iDelayDeactive;        // ï¿½ï¿½ï¿½ï¿½Æ¬Ñ¡ï¿½ï¿½Ö´ï¿½Ð¶ï¿½Ð´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±Ê±ï¿½ï¿½,ï¿½ï¿½Î»us
 }mSpiCfgS,*mPSpiCfgS;
 
-//Éè±¸ÐÅÏ¢
+//ï¿½è±¸ï¿½ï¿½Ï¢
 typedef struct _DEV_INFOR{
-	UCHAR    iIndex;                 // µ±Ç°´ò¿ªÐòºÅ
-	UCHAR    DevicePath[MAX_PATH];   // Éè±¸Á´½ÓÃû,ÓÃÓÚCreateFile
-	UCHAR    UsbClass;               // Çý¶¯Àà±ð 0:CH347_USB_CH341, 2:CH347_USB_HID, 3:CH347_USB_VCP
-	UCHAR    FuncType;               // ¹¦ÄÜÀà±ð 0:CH347_FUNC_UART, 1:CH347_FUNC_SPI_I2C, 2:CH347_FUNC_JTAG_I2C, 3:CH347_FUNC_JTAG_IIC_SPI
+	UCHAR    iIndex;                 // ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½ï¿½
+	UCHAR    DevicePath[MAX_PATH];   // ï¿½è±¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½CreateFile
+	UCHAR    UsbClass;               // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 0:CH347_USB_CH341, 2:CH347_USB_HID, 3:CH347_USB_VCP
+	UCHAR    FuncType;               // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 0:CH347_FUNC_UART, 1:CH347_FUNC_SPI_I2C, 2:CH347_FUNC_JTAG_I2C, 3:CH347_FUNC_JTAG_IIC_SPI
 	CHAR     DeviceID[64];           // USB\VID_xxxx&PID_xxxx
-	UCHAR    ChipMode;               // Ð¾Æ¬¹¤×÷Ä£Ê½,0:Mode0(UART0/1); 1:Mode1(Uart1+SPI+I2C); 2:Mode2(HID Uart1+SPI+I2C) 3:Mode3(Uart1+Jtag) 4:CH347F(Uart*2+Jtag/SPI/IIC)
-	HANDLE   DevHandle;              // Éè±¸¾ä±ú
-	USHORT   BulkOutEndpMaxSize;     // ÅúÁ¿ÉÏ´«¶Ëµã´óÐ¡
-	USHORT   BulkInEndpMaxSize;      // ÅúÁ¿ÏÂ´«¶Ëµã´óÐ¡
-	UCHAR    UsbSpeedType;           // USBËÙ¶ÈÀàÐÍ£¬0:FS,1:HS,2:SS
-	UCHAR    CH347IfNum;             // USB½Ó¿ÚºÅ: CH347T: IF0:UART;   IF1:SPI/IIC/JTAG/GPIO
+	UCHAR    ChipMode;               // Ð¾Æ¬ï¿½ï¿½ï¿½ï¿½Ä£Ê½,0:Mode0(UART0/1); 1:Mode1(Uart1+SPI+I2C); 2:Mode2(HID Uart1+SPI+I2C) 3:Mode3(Uart1+Jtag) 4:CH347F(Uart*2+Jtag/SPI/IIC)
+	HANDLE   DevHandle;              // ï¿½è±¸ï¿½ï¿½ï¿½
+	USHORT   BulkOutEndpMaxSize;     // ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ï¿½Ëµï¿½ï¿½Ð¡
+	USHORT   BulkInEndpMaxSize;      // ï¿½ï¿½ï¿½ï¿½ï¿½Â´ï¿½ï¿½Ëµï¿½ï¿½Ð¡
+	UCHAR    UsbSpeedType;           // USBï¿½Ù¶ï¿½ï¿½ï¿½ï¿½Í£ï¿½0:FS,1:HS,2:SS
+	UCHAR    CH347IfNum;             // USBï¿½Ó¿Úºï¿½: CH347T: IF0:UART;   IF1:SPI/IIC/JTAG/GPIO
 									 //            CH347F: IF0:UART0;  IF1:UART1; IF 2:SPI/IIC/JTAG/GPIO
-	UCHAR    DataUpEndp;             // ÅúÁ¿ÉÏ´«¶ËµãµØÖ·
-	UCHAR    DataDnEndp;             // ÅúÁ¿ÏÂ´«¶ËµãµØÖ·
-	CHAR     ProductString[64];      // USB²úÆ·×Ö·û´®
-	CHAR     ManufacturerString[64]; // USB³§ÉÌ×Ö·û´®
-	ULONG    WriteTimeout;           // USBÐ´³¬Ê±
-	ULONG    ReadTimeout;            // USB¶Á³¬Ê±
-	CHAR     FuncDescStr[64];        // ½Ó¿Ú¹¦ÄÜÃèÊö·û
-	UCHAR    FirewareVer;            // ¹Ì¼þ°æ±¾,Ê®Áù½øÖÆÖµ
+	UCHAR    DataUpEndp;             // ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ï¿½Ëµï¿½ï¿½Ö·
+	UCHAR    DataDnEndp;             // ï¿½ï¿½ï¿½ï¿½ï¿½Â´ï¿½ï¿½Ëµï¿½ï¿½Ö·
+	CHAR     ProductString[64];      // USBï¿½ï¿½Æ·ï¿½Ö·ï¿½ï¿½ï¿½
+	CHAR     ManufacturerString[64]; // USBï¿½ï¿½ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½
+	ULONG    WriteTimeout;           // USBÐ´ï¿½ï¿½Ê±
+	ULONG    ReadTimeout;            // USBï¿½ï¿½ï¿½ï¿½Ê±
+	CHAR     FuncDescStr[64];        // ï¿½Ó¿Ú¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	UCHAR    FirewareVer;            // ï¿½Ì¼ï¿½ï¿½æ±¾,Ê®ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Öµ
 }mDeviceInforS,*mPDeviceInforS;
 
 #pragma pack() 
 
-// CH347¸÷Ä£Ê½¹«ÓÃº¯Êý,Ö§³ÖCH347ËùÓÐÄ£Ê½ÏÂµÄ´ò¿ª¡¢¹Ø±Õ¡¢USB¶Á¡¢USBÐ´£¬°üº¬HID
-//´ò¿ªUSBÉè±¸
-HANDLE WINAPI CH347OpenDevice(ULONG DevI);	// Ö¸¶¨Éè±¸ÐòºÅ
+// CH347ï¿½ï¿½Ä£Ê½ï¿½ï¿½ï¿½Ãºï¿½ï¿½ï¿½,Ö§ï¿½ï¿½CH347ï¿½ï¿½ï¿½ï¿½Ä£Ê½ï¿½ÂµÄ´ò¿ª¡ï¿½ï¿½Ø±Õ¡ï¿½USBï¿½ï¿½ï¿½ï¿½USBÐ´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½HID
+//ï¿½ï¿½USBï¿½è±¸
+HANDLE WINAPI CH347OpenDevice(ULONG DevI);	// Ö¸ï¿½ï¿½ï¿½è±¸ï¿½ï¿½ï¿½
 
-//¹Ø±ÕUSBÉè±¸
-BOOL WINAPI CH347CloseDevice(ULONG iIndex);	// Ö¸¶¨Éè±¸ÐòºÅ
+//ï¿½Ø±ï¿½USBï¿½è±¸
+BOOL WINAPI CH347CloseDevice(ULONG iIndex);	// Ö¸ï¿½ï¿½ï¿½è±¸ï¿½ï¿½ï¿½
 
-// »ñÈ¡Éè±¸USBÐòÁÐºÅ
-BOOL WINAPI CH347GetSerialNumber(ULONG iIndex,				// Ö¸¶¨Éè±¸ÐòºÅ
-								 PUCHAR iSerialNumberStr);	// Ö¸Ïò»ñÈ¡µ½µÄÉè±¸ÐòÁÐºÅ
+// ï¿½ï¿½È¡ï¿½è±¸USBï¿½ï¿½ï¿½Ðºï¿½
+BOOL WINAPI CH347GetSerialNumber(ULONG iIndex,				// Ö¸ï¿½ï¿½ï¿½è±¸ï¿½ï¿½ï¿½
+								 PUCHAR iSerialNumberStr);	// Ö¸ï¿½ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½è±¸ï¿½ï¿½ï¿½Ðºï¿½
 
-// »ñÈ¡Éè±¸ÐÅÏ¢
-BOOL WINAPI CH347GetDeviceInfor(ULONG iIndex,					// Ö¸¶¨Éè±¸ÐòºÅ
-								mDeviceInforS *DevInformation);	// Ö¸Ïò»ñÈ¡µ½µÄÉè±¸ÐÅÏ¢
+// ï¿½ï¿½È¡ï¿½è±¸ï¿½ï¿½Ï¢
+BOOL WINAPI CH347GetDeviceInfor(ULONG iIndex,					// Ö¸ï¿½ï¿½ï¿½è±¸ï¿½ï¿½ï¿½
+								mDeviceInforS *DevInformation);	// Ö¸ï¿½ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½è±¸ï¿½ï¿½Ï¢
 
-// »ñÈ¡CH347Ð¾Æ¬ÀàÐÍ:0:CHIP_TYPE_CH341£»1:CHIP_TYPE_CH347/CHIP_TYPE_CH347T,2:CHIP_TYPE_CH347F£»3:CHIP_TYPE_CH339W
-UCHAR	WINAPI	CH347GetChipType(ULONG			iIndex );  // Ö¸¶¨Éè±¸ÐòºÅ
+// ï¿½ï¿½È¡CH347Ð¾Æ¬ï¿½ï¿½ï¿½ï¿½:0:CHIP_TYPE_CH341ï¿½ï¿½1:CHIP_TYPE_CH347/CHIP_TYPE_CH347T,2:CHIP_TYPE_CH347Fï¿½ï¿½3:CHIP_TYPE_CH339W
+UCHAR	WINAPI	CH347GetChipType(ULONG			iIndex );  // Ö¸ï¿½ï¿½ï¿½è±¸ï¿½ï¿½ï¿½
 
-// »ñÈ¡Çý¶¯°æ±¾¡¢¿â°æ±¾¡¢Éè±¸°æ±¾¡¢Ð¾Æ¬ÀàÐÍ(CH341(FS)/CH347HS)
+// ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½æ±¾ï¿½ï¿½ï¿½ï¿½æ±¾ï¿½ï¿½ï¿½è±¸ï¿½æ±¾ï¿½ï¿½Ð¾Æ¬ï¿½ï¿½ï¿½ï¿½(CH341(FS)/CH347HS)
 BOOL	WINAPI	CH347GetVersion(ULONG 			 iIndex, 
 							    PUCHAR           iDriverVer,
 								PUCHAR           iDLLVer,
 							    PUCHAR           ibcdDevice,
 							    PUCHAR           iChipType);  //CHIP_TYPE_CH341/7
 
-typedef		VOID	( CALLBACK	* mPCH347_NOTIFY_ROUTINE ) (								 // Éè±¸²å°ÎÍ¨ÖªÊÂ¼þ»Øµ÷³ÌÐò
-															ULONG			iEventStatus );  // Éè±¸²å°ÎÊÂ¼þºÍµ±Ç°×´Ì¬(ÔÚÏÂÐÐ¶¨Òå): 0=Éè±¸°Î³öÊÂ¼þ, 3=Éè±¸²åÈëÊÂ¼þ
+typedef		VOID	( CALLBACK	* mPCH347_NOTIFY_ROUTINE ) (								 // ï¿½è±¸ï¿½ï¿½ï¿½Í¨Öªï¿½Â¼ï¿½ï¿½Øµï¿½ï¿½ï¿½ï¿½ï¿½
+															ULONG			iEventStatus );  // ï¿½è±¸ï¿½ï¿½ï¿½ï¿½Â¼ï¿½ï¿½Íµï¿½Ç°×´Ì¬(ï¿½ï¿½ï¿½ï¿½ï¿½Ð¶ï¿½ï¿½ï¿½): 0=ï¿½è±¸ï¿½Î³ï¿½ï¿½Â¼ï¿½, 3=ï¿½è±¸ï¿½ï¿½ï¿½ï¿½ï¿½Â¼ï¿½
 
-#define		CH347_DEVICE_ARRIVAL		3		// Éè±¸²åÈëÊÂ¼þ,ÒÑ¾­²åÈë
-#define		CH347_DEVICE_REMOVE_PEND	1		// Éè±¸½«Òª°Î³ö
-#define		CH347_DEVICE_REMOVE			0		// Éè±¸°Î³öÊÂ¼þ,ÒÑ¾­°Î³ö
+#define		CH347_DEVICE_ARRIVAL		3		// ï¿½è±¸ï¿½ï¿½ï¿½ï¿½ï¿½Â¼ï¿½,ï¿½Ñ¾ï¿½ï¿½ï¿½ï¿½ï¿½
+#define		CH347_DEVICE_REMOVE_PEND	1		// ï¿½è±¸ï¿½ï¿½Òªï¿½Î³ï¿½
+#define		CH347_DEVICE_REMOVE			0		// ï¿½è±¸ï¿½Î³ï¿½ï¿½Â¼ï¿½,ï¿½Ñ¾ï¿½ï¿½Î³ï¿½
 
-// Éè¶¨Éè±¸ÊÂ¼þÍ¨Öª³ÌÐò
-BOOL	WINAPI	CH347SetDeviceNotify(ULONG					iIndex,				// Ö¸¶¨Éè±¸ÐòºÅ,0¶ÔÓ¦µÚÒ»¸öÉè±¸
-									 PCHAR					iDeviceID,			// ¿ÉÑ¡²ÎÊý,Ö¸Ïò×Ö·û´®,Ö¸¶¨±»¼à¿ØµÄÉè±¸µÄID,×Ö·û´®ÒÔ\0ÖÕÖ¹
-									 mPCH347_NOTIFY_ROUTINE	iNotifyRoutine );   // Ö¸¶¨Éè±¸ÊÂ¼þ»Øµ÷³ÌÐò,ÎªNULLÔòÈ¡ÏûÊÂ¼þÍ¨Öª,·ñÔòÔÚ¼ì²âµ½ÊÂ¼þÊ±µ÷ÓÃ¸Ã³ÌÐò
+// ï¿½è¶¨ï¿½è±¸ï¿½Â¼ï¿½Í¨Öªï¿½ï¿½ï¿½ï¿½
+BOOL	WINAPI	CH347SetDeviceNotify(ULONG					iIndex,				// Ö¸ï¿½ï¿½ï¿½è±¸ï¿½ï¿½ï¿½,0ï¿½ï¿½Ó¦ï¿½ï¿½Ò»ï¿½ï¿½ï¿½è±¸
+									 PCHAR					iDeviceID,			// ï¿½ï¿½Ñ¡ï¿½ï¿½ï¿½ï¿½,Ö¸ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½,Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Øµï¿½ï¿½è±¸ï¿½ï¿½ID,ï¿½Ö·ï¿½ï¿½ï¿½ï¿½ï¿½\0ï¿½ï¿½Ö¹
+									 mPCH347_NOTIFY_ROUTINE	iNotifyRoutine );   // Ö¸ï¿½ï¿½ï¿½è±¸ï¿½Â¼ï¿½ï¿½Øµï¿½ï¿½ï¿½ï¿½ï¿½,ÎªNULLï¿½ï¿½È¡ï¿½ï¿½ï¿½Â¼ï¿½Í¨Öª,ï¿½ï¿½ï¿½ï¿½ï¿½Ú¼ï¿½âµ½ï¿½Â¼ï¿½Ê±ï¿½ï¿½ï¿½Ã¸Ã³ï¿½ï¿½ï¿½
 
-// ¶ÁÈ¡USBÊý¾Ý¿é
-BOOL	WINAPI	CH347ReadData( ULONG			iIndex,          // Ö¸¶¨Éè±¸ÐòºÅ
-							   PVOID			oBuffer,         // Ö¸ÏòÒ»¸ö×ã¹»´óµÄ»º³åÇø,ÓÃÓÚ±£´æ¶ÁÈ¡µÄÊý¾Ý
-							   PULONG			ioLength );		 // Ö¸Ïò³¤¶Èµ¥Ôª,ÊäÈëÊ±Îª×¼±¸¶ÁÈ¡µÄ³¤¶È,·µ»ØºóÎªÊµ¼Ê¶ÁÈ¡µÄ³¤¶È
+// ï¿½ï¿½È¡USBï¿½ï¿½ï¿½Ý¿ï¿½
+BOOL	WINAPI	CH347ReadData( ULONG			iIndex,          // Ö¸ï¿½ï¿½ï¿½è±¸ï¿½ï¿½ï¿½
+							   PVOID			oBuffer,         // Ö¸ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ã¹»ï¿½ï¿½Ä»ï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½Ú±ï¿½ï¿½ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+							   PULONG			ioLength );		 // Ö¸ï¿½ò³¤¶Èµï¿½Ôª,ï¿½ï¿½ï¿½ï¿½Ê±Îª×¼ï¿½ï¿½ï¿½ï¿½È¡ï¿½Ä³ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½Øºï¿½ÎªÊµï¿½Ê¶ï¿½È¡ï¿½Ä³ï¿½ï¿½ï¿½
 
-// Ð´È¡USBÊý¾Ý¿é
-BOOL	WINAPI	CH347WriteData(ULONG			iIndex,			// Ö¸¶¨Éè±¸ÐòºÅ
-							   PVOID			iBuffer,		// Ö¸ÏòÒ»¸ö»º³åÇø,·ÅÖÃ×¼±¸Ð´³öµÄÊý¾Ý
-							   PULONG			ioLength );		// Ö¸Ïò³¤¶Èµ¥Ôª,ÊäÈëÊ±Îª×¼±¸Ð´³öµÄ³¤¶È,·µ»ØºóÎªÊµ¼ÊÐ´³öµÄ³¤¶È
+// Ð´È¡USBï¿½ï¿½ï¿½Ý¿ï¿½
+BOOL	WINAPI	CH347WriteData(ULONG			iIndex,			// Ö¸ï¿½ï¿½ï¿½è±¸ï¿½ï¿½ï¿½
+							   PVOID			iBuffer,		// Ö¸ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½×¼ï¿½ï¿½Ð´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+							   PULONG			ioLength );		// Ö¸ï¿½ò³¤¶Èµï¿½Ôª,ï¿½ï¿½ï¿½ï¿½Ê±Îª×¼ï¿½ï¿½Ð´ï¿½ï¿½ï¿½Ä³ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½Øºï¿½ÎªÊµï¿½ï¿½Ð´ï¿½ï¿½ï¿½Ä³ï¿½ï¿½ï¿½
 
-// ÉèÖÃUSBÊý¾Ý¶ÁÐ´µÄ³¬Ê±
-BOOL	WINAPI	CH347SetTimeout(ULONG			iIndex,         // Ö¸¶¨Éè±¸ÐòºÅ
-							    ULONG			iWriteTimeout,  // Ö¸¶¨USBÐ´³öÊý¾Ý¿éµÄ³¬Ê±Ê±¼ä,ÒÔºÁÃëmSÎªµ¥Î»,0xFFFFFFFFÖ¸¶¨²»³¬Ê±(Ä¬ÈÏÖµ)
-								ULONG			iReadTimeout ); // Ö¸¶¨USB¶ÁÈ¡Êý¾Ý¿éµÄ³¬Ê±Ê±¼ä,ÒÔºÁÃëmSÎªµ¥Î»,0xFFFFFFFFÖ¸¶¨²»³¬Ê±(Ä¬ÈÏÖµ)
+// ï¿½ï¿½ï¿½ï¿½USBï¿½ï¿½ï¿½Ý¶ï¿½Ð´ï¿½Ä³ï¿½Ê±
+BOOL	WINAPI	CH347SetTimeout(ULONG			iIndex,         // Ö¸ï¿½ï¿½ï¿½è±¸ï¿½ï¿½ï¿½
+							    ULONG			iWriteTimeout,  // Ö¸ï¿½ï¿½USBÐ´ï¿½ï¿½ï¿½ï¿½ï¿½Ý¿ï¿½Ä³ï¿½Ê±Ê±ï¿½ï¿½,ï¿½Ôºï¿½ï¿½ï¿½mSÎªï¿½ï¿½Î»,0xFFFFFFFFÖ¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±(Ä¬ï¿½ï¿½Öµ)
+								ULONG			iReadTimeout ); // Ö¸ï¿½ï¿½USBï¿½ï¿½È¡ï¿½ï¿½ï¿½Ý¿ï¿½Ä³ï¿½Ê±Ê±ï¿½ï¿½,ï¿½Ôºï¿½ï¿½ï¿½mSÎªï¿½ï¿½Î»,0xFFFFFFFFÖ¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±(Ä¬ï¿½ï¿½Öµ)
 
 /***************SPI********************/
-// SPI¿ØÖÆÆ÷³õÊ¼»¯	
-BOOL	WINAPI	CH347SPI_Init(ULONG iIndex,			// Ö¸¶¨Éè±¸ÐòºÅ
-							  mSpiCfgS *SpiCfg);	// Ö¸ÏòSPIÅäÖÃ½á¹¹Ìå
+// SPIï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¼ï¿½ï¿½	
+BOOL	WINAPI	CH347SPI_Init(ULONG iIndex,			// Ö¸ï¿½ï¿½ï¿½è±¸ï¿½ï¿½ï¿½
+							  mSpiCfgS *SpiCfg);	// Ö¸ï¿½ï¿½SPIï¿½ï¿½ï¿½Ã½á¹¹ï¿½ï¿½
 
-// ÉèÖÃSPIÊ±ÖÓÆµÂÊ£¬µ÷ÓÃ¸Ã½Ó¿ÚºóÐèÖØÐÂµ÷ÓÃCH347SPI_Init½øÐÐ³õÊ¼»¯
-BOOL WINAPI CH347SPI_SetFrequency(ULONG iIndex,		 // Ö¸¶¨Éè±¸ÐòºÅ
-								  ULONG iSpiSpeedHz);// ÉèÖÃSPIÊ±ÖÓ£¬µ¥Î»ÎªHZ
+// ï¿½ï¿½ï¿½ï¿½SPIÊ±ï¿½ï¿½Æµï¿½Ê£ï¿½ï¿½ï¿½ï¿½Ã¸Ã½Ó¿Úºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Âµï¿½ï¿½ï¿½CH347SPI_Initï¿½ï¿½ï¿½Ð³ï¿½Ê¼ï¿½ï¿½
+BOOL WINAPI CH347SPI_SetFrequency(ULONG iIndex,		 // Ö¸ï¿½ï¿½ï¿½è±¸ï¿½ï¿½ï¿½
+								  ULONG iSpiSpeedHz);// ï¿½ï¿½ï¿½ï¿½SPIÊ±ï¿½Ó£ï¿½ï¿½ï¿½Î»ÎªHZ
 
-// ÉèÖÃSPIÊý¾ÝÎ»Êý
-BOOL WINAPI CH347SPI_SetDataBits(ULONG iIndex,		// Ö¸¶¨Éè±¸ÐòºÅ
-								 UCHAR iDataBits);	// 0=8bit£¬1=16bit
+// ï¿½ï¿½ï¿½ï¿½SPIï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½
+BOOL WINAPI CH347SPI_SetDataBits(ULONG iIndex,		// Ö¸ï¿½ï¿½ï¿½è±¸ï¿½ï¿½ï¿½
+								 UCHAR iDataBits);	// 0=8bitï¿½ï¿½1=16bit
 
-// »ñÈ¡SPI¿ØÖÆÆ÷ÅäÖÃÐÅÏ¢
+// ï¿½ï¿½È¡SPIï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
 BOOL    WINAPI  CH347SPI_GetCfg(ULONG iIndex,mSpiCfgS *SpiCfg);
 
-// ÉèÖÃÆ¬Ñ¡×´Ì¬,Ê¹ÓÃÇ°ÐèÏÈµ÷ÓÃCH347SPI_Init¶ÔCS½øÐÐÉèÖÃ
-BOOL	WINAPI	CH347SPI_ChangeCS(ULONG			iIndex,         // Ö¸¶¨Éè±¸ÐòºÅ	
-								  UCHAR         iStatus);       // 0=³·ÏûÆ¬Ñ¡,1=ÉèÖÃÆ¬Ñ¡
+// ï¿½ï¿½ï¿½ï¿½Æ¬Ñ¡×´Ì¬,Ê¹ï¿½ï¿½Ç°ï¿½ï¿½ï¿½Èµï¿½ï¿½ï¿½CH347SPI_Initï¿½ï¿½CSï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+BOOL	WINAPI	CH347SPI_ChangeCS(ULONG			iIndex,         // Ö¸ï¿½ï¿½ï¿½è±¸ï¿½ï¿½ï¿½	
+								  UCHAR         iStatus);       // 0=ï¿½ï¿½ï¿½ï¿½Æ¬Ñ¡,1=ï¿½ï¿½ï¿½ï¿½Æ¬Ñ¡
 
-// ÉèÖÃSPIÆ¬Ñ¡
-BOOL	WINAPI	CH347SPI_SetChipSelect(ULONG			iIndex,            // Ö¸¶¨Éè±¸ÐòºÅ
-									   USHORT           iEnableSelect,     // µÍ°ËÎ»ÎªCS1£¬¸ß°ËÎ»ÎªCS2; ×Ö½ÚÖµÎª1=ÉèÖÃCS,Îª0=ºöÂÔ´ËCSÉèÖÃ
-									   USHORT           iChipSelect,       // µÍ°ËÎ»ÎªCS1£¬¸ß°ËÎ»ÎªCS2;Æ¬Ñ¡Êä³ö,0=³·ÏûÆ¬Ñ¡,1=ÉèÖÃÆ¬Ñ¡
-									   ULONG            iIsAutoDeativeCS,  // µÍ16Î»ÎªCS1£¬¸ß16Î»ÎªCS2;²Ù×÷Íê³ÉºóÊÇ·ñ×Ô¶¯³·ÏûÆ¬Ñ¡
-									   ULONG            iActiveDelay,      // µÍ16Î»ÎªCS1£¬¸ß16Î»ÎªCS2;ÉèÖÃÆ¬Ñ¡ºóÖ´ÐÐ¶ÁÐ´²Ù×÷µÄÑÓÊ±Ê±¼ä,µ¥Î»us
-									   ULONG            iDelayDeactive);   // µÍ16Î»ÎªCS1£¬¸ß16Î»ÎªCS2;³·ÏûÆ¬Ñ¡ºóÖ´ÐÐ¶ÁÐ´²Ù×÷µÄÑÓÊ±Ê±¼ä,µ¥Î»us
+// ï¿½ï¿½ï¿½ï¿½SPIÆ¬Ñ¡
+BOOL	WINAPI	CH347SPI_SetChipSelect(ULONG			iIndex,            // Ö¸ï¿½ï¿½ï¿½è±¸ï¿½ï¿½ï¿½
+									   USHORT           iEnableSelect,     // ï¿½Í°ï¿½Î»ÎªCS1ï¿½ï¿½ï¿½ß°ï¿½Î»ÎªCS2; ï¿½Ö½ï¿½ÖµÎª1=ï¿½ï¿½ï¿½ï¿½CS,Îª0=ï¿½ï¿½ï¿½Ô´ï¿½CSï¿½ï¿½ï¿½ï¿½
+									   USHORT           iChipSelect,       // ï¿½Í°ï¿½Î»ÎªCS1ï¿½ï¿½ï¿½ß°ï¿½Î»ÎªCS2;Æ¬Ñ¡ï¿½ï¿½ï¿½,0=ï¿½ï¿½ï¿½ï¿½Æ¬Ñ¡,1=ï¿½ï¿½ï¿½ï¿½Æ¬Ñ¡
+									   ULONG            iIsAutoDeativeCS,  // ï¿½ï¿½16Î»ÎªCS1ï¿½ï¿½ï¿½ï¿½16Î»ÎªCS2;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Éºï¿½ï¿½Ç·ï¿½ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½ï¿½Æ¬Ñ¡
+									   ULONG            iActiveDelay,      // ï¿½ï¿½16Î»ÎªCS1ï¿½ï¿½ï¿½ï¿½16Î»ÎªCS2;ï¿½ï¿½ï¿½ï¿½Æ¬Ñ¡ï¿½ï¿½Ö´ï¿½Ð¶ï¿½Ð´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±Ê±ï¿½ï¿½,ï¿½ï¿½Î»us
+									   ULONG            iDelayDeactive);   // ï¿½ï¿½16Î»ÎªCS1ï¿½ï¿½ï¿½ï¿½16Î»ÎªCS2;ï¿½ï¿½ï¿½ï¿½Æ¬Ñ¡ï¿½ï¿½Ö´ï¿½Ð¶ï¿½Ð´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±Ê±ï¿½ï¿½,ï¿½ï¿½Î»us
 
-// SPI4Ð´Êý¾Ý
-BOOL	WINAPI	CH347SPI_Write(ULONG			iIndex,          // Ö¸¶¨Éè±¸ÐòºÅ	
-							   ULONG			iChipSelect,     // Æ¬Ñ¡¿ØÖÆ, Î»7Îª0ÔòºöÂÔÆ¬Ñ¡¿ØÖÆ, Î»7Îª1½øÐÐÆ¬Ñ¡²Ù×÷
-							   ULONG			iLength,         // ×¼±¸´«ÊäµÄÊý¾Ý×Ö½ÚÊý	
-							   ULONG			iWriteStep,      // ×¼±¸¶ÁÈ¡µÄµ¥¸ö¿éµÄ³¤¶È
-							   PVOID			ioBuffer);       // Ö¸ÏòÒ»¸ö»º³åÇø,·ÅÖÃ×¼±¸´ÓMOSIÐ´³öµÄÊý¾Ý
+// SPI4Ð´ï¿½ï¿½ï¿½ï¿½
+BOOL	WINAPI	CH347SPI_Write(ULONG			iIndex,          // Ö¸ï¿½ï¿½ï¿½è±¸ï¿½ï¿½ï¿½	
+							   ULONG			iChipSelect,     // Æ¬Ñ¡ï¿½ï¿½ï¿½ï¿½, Î»7Îª0ï¿½ï¿½ï¿½ï¿½ï¿½Æ¬Ñ¡ï¿½ï¿½ï¿½ï¿½, Î»7Îª1ï¿½ï¿½ï¿½ï¿½Æ¬Ñ¡ï¿½ï¿½ï¿½ï¿½
+							   ULONG			iLength,         // ×¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö½ï¿½ï¿½ï¿½	
+							   ULONG			iWriteStep,      // ×¼ï¿½ï¿½ï¿½ï¿½È¡ï¿½Äµï¿½ï¿½ï¿½ï¿½ï¿½Ä³ï¿½ï¿½ï¿½
+							   PVOID			ioBuffer);       // Ö¸ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½×¼ï¿½ï¿½ï¿½ï¿½MOSIÐ´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
-// SPI4¶ÁÊý¾Ý.ÎÞÐèÏÈÐ´Êý¾Ý£¬Ð§ÂÊ½ÏCH347SPI_WriteRead¸ßºÜ¶à
-BOOL	WINAPI	CH347SPI_Read(ULONG			iIndex,           // Ö¸¶¨Éè±¸ÐòºÅ	
-							  ULONG			iChipSelect,      // Æ¬Ñ¡¿ØÖÆ, Î»7Îª0ÔòºöÂÔÆ¬Ñ¡¿ØÖÆ, Î»7Îª1½øÐÐÆ¬Ñ¡²Ù×÷
-							  ULONG         oLength,          // ×¼±¸·¢³öµÄ×Ö½ÚÊý
-							  PULONG		iLength,          // ×¼±¸¶ÁÈëµÄÊý¾Ý×Ö½ÚÊý	
-							  PVOID			ioBuffer);        // Ö¸ÏòÒ»¸ö»º³åÇø,·ÅÖÃ×¼±¸´ÓDOUTÐ´³öµÄÊý¾Ý,·µ»ØºóÊÇ´ÓDIN¶ÁÈëµÄÊý¾Ý
+// SPI4ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð´ï¿½ï¿½ï¿½Ý£ï¿½Ð§ï¿½Ê½ï¿½CH347SPI_WriteReadï¿½ßºÜ¶ï¿½
+BOOL	WINAPI	CH347SPI_Read(ULONG			iIndex,           // Ö¸ï¿½ï¿½ï¿½è±¸ï¿½ï¿½ï¿½	
+							  ULONG			iChipSelect,      // Æ¬Ñ¡ï¿½ï¿½ï¿½ï¿½, Î»7Îª0ï¿½ï¿½ï¿½ï¿½ï¿½Æ¬Ñ¡ï¿½ï¿½ï¿½ï¿½, Î»7Îª1ï¿½ï¿½ï¿½ï¿½Æ¬Ñ¡ï¿½ï¿½ï¿½ï¿½
+							  ULONG         oLength,          // ×¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö½ï¿½ï¿½ï¿½
+							  PULONG		iLength,          // ×¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö½ï¿½ï¿½ï¿½	
+							  PVOID			ioBuffer);        // Ö¸ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½×¼ï¿½ï¿½ï¿½ï¿½DOUTÐ´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½Øºï¿½ï¿½Ç´ï¿½DINï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
-// ´¦ÀíSPIÊý¾ÝÁ÷,4Ïß½Ó¿Ú
-BOOL	WINAPI	CH347SPI_WriteRead(ULONG			iIndex,       // Ö¸¶¨Éè±¸ÐòºÅ
-								   ULONG			iChipSelect,  // Æ¬Ñ¡¿ØÖÆ, Î»7Îª0ÔòºöÂÔÆ¬Ñ¡¿ØÖÆ, Î»7Îª1Ôò²Ù×÷Æ¬Ñ¡
-								   ULONG			iLength,      // ×¼±¸´«ÊäµÄÊý¾Ý×Ö½ÚÊý
-								   PVOID			ioBuffer );   // Ö¸ÏòÒ»¸ö»º³åÇø,·ÅÖÃ×¼±¸´ÓDOUTÐ´³öµÄÊý¾Ý,·µ»ØºóÊÇ´ÓDIN¶ÁÈëµÄÊý¾Ý
+// ï¿½ï¿½ï¿½ï¿½SPIï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,4ï¿½ß½Ó¿ï¿½
+BOOL	WINAPI	CH347SPI_WriteRead(ULONG			iIndex,       // Ö¸ï¿½ï¿½ï¿½è±¸ï¿½ï¿½ï¿½
+								   ULONG			iChipSelect,  // Æ¬Ñ¡ï¿½ï¿½ï¿½ï¿½, Î»7Îª0ï¿½ï¿½ï¿½ï¿½ï¿½Æ¬Ñ¡ï¿½ï¿½ï¿½ï¿½, Î»7Îª1ï¿½ï¿½ï¿½ï¿½ï¿½Æ¬Ñ¡
+								   ULONG			iLength,      // ×¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö½ï¿½ï¿½ï¿½
+								   PVOID			ioBuffer );   // Ö¸ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½×¼ï¿½ï¿½ï¿½ï¿½DOUTÐ´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½Øºï¿½ï¿½Ç´ï¿½DINï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
-// ´¦ÀíSPIÊý¾ÝÁ÷,4Ïß½Ó¿Ú
-BOOL	WINAPI	CH347StreamSPI4(ULONG			iIndex,       // Ö¸¶¨Éè±¸ÐòºÅ
-								ULONG			iChipSelect,  // Æ¬Ñ¡¿ØÖÆ, Î»7Îª0ÔòºöÂÔÆ¬Ñ¡¿ØÖÆ, Î»7Îª1Ôò²ÎÊýÓÐÐ§
-								ULONG			iLength,      // ×¼±¸´«ÊäµÄÊý¾Ý×Ö½ÚÊý
-								PVOID			ioBuffer );   // Ö¸ÏòÒ»¸ö»º³åÇø,·ÅÖÃ×¼±¸´ÓDOUTÐ´³öµÄÊý¾Ý,·µ»ØºóÊÇ´ÓDIN¶ÁÈëµÄÊý¾Ý
+// ï¿½ï¿½ï¿½ï¿½SPIï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,4ï¿½ß½Ó¿ï¿½
+BOOL	WINAPI	CH347StreamSPI4(ULONG			iIndex,       // Ö¸ï¿½ï¿½ï¿½è±¸ï¿½ï¿½ï¿½
+								ULONG			iChipSelect,  // Æ¬Ñ¡ï¿½ï¿½ï¿½ï¿½, Î»7Îª0ï¿½ï¿½ï¿½ï¿½ï¿½Æ¬Ñ¡ï¿½ï¿½ï¿½ï¿½, Î»7Îª1ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð§
+								ULONG			iLength,      // ×¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö½ï¿½ï¿½ï¿½
+								PVOID			ioBuffer );   // Ö¸ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½×¼ï¿½ï¿½ï¿½ï¿½DOUTÐ´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½Øºï¿½ï¿½Ç´ï¿½DINï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 /***************JTAG********************/
-// JTAG½Ó¿Ú³õÊ¼»¯£¬ÉèÖÃJTAGÍ¨ÐÅËÙ¶È
-BOOL	WINAPI	CH347Jtag_INIT(ULONG iIndex,		// Ö¸¶¨Éè±¸ÐòºÅ
-							   UCHAR iClockRate);   // Í¨ÐÅËÙ¶È£»0=468.75KHz,1=937.5KHz,2=1.875MHz,3=3.75MHz,4=7.5MHz,5=15MHz,6=30MHz,7=60MHz
+// JTAGï¿½Ó¿Ú³ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½JTAGÍ¨ï¿½ï¿½ï¿½Ù¶ï¿½
+BOOL	WINAPI	CH347Jtag_INIT(ULONG iIndex,		// Ö¸ï¿½ï¿½ï¿½è±¸ï¿½ï¿½ï¿½
+							   UCHAR iClockRate);   // Í¨ï¿½ï¿½ï¿½Ù¶È£ï¿½0=468.75KHz,1=937.5KHz,2=1.875MHz,3=3.75MHz,4=7.5MHz,5=15MHz,6=30MHz,7=60MHz
 
-// »ñÈ¡JtagËÙ¶ÈÉèÖÃ
-BOOL    WINAPI  CH347Jtag_GetCfg(ULONG iIndex,         // Ö¸¶¨Éè±¸ÐòºÅ
-							     UCHAR *ClockRate);    // Í¨ÐÅËÙ¶È£»ÓÐÐ§ÖµÎª0-7£¬ÖµÔ½´óÍ¨ÐÅËÙ¶ÈÔ½¿ì
+// ï¿½ï¿½È¡Jtagï¿½Ù¶ï¿½ï¿½ï¿½ï¿½ï¿½
+BOOL    WINAPI  CH347Jtag_GetCfg(ULONG iIndex,         // Ö¸ï¿½ï¿½ï¿½è±¸ï¿½ï¿½ï¿½
+							     UCHAR *ClockRate);    // Í¨ï¿½ï¿½ï¿½Ù¶È£ï¿½ï¿½ï¿½Ð§ÖµÎª0-7ï¿½ï¿½ÖµÔ½ï¿½ï¿½Í¨ï¿½ï¿½ï¿½Ù¶ï¿½Ô½ï¿½ï¿½
 
 
-// ¸Ä±äTMSµÄÖµÀ´½øÐÐ×´Ì¬ÇÐ»»
-BOOL	WINAPI CH347Jtag_TmsChange(ULONG  iIndex,   // Éè±¸ÐòºÅ
-								   PUCHAR tmsValue, // ½øÐÐÇÐ»»µÄTMSÎ»Öµ,ÒÔ×Ö½ÚÎªµ¥Î»
-								   ULONG  Step,     // tmsValueÄÚ´æ´¢µÄTMSÓÐÐ§Î»Êý
-								   ULONG  Skip);    // ÓÐÐ§ÆðÊ¼Î»
+// ï¿½Ä±ï¿½TMSï¿½ï¿½Öµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×´Ì¬ï¿½Ð»ï¿½
+BOOL	WINAPI CH347Jtag_TmsChange(ULONG  iIndex,   // ï¿½è±¸ï¿½ï¿½ï¿½
+								   PUCHAR tmsValue, // ï¿½ï¿½ï¿½ï¿½ï¿½Ð»ï¿½ï¿½ï¿½TMSÎ»Öµ,ï¿½ï¿½ï¿½Ö½ï¿½Îªï¿½ï¿½Î»
+								   ULONG  Step,     // tmsValueï¿½Ú´æ´¢ï¿½ï¿½TMSï¿½ï¿½Ð§Î»ï¿½ï¿½
+								   ULONG  Skip);    // ï¿½ï¿½Ð§ï¿½ï¿½Ê¼Î»
 
-// ÔÚShift-DR/IR×´Ì¬½øÐÐ¶ÁÐ´£¬Ö´ÐÐÍêÇÐÖÁExit DR/IR
-// ×´Ì¬»ú:Shift-DR/IR.RW.->Exit DR/IR
+// ï¿½ï¿½Shift-DR/IR×´Ì¬ï¿½ï¿½ï¿½Ð¶ï¿½Ð´ï¿½ï¿½Ö´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Exit DR/IR
+// ×´Ì¬ï¿½ï¿½:Shift-DR/IR.RW.->Exit DR/IR
 BOOL   WINAPI  CH347Jtag_IoScan(ULONG   iIndex,    
-							    PUCHAR  DataBits,   //ÐèÒª½øÐÐ´«ÊäµÄÊý¾ÝÎ»
-							    ULONG   DataBitsNb, //ÐèÒª´«ÊäÊý¾ÝµÄÎ»Êý
-							    BOOL    IsRead);    //ÊÇ·ñÐèÒª¶ÁÈ¡Êý¾Ý
+							    PUCHAR  DataBits,   //ï¿½ï¿½Òªï¿½ï¿½ï¿½Ð´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î»
+							    ULONG   DataBitsNb, //ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ýµï¿½Î»ï¿½ï¿½
+							    BOOL    IsRead);    //ï¿½Ç·ï¿½ï¿½ï¿½Òªï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½
 
-// ÇÐÖÁShift-DR/IR×´Ì¬½øÐÐ¶ÁÐ´,Ö´ÐÐÍê³Éºó,ÈçÊÇ×îºóÒ»°ü£¬ÔòÇÐ»»×´Ì¬ÖÁExit DR/IR;Èç¹û²»ÊÇ,ÔòÍ£ÔÚShift-DR/IR×´Ì¬
-// ×´Ì¬»ú:Shift-DR/IR.RW..->[Exit DR/IR]
-BOOL   WINAPI  CH347Jtag_IoScanT(ULONG  iIndex,       // Ö¸¶¨Éè±¸ÐòºÅ
-								 PUCHAR DataBits,     // ÐèÒª½øÐÐ´«ÊäµÄÊý¾ÝÎ»
-								 ULONG  DataBitsNb,   // ÐèÒª´«ÊäÊý¾ÝµÄÎ»Êý
-								 BOOL   IsRead,       // ÊÇ·ñÐèÒª¶ÁÈ¡Êý¾Ý
-								 BOOL   IsLastPkt);   // ÊÇ·ñÎª×îºóÒ»°ü
+// ï¿½ï¿½ï¿½ï¿½Shift-DR/IR×´Ì¬ï¿½ï¿½ï¿½Ð¶ï¿½Ð´,Ö´ï¿½ï¿½ï¿½ï¿½Éºï¿½,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð»ï¿½×´Ì¬ï¿½ï¿½Exit DR/IR;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½Í£ï¿½ï¿½Shift-DR/IR×´Ì¬
+// ×´Ì¬ï¿½ï¿½:Shift-DR/IR.RW..->[Exit DR/IR]
+BOOL   WINAPI  CH347Jtag_IoScanT(ULONG  iIndex,       // Ö¸ï¿½ï¿½ï¿½è±¸ï¿½ï¿½ï¿½
+								 PUCHAR DataBits,     // ï¿½ï¿½Òªï¿½ï¿½ï¿½Ð´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î»
+								 ULONG  DataBitsNb,   // ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ýµï¿½Î»ï¿½ï¿½
+								 BOOL   IsRead,       // ï¿½Ç·ï¿½ï¿½ï¿½Òªï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½
+								 BOOL   IsLastPkt);   // ï¿½Ç·ï¿½Îªï¿½ï¿½ï¿½Ò»ï¿½ï¿½
 
-// JTAG¸´Î»Tap×´Ì¬º¯Êý.Á¬ÐøÁù¸öÒÔÉÏTCKÇÒTMSÎª¸ß½«¿É½«×´Ì¬»úÖÃÎªTest-Logic Reset×´Ì¬
-ULONG	WINAPI  CH347Jtag_Reset(ULONG iIndex);	// Ö¸¶¨Éè±¸ÐòºÅ
+// JTAGï¿½ï¿½Î»Tap×´Ì¬ï¿½ï¿½ï¿½ï¿½.ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½TCKï¿½ï¿½TMSÎªï¿½ß½ï¿½ï¿½É½ï¿½×´Ì¬ï¿½ï¿½ï¿½ï¿½ÎªTest-Logic Reset×´Ì¬
+ULONG	WINAPI  CH347Jtag_Reset(ULONG iIndex);	// Ö¸ï¿½ï¿½ï¿½è±¸ï¿½ï¿½ï¿½
 
-// ²Ù×÷TRSTÍê³ÉÓ²¼þ¸´Î»
-BOOL WINAPI CH347Jtag_ResetTrst(ULONG iIndex,	// Ö¸¶¨Éè±¸ÐòºÅ
-								BOOL  iLevel);	// 0=ÉèÖÃÎªµÍ£¬1=ÉèÖÃÎª¸ß
+// ï¿½ï¿½ï¿½ï¿½TRSTï¿½ï¿½ï¿½Ó²ï¿½ï¿½ï¿½ï¿½Î»
+BOOL WINAPI CH347Jtag_ResetTrst(ULONG iIndex,	// Ö¸ï¿½ï¿½ï¿½è±¸ï¿½ï¿½ï¿½
+								BOOL  iLevel);	// 0=ï¿½ï¿½ï¿½ï¿½Îªï¿½Í£ï¿½1=ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½
 
-// Î»´ø·½Ê½JTAG IR/DRÊý¾Ý¶ÁÐ´.ÊÊÓÃÓÚÉÙÁ¿Êý¾ÝµÄ¶ÁÐ´¡£ÈçÖ¸Áî²Ù×÷¡¢×´Ì¬»úÇÐ»»µÈ¿ØÖÆÀà´«Êä¡£ÈçÅúÁ¿Êý¾Ý´«Êä£¬½¨ÒéÊ¹ÓÃCH347Jtag_WriteRead_Fast
-// ÃüÁî°üÒÔ4096×Ö½ÚÎªµ¥Î»ÅúÁ¿¶ÁÐ´
-// ×´Ì¬»ú:Run-Test->Shift-IR/DR..->Exit IR/DR -> Run-Test
-BOOL	WINAPI	CH347Jtag_WriteRead(ULONG			iIndex,           // Ö¸¶¨Éè±¸ÐòºÅ
-									BOOL            IsDR,             // =TRUE: DRÊý¾Ý¶ÁÐ´,=FALSE:IRÊý¾Ý¶ÁÐ´
-									ULONG			iWriteBitLength,  // Ð´³¤¶È,×¼±¸Ð´³öµÄ³¤¶È
-									PVOID			iWriteBitBuffer,  // Ö¸ÏòÒ»¸ö»º³åÇø,·ÅÖÃ×¼±¸Ð´³öµÄÊý¾Ý	
-									PULONG			oReadBitLength,   // Ö¸Ïò³¤¶Èµ¥Ôª,·µ»ØºóÎªÊµ¼Ê¶ÁÈ¡µÄ³¤¶È
-									PVOID			oReadBitBuffer ); // Ö¸ÏòÒ»¸ö×ã¹»´óµÄ»º³åÇø,ÓÃÓÚ±£´æ¶ÁÈ¡µÄÊý¾Ý
+// Î»ï¿½ï¿½ï¿½ï¿½Ê½JTAG IR/DRï¿½ï¿½ï¿½Ý¶ï¿½Ð´.ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÝµÄ¶ï¿½Ð´ï¿½ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×´Ì¬ï¿½ï¿½ï¿½Ð»ï¿½ï¿½È¿ï¿½ï¿½ï¿½ï¿½à´«ï¿½ä¡£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý´ï¿½ï¿½ä£¬ï¿½ï¿½ï¿½ï¿½Ê¹ï¿½ï¿½CH347Jtag_WriteRead_Fast
+// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½4096ï¿½Ö½ï¿½Îªï¿½ï¿½Î»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð´
+// ×´Ì¬ï¿½ï¿½:Run-Test->Shift-IR/DR..->Exit IR/DR -> Run-Test
+BOOL	WINAPI	CH347Jtag_WriteRead(ULONG			iIndex,           // Ö¸ï¿½ï¿½ï¿½è±¸ï¿½ï¿½ï¿½
+									BOOL            IsDR,             // =TRUE: DRï¿½ï¿½ï¿½Ý¶ï¿½Ð´,=FALSE:IRï¿½ï¿½ï¿½Ý¶ï¿½Ð´
+									ULONG			iWriteBitLength,  // Ð´ï¿½ï¿½ï¿½ï¿½,×¼ï¿½ï¿½Ð´ï¿½ï¿½ï¿½Ä³ï¿½ï¿½ï¿½
+									PVOID			iWriteBitBuffer,  // Ö¸ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½×¼ï¿½ï¿½Ð´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½	
+									PULONG			oReadBitLength,   // Ö¸ï¿½ò³¤¶Èµï¿½Ôª,ï¿½ï¿½ï¿½Øºï¿½ÎªÊµï¿½Ê¶ï¿½È¡ï¿½Ä³ï¿½ï¿½ï¿½
+									PVOID			oReadBitBuffer ); // Ö¸ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ã¹»ï¿½ï¿½Ä»ï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½Ú±ï¿½ï¿½ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
-// JTAG IR/DRÊý¾ÝÅúÁ¿¶ÁÐ´,ÓÃÓÚ¶à×Ö½ÚÁ¬Ðø¶ÁÐ´¡£ÈçJTAG¹Ì¼þÏÂÔØ²Ù×÷¡£ÒòÓ²¼þÓÐ4K»º³åÇø£¬ÈçÏÈÐ´ºó¶Á£¬³¤¶È²»³¬¹ý4096×Ö½Ú¡£»º³åÇø´óÐ¡¿É×ÔÐÐµ÷Õû
-// ×´Ì¬»ú:Run-Test->Shift-IR/DR..->Exit IR/DR -> Run-Test
-BOOL	WINAPI	CH347Jtag_WriteRead_Fast(ULONG		iIndex,            // Ö¸¶¨Éè±¸ÐòºÅ
-										 BOOL       IsDR,              // =TRUE: DRÊý¾Ý¶ÁÐ´,=FALSE:IRÊý¾Ý¶ÁÐ´
-										 ULONG		iWriteBitLength,   // Ð´³¤¶È,×¼±¸Ð´³öµÄ³¤¶È
-										 PVOID		iWriteBitBuffer,   // Ö¸ÏòÒ»¸ö»º³åÇø,·ÅÖÃ×¼±¸Ð´³öµÄÊý¾Ý	
-										 PULONG		oReadBitLength,    // Ö¸Ïò³¤¶Èµ¥Ôª,·µ»ØºóÎªÊµ¼Ê¶ÁÈ¡µÄ³¤¶È
-										 PVOID		oReadBitBuffer );  // Ö¸ÏòÒ»¸ö×ã¹»´óµÄ»º³åÇø,ÓÃÓÚ±£´æ¶ÁÈ¡µÄÊý¾Ý
+// JTAG IR/DRï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð´,ï¿½ï¿½ï¿½Ú¶ï¿½ï¿½Ö½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð´ï¿½ï¿½ï¿½ï¿½JTAGï¿½Ì¼ï¿½ï¿½ï¿½ï¿½Ø²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó²ï¿½ï¿½ï¿½ï¿½4Kï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È²ï¿½ï¿½ï¿½ï¿½ï¿½4096ï¿½Ö½Ú¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¡ï¿½ï¿½ï¿½ï¿½ï¿½Ðµï¿½ï¿½ï¿½
+// ×´Ì¬ï¿½ï¿½:Run-Test->Shift-IR/DR..->Exit IR/DR -> Run-Test
+BOOL	WINAPI	CH347Jtag_WriteRead_Fast(ULONG		iIndex,            // Ö¸ï¿½ï¿½ï¿½è±¸ï¿½ï¿½ï¿½
+										 BOOL       IsDR,              // =TRUE: DRï¿½ï¿½ï¿½Ý¶ï¿½Ð´,=FALSE:IRï¿½ï¿½ï¿½Ý¶ï¿½Ð´
+										 ULONG		iWriteBitLength,   // Ð´ï¿½ï¿½ï¿½ï¿½,×¼ï¿½ï¿½Ð´ï¿½ï¿½ï¿½Ä³ï¿½ï¿½ï¿½
+										 PVOID		iWriteBitBuffer,   // Ö¸ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½×¼ï¿½ï¿½Ð´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½	
+										 PULONG		oReadBitLength,    // Ö¸ï¿½ò³¤¶Èµï¿½Ôª,ï¿½ï¿½ï¿½Øºï¿½ÎªÊµï¿½Ê¶ï¿½È¡ï¿½Ä³ï¿½ï¿½ï¿½
+										 PVOID		oReadBitBuffer );  // Ö¸ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ã¹»ï¿½ï¿½Ä»ï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½Ú±ï¿½ï¿½ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
-// Î»´ø·½Ê½JTAG IR/DRÊý¾Ý¶ÁÐ´.ÊÊÓÃÓÚÉÙÁ¿Êý¾ÝµÄ¶ÁÐ´¡£ÈçÖ¸Áî²Ù×÷¡¢×´Ì¬»úÇÐ»»µÈ¿ØÖÆÀà´«Êä¡£ÈçÅúÁ¿Êý¾Ý´«Êä£¬½¨ÒéÊ¹ÓÃCH347Jtag_WriteRead_Fast
-// ÃüÁî°üÒÔ4096×Ö½ÚÎªµ¥Î»ÅúÁ¿¶ÁÐ´
-// ×´Ì¬»ú:Run-Test-> Shift-IR/DR..->Exit IR/DR -> Run-Test
-BOOL	WINAPI	CH347Jtag_WriteReadEx(ULONG			iIndex,           // Ö¸¶¨Éè±¸ÐòºÅ
-									  BOOL			IsInDrOrIr,	      // =TRUE: ÔÚSHIFT-DR/IR×´Ì¬½øÐÐÊý¾Ý½»»¥  ==FALSE: Run-Test->Shift-IR/DR.½øÐÐÊý¾Ý½»»¥.->Exit IR/DR -> Run-Test
-									  BOOL          IsDR,             // =TRUE: DRÊý¾Ý¶ÁÐ´,=FALSE:IRÊý¾Ý¶ÁÐ´
-									  ULONG			iWriteBitLength,  // Ð´³¤¶È,×¼±¸Ð´³öµÄ³¤¶È
-									  PVOID			iWriteBitBuffer,  // Ö¸ÏòÒ»¸ö»º³åÇø,·ÅÖÃ×¼±¸Ð´³öµÄÊý¾Ý	
-									  PULONG		oReadBitLength,   // Ö¸Ïò³¤¶Èµ¥Ôª,·µ»ØºóÎªÊµ¼Ê¶ÁÈ¡µÄ³¤¶È
-									  PVOID			oReadBitBuffer ); // Ö¸ÏòÒ»¸ö×ã¹»´óµÄ»º³åÇø,ÓÃÓÚ±£´æ¶ÁÈ¡µÄÊý¾Ý
+// Î»ï¿½ï¿½ï¿½ï¿½Ê½JTAG IR/DRï¿½ï¿½ï¿½Ý¶ï¿½Ð´.ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÝµÄ¶ï¿½Ð´ï¿½ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×´Ì¬ï¿½ï¿½ï¿½Ð»ï¿½ï¿½È¿ï¿½ï¿½ï¿½ï¿½à´«ï¿½ä¡£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý´ï¿½ï¿½ä£¬ï¿½ï¿½ï¿½ï¿½Ê¹ï¿½ï¿½CH347Jtag_WriteRead_Fast
+// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½4096ï¿½Ö½ï¿½Îªï¿½ï¿½Î»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð´
+// ×´Ì¬ï¿½ï¿½:Run-Test-> Shift-IR/DR..->Exit IR/DR -> Run-Test
+BOOL	WINAPI	CH347Jtag_WriteReadEx(ULONG			iIndex,           // Ö¸ï¿½ï¿½ï¿½è±¸ï¿½ï¿½ï¿½
+									  BOOL			IsInDrOrIr,	      // =TRUE: ï¿½ï¿½SHIFT-DR/IR×´Ì¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý½ï¿½ï¿½ï¿½  ==FALSE: Run-Test->Shift-IR/DR.ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý½ï¿½ï¿½ï¿½.->Exit IR/DR -> Run-Test
+									  BOOL          IsDR,             // =TRUE: DRï¿½ï¿½ï¿½Ý¶ï¿½Ð´,=FALSE:IRï¿½ï¿½ï¿½Ý¶ï¿½Ð´
+									  ULONG			iWriteBitLength,  // Ð´ï¿½ï¿½ï¿½ï¿½,×¼ï¿½ï¿½Ð´ï¿½ï¿½ï¿½Ä³ï¿½ï¿½ï¿½
+									  PVOID			iWriteBitBuffer,  // Ö¸ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½×¼ï¿½ï¿½Ð´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½	
+									  PULONG		oReadBitLength,   // Ö¸ï¿½ò³¤¶Èµï¿½Ôª,ï¿½ï¿½ï¿½Øºï¿½ÎªÊµï¿½Ê¶ï¿½È¡ï¿½Ä³ï¿½ï¿½ï¿½
+									  PVOID			oReadBitBuffer ); // Ö¸ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ã¹»ï¿½ï¿½Ä»ï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½Ú±ï¿½ï¿½ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
-// JTAG IR/DRÊý¾ÝÅúÁ¿¶ÁÐ´,ÓÃÓÚ¶à×Ö½ÚÁ¬Ðø¶ÁÐ´¡£ÈçJTAG¹Ì¼þÏÂÔØ²Ù×÷¡£ÒòÓ²¼þÓÐ4K»º³åÇø£¬ÈçÏÈÐ´ºó¶Á£¬³¤¶È²»³¬¹ý4096×Ö½Ú¡£»º³åÇø´óÐ¡¿É×ÔÐÐµ÷Õû
-// ×´Ì¬»ú:Run-Test->Shift-IR/DR..->Exit IR/DR -> Run-Test
-BOOL	WINAPI	CH347Jtag_WriteRead_FastEx(ULONG		iIndex,            // Ö¸¶¨Éè±¸ÐòºÅ
-										   BOOL		    IsInDrOrIr,	       // =TRUE: ÔÚSHIFT-DR/IR×´Ì¬½øÐÐÊý¾Ý½»»¥  ==FALSE: Run-Test->Shift-IR/DR.½øÐÐÊý¾Ý½»»¥.->Exit IR/DR -> Run-Test								
-										   BOOL         IsDR,              // =TRUE: DRÊý¾Ý¶ÁÐ´,=FALSE:IRÊý¾Ý¶ÁÐ´
-										   ULONG		iWriteBitLength,   // Ð´³¤¶È,×¼±¸Ð´³öµÄ³¤¶È
-										   PVOID		iWriteBitBuffer,   // Ö¸ÏòÒ»¸ö»º³åÇø,·ÅÖÃ×¼±¸Ð´³öµÄÊý¾Ý	
-										   PULONG		oReadBitLength,    // Ö¸Ïò³¤¶Èµ¥Ôª,·µ»ØºóÎªÊµ¼Ê¶ÁÈ¡µÄ³¤¶È
-										   PVOID		oReadBitBuffer );  // Ö¸ÏòÒ»¸ö×ã¹»´óµÄ»º³åÇø,ÓÃÓÚ±£´æ¶ÁÈ¡µÄÊý¾Ý
+// JTAG IR/DRï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð´,ï¿½ï¿½ï¿½Ú¶ï¿½ï¿½Ö½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð´ï¿½ï¿½ï¿½ï¿½JTAGï¿½Ì¼ï¿½ï¿½ï¿½ï¿½Ø²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó²ï¿½ï¿½ï¿½ï¿½4Kï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È²ï¿½ï¿½ï¿½ï¿½ï¿½4096ï¿½Ö½Ú¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¡ï¿½ï¿½ï¿½ï¿½ï¿½Ðµï¿½ï¿½ï¿½
+// ×´Ì¬ï¿½ï¿½:Run-Test->Shift-IR/DR..->Exit IR/DR -> Run-Test
+BOOL	WINAPI	CH347Jtag_WriteRead_FastEx(ULONG		iIndex,            // Ö¸ï¿½ï¿½ï¿½è±¸ï¿½ï¿½ï¿½
+										   BOOL		    IsInDrOrIr,	       // =TRUE: ï¿½ï¿½SHIFT-DR/IR×´Ì¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý½ï¿½ï¿½ï¿½  ==FALSE: Run-Test->Shift-IR/DR.ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý½ï¿½ï¿½ï¿½.->Exit IR/DR -> Run-Test								
+										   BOOL         IsDR,              // =TRUE: DRï¿½ï¿½ï¿½Ý¶ï¿½Ð´,=FALSE:IRï¿½ï¿½ï¿½Ý¶ï¿½Ð´
+										   ULONG		iWriteBitLength,   // Ð´ï¿½ï¿½ï¿½ï¿½,×¼ï¿½ï¿½Ð´ï¿½ï¿½ï¿½Ä³ï¿½ï¿½ï¿½
+										   PVOID		iWriteBitBuffer,   // Ö¸ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½×¼ï¿½ï¿½Ð´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½	
+										   PULONG		oReadBitLength,    // Ö¸ï¿½ò³¤¶Èµï¿½Ôª,ï¿½ï¿½ï¿½Øºï¿½ÎªÊµï¿½Ê¶ï¿½È¡ï¿½Ä³ï¿½ï¿½ï¿½
+										   PVOID		oReadBitBuffer );  // Ö¸ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ã¹»ï¿½ï¿½Ä»ï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½Ú±ï¿½ï¿½ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
-// µ¥²½ÇÐ»»JTAG×´Ì¬»ú£¬Ðè°´ÕÕË³ÐòÖ´ÐÐ
-BOOL WINAPI CH347Jtag_SwitchTapState(UCHAR TapState);		// Ö¸¶¨ÇÐ»»µ½µÄ×´Ì¬
-// 0:Test-Logic Reset,1:Run-Test/Idle£¬2:Run-Test/Idle -> Shift-DR,3:Shift-DR -> Run-Test/Idle
+// ï¿½ï¿½ï¿½ï¿½ï¿½Ð»ï¿½JTAG×´Ì¬ï¿½ï¿½ï¿½ï¿½ï¿½è°´ï¿½ï¿½Ë³ï¿½ï¿½Ö´ï¿½ï¿½
+BOOL WINAPI CH347Jtag_SwitchTapState(UCHAR TapState);		// Ö¸ï¿½ï¿½ï¿½Ð»ï¿½ï¿½ï¿½ï¿½ï¿½×´Ì¬
+// 0:Test-Logic Reset,1:Run-Test/Idleï¿½ï¿½2:Run-Test/Idle -> Shift-DR,3:Shift-DR -> Run-Test/Idle
 // 4:Run-Test/Idle -> Shift-IR, 5:Shift-IR -> Run-Test/Idle, 6:Exit1-DR/IR -> Update-DR/IR -> Run-Test/Idle
 
-// µ¥²½ÇÐ»»JTAG×´Ì¬»ú,¿ÉÖ¸¶¨²Ù×÷Éè±¸iIndex
-BOOL WINAPI CH347Jtag_SwitchTapStateEx(ULONG iIndex,		// Ö¸¶¨Éè±¸ÐòºÅ
-									   UCHAR TapState);		// Ö¸¶¨ÇÐ»»µ½µÄ×´Ì¬
+// ï¿½ï¿½ï¿½ï¿½ï¿½Ð»ï¿½JTAG×´Ì¬ï¿½ï¿½,ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½è±¸iIndex
+BOOL WINAPI CH347Jtag_SwitchTapStateEx(ULONG iIndex,		// Ö¸ï¿½ï¿½ï¿½è±¸ï¿½ï¿½ï¿½
+									   UCHAR TapState);		// Ö¸ï¿½ï¿½ï¿½Ð»ï¿½ï¿½ï¿½ï¿½ï¿½×´Ì¬
 
-// JTAG DRÐ´,ÒÔ×Ö½ÚÎªµ¥Î»,ÓÃÓÚ¶à×Ö½ÚÁ¬Ðø¶ÁÐ´¡£ÈçJTAG¹Ì¼þÏÂÔØ²Ù×÷¡£
-// ×´Ì¬»ú:Run-Test->Shift-DR..->Exit DR -> Run-Test
-BOOL	WINAPI	CH347Jtag_ByteWriteDR(ULONG			iIndex,        // Ö¸¶¨Éè±¸ÐòºÅ									
-									  ULONG			iWriteLength,  // Ð´³¤¶È,×¼±¸Ð´³öµÄ×Ö½Ú³¤¶È
-									  PVOID			iWriteBuffer); // Ö¸ÏòÒ»¸ö»º³åÇø,·ÅÖÃ×¼±¸Ð´³öµÄÊý¾Ý	
+// JTAG DRÐ´,ï¿½ï¿½ï¿½Ö½ï¿½Îªï¿½ï¿½Î»,ï¿½ï¿½ï¿½Ú¶ï¿½ï¿½Ö½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð´ï¿½ï¿½ï¿½ï¿½JTAGï¿½Ì¼ï¿½ï¿½ï¿½ï¿½Ø²ï¿½ï¿½ï¿½ï¿½ï¿½
+// ×´Ì¬ï¿½ï¿½:Run-Test->Shift-DR..->Exit DR -> Run-Test
+BOOL	WINAPI	CH347Jtag_ByteWriteDR(ULONG			iIndex,        // Ö¸ï¿½ï¿½ï¿½è±¸ï¿½ï¿½ï¿½									
+									  ULONG			iWriteLength,  // Ð´ï¿½ï¿½ï¿½ï¿½,×¼ï¿½ï¿½Ð´ï¿½ï¿½ï¿½ï¿½ï¿½Ö½Ú³ï¿½ï¿½ï¿½
+									  PVOID			iWriteBuffer); // Ö¸ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½×¼ï¿½ï¿½Ð´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½	
 
-// JTAG DR¶Á,ÒÔ×Ö½ÚÎªµ¥Î»,¶à×Ö½ÚÁ¬Ðø¶Á¡£
-// ×´Ì¬»ú:Run-Test->Shift-DR..->Exit DR -> Run-Test
-BOOL	WINAPI	CH347Jtag_ByteReadDR(ULONG			iIndex,        // Ö¸¶¨Éè±¸ÐòºÅ									
-									 PULONG			oReadLength,   // Ö¸Ïò³¤¶Èµ¥Ôª,·µ»ØºóÎªÊµ¼Ê¶ÁÈ¡µÄ×Ö½Ú³¤¶È
-									 PVOID			oReadBuffer ); // Ö¸ÏòÒ»¸ö×ã¹»´óµÄ»º³åÇø,ÓÃÓÚ±£´æ¶ÁÈ¡µÄÊý¾Ý
+// JTAG DRï¿½ï¿½,ï¿½ï¿½ï¿½Ö½ï¿½Îªï¿½ï¿½Î»,ï¿½ï¿½ï¿½Ö½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+// ×´Ì¬ï¿½ï¿½:Run-Test->Shift-DR..->Exit DR -> Run-Test
+BOOL	WINAPI	CH347Jtag_ByteReadDR(ULONG			iIndex,        // Ö¸ï¿½ï¿½ï¿½è±¸ï¿½ï¿½ï¿½									
+									 PULONG			oReadLength,   // Ö¸ï¿½ò³¤¶Èµï¿½Ôª,ï¿½ï¿½ï¿½Øºï¿½ÎªÊµï¿½Ê¶ï¿½È¡ï¿½ï¿½ï¿½Ö½Ú³ï¿½ï¿½ï¿½
+									 PVOID			oReadBuffer ); // Ö¸ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ã¹»ï¿½ï¿½Ä»ï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½Ú±ï¿½ï¿½ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
-// JTAG IRÐ´,ÒÔ×Ö½ÚÎªµ¥Î»,¶à×Ö½ÚÁ¬ÐøÐ´¡£
-// ×´Ì¬»ú:Run-Test->Shift-IR..->Exit IR -> Run-Test
-BOOL	WINAPI	CH347Jtag_ByteWriteIR(ULONG			iIndex,        // Ö¸¶¨Éè±¸ÐòºÅ									
-									  ULONG			iWriteLength,  // Ð´³¤¶È,×¼±¸Ð´³öµÄ×Ö½Ú³¤¶È
-									  PVOID			iWriteBuffer); // Ö¸ÏòÒ»¸ö»º³åÇø,·ÅÖÃ×¼±¸Ð´³öµÄÊý¾Ý										
+// JTAG IRÐ´,ï¿½ï¿½ï¿½Ö½ï¿½Îªï¿½ï¿½Î»,ï¿½ï¿½ï¿½Ö½ï¿½ï¿½ï¿½ï¿½ï¿½Ð´ï¿½ï¿½
+// ×´Ì¬ï¿½ï¿½:Run-Test->Shift-IR..->Exit IR -> Run-Test
+BOOL	WINAPI	CH347Jtag_ByteWriteIR(ULONG			iIndex,        // Ö¸ï¿½ï¿½ï¿½è±¸ï¿½ï¿½ï¿½									
+									  ULONG			iWriteLength,  // Ð´ï¿½ï¿½ï¿½ï¿½,×¼ï¿½ï¿½Ð´ï¿½ï¿½ï¿½ï¿½ï¿½Ö½Ú³ï¿½ï¿½ï¿½
+									  PVOID			iWriteBuffer); // Ö¸ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½×¼ï¿½ï¿½Ð´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½										
 
-// JTAG IR¶Á,ÒÔ×Ö½ÚÎªµ¥Î»,¶à×Ö½ÚÁ¬Ðø¶ÁÐ´¡£
-// ×´Ì¬»ú:Run-Test->Shift-IR..->Exit IR -> Run-Test
-BOOL	WINAPI	CH347Jtag_ByteReadIR(ULONG			iIndex,         // Ö¸¶¨Éè±¸ÐòºÅ									
-									 PULONG			oReadLength,    // Ö¸Ïò³¤¶Èµ¥Ôª,·µ»ØºóÎªÊµ¼Ê¶ÁÈ¡µÄ×Ö½Ú³¤¶È
-									 PVOID			oReadBuffer );  // Ö¸ÏòÒ»¸ö×ã¹»´óµÄ»º³åÇø,ÓÃÓÚ±£´æ¶ÁÈ¡µÄÊý¾Ý
+// JTAG IRï¿½ï¿½,ï¿½ï¿½ï¿½Ö½ï¿½Îªï¿½ï¿½Î»,ï¿½ï¿½ï¿½Ö½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð´ï¿½ï¿½
+// ×´Ì¬ï¿½ï¿½:Run-Test->Shift-IR..->Exit IR -> Run-Test
+BOOL	WINAPI	CH347Jtag_ByteReadIR(ULONG			iIndex,         // Ö¸ï¿½ï¿½ï¿½è±¸ï¿½ï¿½ï¿½									
+									 PULONG			oReadLength,    // Ö¸ï¿½ò³¤¶Èµï¿½Ôª,ï¿½ï¿½ï¿½Øºï¿½ÎªÊµï¿½Ê¶ï¿½È¡ï¿½ï¿½ï¿½Ö½Ú³ï¿½ï¿½ï¿½
+									 PVOID			oReadBuffer );  // Ö¸ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ã¹»ï¿½ï¿½Ä»ï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½Ú±ï¿½ï¿½ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
-// Î»´ø·½Ê½JTAG DRÊý¾ÝÐ´.ÊÊÓÃÓÚÉÙÁ¿Êý¾ÝµÄ¶ÁÐ´¡£ÈçÖ¸Áî²Ù×÷¡¢×´Ì¬»úÇÐ»»µÈ¿ØÖÆÀà´«Êä¡£ÈçÅúÁ¿Êý¾Ý´«Êä£¬½¨ÒéÊ¹ÓÃUSB20Jtag_ByeWriteDR
-// ×´Ì¬»ú:Run-Test->Shift-DR..->Exit DR -> Run-Test
-BOOL	WINAPI	CH347Jtag_BitWriteDR(ULONG			iIndex,             // Ö¸¶¨Éè±¸ÐòºÅ									
-									 ULONG    	    iWriteBitLength,    // Ö¸Ïò³¤¶Èµ¥Ôª,·µ»ØºóÎªÊµ¼Ê¶ÁÈ¡µÄ×Ö½Ú³¤¶È
-									 PVOID			iWriteBitBuffer );  // Ö¸ÏòÒ»¸ö×ã¹»´óµÄ»º³åÇø,ÓÃÓÚ±£´æ¶ÁÈ¡µÄÊý¾Ý
+// Î»ï¿½ï¿½ï¿½ï¿½Ê½JTAG DRï¿½ï¿½ï¿½ï¿½Ð´.ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÝµÄ¶ï¿½Ð´ï¿½ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×´Ì¬ï¿½ï¿½ï¿½Ð»ï¿½ï¿½È¿ï¿½ï¿½ï¿½ï¿½à´«ï¿½ä¡£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý´ï¿½ï¿½ä£¬ï¿½ï¿½ï¿½ï¿½Ê¹ï¿½ï¿½USB20Jtag_ByeWriteDR
+// ×´Ì¬ï¿½ï¿½:Run-Test->Shift-DR..->Exit DR -> Run-Test
+BOOL	WINAPI	CH347Jtag_BitWriteDR(ULONG			iIndex,             // Ö¸ï¿½ï¿½ï¿½è±¸ï¿½ï¿½ï¿½									
+									 ULONG    	    iWriteBitLength,    // Ö¸ï¿½ò³¤¶Èµï¿½Ôª,ï¿½ï¿½ï¿½Øºï¿½ÎªÊµï¿½Ê¶ï¿½È¡ï¿½ï¿½ï¿½Ö½Ú³ï¿½ï¿½ï¿½
+									 PVOID			iWriteBitBuffer );  // Ö¸ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ã¹»ï¿½ï¿½Ä»ï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½Ú±ï¿½ï¿½ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
-// Î»´ø·½Ê½JTAG IRÊý¾ÝÐ´.ÊÊÓÃÓÚÉÙÁ¿Êý¾ÝµÄ¶ÁÐ´¡£ÈçÖ¸Áî²Ù×÷¡¢×´Ì¬»úÇÐ»»µÈ¿ØÖÆÀà´«Êä¡£ÈçÅúÁ¿Êý¾Ý´«Êä£¬½¨ÒéÊ¹ÓÃUSB20Jtag_ByteWriteIR
-// ×´Ì¬»ú:Run-Test->Shift-IR..->Exit IR -> Run-Test
-BOOL	WINAPI	CH347Jtag_BitWriteIR(ULONG			iIndex,             // Ö¸¶¨Éè±¸ÐòºÅ									
-									 ULONG    	    iWriteBitLength,    // Ö¸Ïò³¤¶Èµ¥Ôª,·µ»ØºóÎªÊµ¼Ê¶ÁÈ¡µÄ×Ö½Ú³¤¶È
-									 PVOID			iWriteBitBuffer );  // Ö¸ÏòÒ»¸ö×ã¹»´óµÄ»º³åÇø,ÓÃÓÚ±£´æ¶ÁÈ¡µÄÊý¾Ý
+// Î»ï¿½ï¿½ï¿½ï¿½Ê½JTAG IRï¿½ï¿½ï¿½ï¿½Ð´.ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÝµÄ¶ï¿½Ð´ï¿½ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×´Ì¬ï¿½ï¿½ï¿½Ð»ï¿½ï¿½È¿ï¿½ï¿½ï¿½ï¿½à´«ï¿½ä¡£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý´ï¿½ï¿½ä£¬ï¿½ï¿½ï¿½ï¿½Ê¹ï¿½ï¿½USB20Jtag_ByteWriteIR
+// ×´Ì¬ï¿½ï¿½:Run-Test->Shift-IR..->Exit IR -> Run-Test
+BOOL	WINAPI	CH347Jtag_BitWriteIR(ULONG			iIndex,             // Ö¸ï¿½ï¿½ï¿½è±¸ï¿½ï¿½ï¿½									
+									 ULONG    	    iWriteBitLength,    // Ö¸ï¿½ò³¤¶Èµï¿½Ôª,ï¿½ï¿½ï¿½Øºï¿½ÎªÊµï¿½Ê¶ï¿½È¡ï¿½ï¿½ï¿½Ö½Ú³ï¿½ï¿½ï¿½
+									 PVOID			iWriteBitBuffer );  // Ö¸ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ã¹»ï¿½ï¿½Ä»ï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½Ú±ï¿½ï¿½ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
-// Î»´ø·½Ê½JTAG IRÊý¾Ý¶Á.ÊÊÓÃÓÚÉÙÁ¿Êý¾ÝµÄ¶ÁÐ´¡£ÈçÖ¸Áî²Ù×÷¡¢×´Ì¬»úÇÐ»»µÈ¡£ÈçÅúÁ¿Êý¾Ý´«Êä£¬½¨ÒéÊ¹ÓÃUSB20Jtag_ByteReadIR
-// ×´Ì¬»ú:Run-Test->Shift-IR..->Exit IR -> Run-Test
-BOOL	WINAPI	CH347Jtag_BitReadIR(ULONG			iIndex,				// Ö¸¶¨Éè±¸ÐòºÅ									
-									PULONG    	oReadBitLength,			// Ö¸Ïò³¤¶Èµ¥Ôª,·µ»ØºóÎªÊµ¼Ê¶ÁÈ¡µÄ×Ö½Ú³¤¶È
-									PVOID			oReadBitBuffer );	// Ö¸ÏòÒ»¸ö×ã¹»´óµÄ»º³åÇø,ÓÃÓÚ±£´æ¶ÁÈ¡µÄÊý¾Ý
+// Î»ï¿½ï¿½ï¿½ï¿½Ê½JTAG IRï¿½ï¿½ï¿½Ý¶ï¿½.ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÝµÄ¶ï¿½Ð´ï¿½ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×´Ì¬ï¿½ï¿½ï¿½Ð»ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý´ï¿½ï¿½ä£¬ï¿½ï¿½ï¿½ï¿½Ê¹ï¿½ï¿½USB20Jtag_ByteReadIR
+// ×´Ì¬ï¿½ï¿½:Run-Test->Shift-IR..->Exit IR -> Run-Test
+BOOL	WINAPI	CH347Jtag_BitReadIR(ULONG			iIndex,				// Ö¸ï¿½ï¿½ï¿½è±¸ï¿½ï¿½ï¿½									
+									PULONG    	oReadBitLength,			// Ö¸ï¿½ò³¤¶Èµï¿½Ôª,ï¿½ï¿½ï¿½Øºï¿½ÎªÊµï¿½Ê¶ï¿½È¡ï¿½ï¿½ï¿½Ö½Ú³ï¿½ï¿½ï¿½
+									PVOID			oReadBitBuffer );	// Ö¸ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ã¹»ï¿½ï¿½Ä»ï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½Ú±ï¿½ï¿½ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
-// Î»´ø·½Ê½JTAG DRÊý¾Ý¶Á.ÊÊÓÃÓÚÉÙÁ¿Êý¾ÝµÄ¶ÁÐ´¡£ÈçÅúÁ¿ºÍ¸ßËÙÊý¾Ý´«Êä£¬½¨ÒéÊ¹ÓÃUSB20Jtag_ByteReadDR
-// ×´Ì¬»ú:Run-Test->Shift-DR..->Exit DR -> Run-Test
-BOOL	WINAPI	CH347Jtag_BitReadDR(ULONG			iIndex,				// Ö¸¶¨Éè±¸ÐòºÅ									
-									PULONG    	    oReadBitLength,		// Ö¸Ïò³¤¶Èµ¥Ôª,·µ»ØºóÎªÊµ¼Ê¶ÁÈ¡µÄ×Ö½Ú³¤¶È
-									PVOID			oReadBitBuffer );   // Ö¸ÏòÒ»¸ö×ã¹»´óµÄ»º³åÇø,ÓÃÓÚ±£´æ¶ÁÈ¡µÄÊý¾Ý
+// Î»ï¿½ï¿½ï¿½ï¿½Ê½JTAG DRï¿½ï¿½ï¿½Ý¶ï¿½.ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÝµÄ¶ï¿½Ð´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý´ï¿½ï¿½ä£¬ï¿½ï¿½ï¿½ï¿½Ê¹ï¿½ï¿½USB20Jtag_ByteReadDR
+// ×´Ì¬ï¿½ï¿½:Run-Test->Shift-DR..->Exit DR -> Run-Test
+BOOL	WINAPI	CH347Jtag_BitReadDR(ULONG			iIndex,				// Ö¸ï¿½ï¿½ï¿½è±¸ï¿½ï¿½ï¿½									
+									PULONG    	    oReadBitLength,		// Ö¸ï¿½ò³¤¶Èµï¿½Ôª,ï¿½ï¿½ï¿½Øºï¿½ÎªÊµï¿½Ê¶ï¿½È¡ï¿½ï¿½ï¿½Ö½Ú³ï¿½ï¿½ï¿½
+									PVOID			oReadBitBuffer );   // Ö¸ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ã¹»ï¿½ï¿½Ä»ï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½Ú±ï¿½ï¿½ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 /***************GPIO********************/
-// »ñÈ¡CH347µÄGPIO·½ÏòºÍÒý½ÅµçÆ½Öµ
-BOOL WINAPI CH347GPIO_Get(ULONG iIndex,       // Ö¸¶¨Éè±¸ÐòºÅ
-						  UCHAR *iDir,        // Òý½Å·½Ïò:GPIO0-7¶ÔÓ¦Î»0-7,	0=ÊäÈë£»1=Êä³ö
-						  UCHAR *iData);      // GPIO0µçÆ½:GPIO0-7¶ÔÓ¦Î»0-7,0=µÍµçÆ½£»1=¸ßµçÆ½)
+// ï¿½ï¿½È¡CH347ï¿½ï¿½GPIOï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Åµï¿½Æ½Öµ
+BOOL WINAPI CH347GPIO_Get(ULONG iIndex,       // Ö¸ï¿½ï¿½ï¿½è±¸ï¿½ï¿½ï¿½
+						  UCHAR *iDir,        // ï¿½ï¿½ï¿½Å·ï¿½ï¿½ï¿½:GPIO0-7ï¿½ï¿½Ó¦Î»0-7,	0=ï¿½ï¿½ï¿½ë£»1=ï¿½ï¿½ï¿½
+						  UCHAR *iData);      // GPIO0ï¿½ï¿½Æ½:GPIO0-7ï¿½ï¿½Ó¦Î»0-7,0=ï¿½Íµï¿½Æ½ï¿½ï¿½1=ï¿½ßµï¿½Æ½)
 
-// ÉèÖÃCH347µÄGPIO·½ÏòºÍÒý½ÅµçÆ½Öµ 
-BOOL WINAPI CH347GPIO_Set(ULONG iIndex,        // Ö¸¶¨Éè±¸ÐòºÅ
-						  UCHAR iEnable,       // Êý¾ÝÓÐÐ§±êÖ¾:¶ÔÓ¦Î»0-7,¶ÔÓ¦GPIO0-7.
-						  UCHAR iSetDirOut,    // ÉèÖÃI/O·½Ïò,Ä³Î»Çå0Ôò¶ÔÓ¦Òý½ÅÎªÊäÈë,Ä³Î»ÖÃ1Ôò¶ÔÓ¦Òý½ÅÎªÊä³ö.GPIO0-7¶ÔÓ¦Î»0-7.
-						  UCHAR iSetDataOut);  // Êä³öÊý¾Ý,Èç¹ûI/O·½ÏòÎªÊä³ö,ÄÇÃ´Ä³Î»Çå0Ê±¶ÔÓ¦Òý½ÅÊä³öµÍµçÆ½,Ä³Î»ÖÃ1Ê±¶ÔÓ¦Òý½ÅÊä³ö¸ßµçÆ½
+// ï¿½ï¿½ï¿½ï¿½CH347ï¿½ï¿½GPIOï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Åµï¿½Æ½Öµ 
+BOOL WINAPI CH347GPIO_Set(ULONG iIndex,        // Ö¸ï¿½ï¿½ï¿½è±¸ï¿½ï¿½ï¿½
+						  UCHAR iEnable,       // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð§ï¿½ï¿½Ö¾:ï¿½ï¿½Ó¦Î»0-7,ï¿½ï¿½Ó¦GPIO0-7.
+						  UCHAR iSetDirOut,    // ï¿½ï¿½ï¿½ï¿½I/Oï¿½ï¿½ï¿½ï¿½,Ä³Î»ï¿½ï¿½0ï¿½ï¿½ï¿½Ó¦ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½,Ä³Î»ï¿½ï¿½1ï¿½ï¿½ï¿½Ó¦ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½ï¿½.GPIO0-7ï¿½ï¿½Ó¦Î»0-7.
+						  UCHAR iSetDataOut);  // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½I/Oï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½ï¿½,ï¿½ï¿½Ã´Ä³Î»ï¿½ï¿½0Ê±ï¿½ï¿½Ó¦ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Íµï¿½Æ½,Ä³Î»ï¿½ï¿½1Ê±ï¿½ï¿½Ó¦ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ßµï¿½Æ½
 
 
-typedef		VOID	( CALLBACK	* mPCH347_INT_ROUTINE ) (  // ÖÐ¶Ï·þÎñ³ÌÐò
-	                                                     PUCHAR			iStatus );  // ÖÐ¶Ï×´Ì¬Êý¾Ý,²Î¿¼ÏÂÃæµÄÎ»ËµÃ÷
-// 8¸ö×Ö½ÚGPIO0-7Òý½Å×´Ì¬.Ã¿×Ö½ÚÎ»¶¨ÒåÈçÏÂ:
-// Î»7£ºµ±Ç°µÄGPIO0·½Ïò£¬0£ºÊäÈë£»1£ºÊä³ö£»
-// Î»6£ºµ±Ç°µÄGPIO0µçÆ½£¬0£ºµÍµçÆ½£»1£º¸ßµçÆ½£»
-// Î»5£ºµ±Ç°µÄGPIO0ÊÇ·ñÉèÖÃÎªÖÐ¶Ï£¬0£º²éÑ¯Ä£Ê½£»1£ºÖÐ¶ÏÄ£Ê½£»
-// Î»4-3£ºÉèÖÃGPIO0µÄÖÐ¶ÏÄ£Ê½£¬00£ºÏÂ½µÑØ´¥·¢£»01£ºÉÏÉýÑØ´¥·¢;10£ºË«±ßÑØ´¥·¢£»11: ±£Áô;
-// Î»2-0£º±£Áô£»
+typedef		VOID	( CALLBACK	* mPCH347_INT_ROUTINE ) (  // ï¿½Ð¶Ï·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	                                                     PUCHAR			iStatus );  // ï¿½Ð¶ï¿½×´Ì¬ï¿½ï¿½ï¿½ï¿½,ï¿½Î¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î»Ëµï¿½ï¿½
+// 8ï¿½ï¿½ï¿½Ö½ï¿½GPIO0-7ï¿½ï¿½ï¿½ï¿½×´Ì¬.Ã¿ï¿½Ö½ï¿½Î»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½:
+// Î»7ï¿½ï¿½ï¿½ï¿½Ç°ï¿½ï¿½GPIO0ï¿½ï¿½ï¿½ï¿½0ï¿½ï¿½ï¿½ï¿½ï¿½ë£»1ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+// Î»6ï¿½ï¿½ï¿½ï¿½Ç°ï¿½ï¿½GPIO0ï¿½ï¿½Æ½ï¿½ï¿½0ï¿½ï¿½ï¿½Íµï¿½Æ½ï¿½ï¿½1ï¿½ï¿½ï¿½ßµï¿½Æ½ï¿½ï¿½
+// Î»5ï¿½ï¿½ï¿½ï¿½Ç°ï¿½ï¿½GPIO0ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½Îªï¿½Ð¶Ï£ï¿½0ï¿½ï¿½ï¿½ï¿½Ñ¯Ä£Ê½ï¿½ï¿½1ï¿½ï¿½ï¿½Ð¶ï¿½Ä£Ê½ï¿½ï¿½
+// Î»4-3ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½GPIO0ï¿½ï¿½ï¿½Ð¶ï¿½Ä£Ê½ï¿½ï¿½00ï¿½ï¿½ï¿½Â½ï¿½ï¿½Ø´ï¿½ï¿½ï¿½ï¿½ï¿½01ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø´ï¿½ï¿½ï¿½;10ï¿½ï¿½Ë«ï¿½ï¿½ï¿½Ø´ï¿½ï¿½ï¿½ï¿½ï¿½11: ï¿½ï¿½ï¿½ï¿½;
+// Î»2-0ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
-// Éè¶¨GPIOÖÐ¶Ï·þÎñ³ÌÐò
-BOOL	WINAPI	CH347SetIntRoutine(ULONG			iIndex,           // Ö¸¶¨Éè±¸ÐòºÅ
-	                               UCHAR           Int0PinN,          // ÖÐ¶Ï0 GPIOÒý½ÅºÅ,´óÓÚ7:²»ÆôÓÃ´ËÖÐ¶ÏÔ´; Îª0-7¶ÔÓ¦gpio0-7
-	                               UCHAR           Int0TripMode,      // ÖÐ¶Ï0ÀàÐÍ: 00:ÏÂ½µÑØ´¥·¢; 01:ÉÏÉýÑØ´¥·¢; 02:Ë«±ßÑØ´¥·¢; 03:±£Áô;
-	                               UCHAR           Int1PinN,          // ÖÐ¶Ï1 GPIOÒý½ÅºÅ,´óÓÚ7Ôò²»ÆôÓÃ´ËÖÐ¶ÏÔ´,Îª0-7¶ÔÓ¦gpio0-7
-	                               UCHAR           Int1TripMode,      // ÖÐ¶Ï1ÀàÐÍ: 00:ÏÂ½µÑØ´¥·¢; 01:ÉÏÉýÑØ´¥·¢; 02:Ë«±ßÑØ´¥·¢; 03:±£Áô;
-	                               mPCH347_INT_ROUTINE	iIntRoutine );// Ö¸¶¨ÖÐ¶Ï·þÎñ³ÌÐò,ÎªNULLÔòÈ¡ÏûÖÐ¶Ï·þÎñ,·ñÔòÔÚÖÐ¶ÏÊ±µ÷ÓÃ¸Ã³ÌÐò
+// ï¿½è¶¨GPIOï¿½Ð¶Ï·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+BOOL	WINAPI	CH347SetIntRoutine(ULONG			iIndex,           // Ö¸ï¿½ï¿½ï¿½è±¸ï¿½ï¿½ï¿½
+	                               UCHAR           Int0PinN,          // ï¿½Ð¶ï¿½0 GPIOï¿½ï¿½ï¿½Åºï¿½,ï¿½ï¿½ï¿½ï¿½7:ï¿½ï¿½ï¿½ï¿½ï¿½Ã´ï¿½ï¿½Ð¶ï¿½Ô´; Îª0-7ï¿½ï¿½Ó¦gpio0-7
+	                               UCHAR           Int0TripMode,      // ï¿½Ð¶ï¿½0ï¿½ï¿½ï¿½ï¿½: 00:ï¿½Â½ï¿½ï¿½Ø´ï¿½ï¿½ï¿½; 01:ï¿½ï¿½ï¿½ï¿½ï¿½Ø´ï¿½ï¿½ï¿½; 02:Ë«ï¿½ï¿½ï¿½Ø´ï¿½ï¿½ï¿½; 03:ï¿½ï¿½ï¿½ï¿½;
+	                               UCHAR           Int1PinN,          // ï¿½Ð¶ï¿½1 GPIOï¿½ï¿½ï¿½Åºï¿½,ï¿½ï¿½ï¿½ï¿½7ï¿½ï¿½ï¿½ï¿½ï¿½Ã´ï¿½ï¿½Ð¶ï¿½Ô´,Îª0-7ï¿½ï¿½Ó¦gpio0-7
+	                               UCHAR           Int1TripMode,      // ï¿½Ð¶ï¿½1ï¿½ï¿½ï¿½ï¿½: 00:ï¿½Â½ï¿½ï¿½Ø´ï¿½ï¿½ï¿½; 01:ï¿½ï¿½ï¿½ï¿½ï¿½Ø´ï¿½ï¿½ï¿½; 02:Ë«ï¿½ï¿½ï¿½Ø´ï¿½ï¿½ï¿½; 03:ï¿½ï¿½ï¿½ï¿½;
+	                               mPCH347_INT_ROUTINE	iIntRoutine );// Ö¸ï¿½ï¿½ï¿½Ð¶Ï·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,ÎªNULLï¿½ï¿½È¡ï¿½ï¿½ï¿½Ð¶Ï·ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¶ï¿½Ê±ï¿½ï¿½ï¿½Ã¸Ã³ï¿½ï¿½ï¿½
 
-// ¶ÁÈ¡ÖÐ¶ÏÊý¾Ý
-BOOL	WINAPI	CH347ReadInter(ULONG			iIndex,      // Ö¸¶¨Éè±¸ÐòºÅ
-	                           PUCHAR			iStatus );   // Ö¸Ïò8×Ö½Úµ¥Ôª,·Ö±ðÎªGPIO0-7Òý½Å×´Ì¬,Ã¿¸ö×Ö½ÚÎ»ËµÃ÷²Î¿¼ÖÐ¶Ï·þÎñ³ÌÐòiStatusÎ»ËµÃ÷ 
+// ï¿½ï¿½È¡ï¿½Ð¶ï¿½ï¿½ï¿½ï¿½ï¿½
+BOOL	WINAPI	CH347ReadInter(ULONG			iIndex,      // Ö¸ï¿½ï¿½ï¿½è±¸ï¿½ï¿½ï¿½
+	                           PUCHAR			iStatus );   // Ö¸ï¿½ï¿½8ï¿½Ö½Úµï¿½Ôª,ï¿½Ö±ï¿½ÎªGPIO0-7ï¿½ï¿½ï¿½ï¿½×´Ì¬,Ã¿ï¿½ï¿½ï¿½Ö½ï¿½Î»Ëµï¿½ï¿½ï¿½Î¿ï¿½ï¿½Ð¶Ï·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½iStatusÎ»Ëµï¿½ï¿½ 
 
-// ·ÅÆúÖÐ¶ÏÊý¾Ý¶Á²Ù×÷
-BOOL	WINAPI	CH347AbortInter(ULONG			iIndex );  // Ö¸¶¨Éè±¸ÐòºÅ
+// ï¿½ï¿½ï¿½ï¿½ï¿½Ð¶ï¿½ï¿½ï¿½ï¿½Ý¶ï¿½ï¿½ï¿½ï¿½ï¿½
+BOOL	WINAPI	CH347AbortInter(ULONG			iIndex );  // Ö¸ï¿½ï¿½ï¿½è±¸ï¿½ï¿½ï¿½
 
-// ½øÈëIAP¹Ì¼þÉý¼¶Ä£Ê½
+// ï¿½ï¿½ï¿½ï¿½IAPï¿½Ì¼ï¿½ï¿½ï¿½ï¿½ï¿½Ä£Ê½
 BOOL	WINAPI	CH347StartIapFwUpate(ULONG    iIndex,
-									 ULONG	  FwSize); // ¹Ì¼þ³¤¶È
+									 ULONG	  FwSize); // ï¿½Ì¼ï¿½ï¿½ï¿½ï¿½ï¿½
 
-/**************HID/VCP´®¿Ú**********************/
-// ´ò¿ª´®¿Ú
-HANDLE WINAPI CH347Uart_Open(ULONG iIndex);		// Ö¸¶¨Éè±¸ÐòºÅ
+/**************HID/VCPï¿½ï¿½ï¿½ï¿½**********************/
+// ï¿½ò¿ª´ï¿½ï¿½ï¿½
+HANDLE WINAPI CH347Uart_Open(ULONG iIndex);		// Ö¸ï¿½ï¿½ï¿½è±¸ï¿½ï¿½ï¿½
 
-// ¹Ø±Õ´®¿Ú
-BOOL WINAPI CH347Uart_Close(ULONG iIndex);		// Ö¸¶¨Éè±¸ÐòºÅ
+// ï¿½Ø±Õ´ï¿½ï¿½ï¿½
+BOOL WINAPI CH347Uart_Close(ULONG iIndex);		// Ö¸ï¿½ï¿½ï¿½è±¸ï¿½ï¿½ï¿½
 
-BOOL	WINAPI	CH347Uart_SetDeviceNotify(												// Éè¶¨Éè±¸ÊÂ¼þÍ¨Öª³ÌÐò
-										  ULONG					iIndex,					// Ö¸¶¨Éè±¸ÐòºÅ,0¶ÔÓ¦µÚÒ»¸öÉè±¸
-										  PCHAR					iDeviceID,				// ¿ÉÑ¡²ÎÊý,Ö¸Ïò×Ö·û´®,Ö¸¶¨±»¼à¿ØµÄÉè±¸µÄID,×Ö·û´®ÒÔ\0ÖÕÖ¹
-										  mPCH347_NOTIFY_ROUTINE	iNotifyRoutine );   // Ö¸¶¨Éè±¸ÊÂ¼þ»Øµ÷³ÌÐò,ÎªNULLÔòÈ¡ÏûÊÂ¼þÍ¨Öª,·ñÔòÔÚ¼ì²âµ½ÊÂ¼þÊ±µ÷ÓÃ¸Ã³ÌÐò
+BOOL	WINAPI	CH347Uart_SetDeviceNotify(												// ï¿½è¶¨ï¿½è±¸ï¿½Â¼ï¿½Í¨Öªï¿½ï¿½ï¿½ï¿½
+										  ULONG					iIndex,					// Ö¸ï¿½ï¿½ï¿½è±¸ï¿½ï¿½ï¿½,0ï¿½ï¿½Ó¦ï¿½ï¿½Ò»ï¿½ï¿½ï¿½è±¸
+										  PCHAR					iDeviceID,				// ï¿½ï¿½Ñ¡ï¿½ï¿½ï¿½ï¿½,Ö¸ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½,Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Øµï¿½ï¿½è±¸ï¿½ï¿½ID,ï¿½Ö·ï¿½ï¿½ï¿½ï¿½ï¿½\0ï¿½ï¿½Ö¹
+										  mPCH347_NOTIFY_ROUTINE	iNotifyRoutine );   // Ö¸ï¿½ï¿½ï¿½è±¸ï¿½Â¼ï¿½ï¿½Øµï¿½ï¿½ï¿½ï¿½ï¿½,ÎªNULLï¿½ï¿½È¡ï¿½ï¿½ï¿½Â¼ï¿½Í¨Öª,ï¿½ï¿½ï¿½ï¿½ï¿½Ú¼ï¿½âµ½ï¿½Â¼ï¿½Ê±ï¿½ï¿½ï¿½Ã¸Ã³ï¿½ï¿½ï¿½
 
-// »ñÈ¡UARTÓ²¼þÅäÖÃ
-BOOL    WINAPI  CH347Uart_GetCfg(ULONG   iIndex,       // Ö¸¶¨Éè±¸ÐòºÅ
-								 PULONG  BaudRate,     // ²¨ÌØÂÊ
-								 PUCHAR  ByteSize,     // Êý¾ÝÎ»Êý(5,6,7,8,16)
-								 PUCHAR  Parity,       // Ð£ÑéÎ»(0£ºNone; 1£ºOdd; 2£ºEven; 3£ºMark; 4£ºSpace)
-								 PUCHAR  StopBits,     // Í£Ö¹Î»Êý(0£º1Í£Ö¹Î»; 1£º1.5Í£Ö¹Î»; 2£º2Í£Ö¹Î»)£»
-								 PUCHAR  ByteTimeout); // ×Ö½Ú³¬Ê±
+// ï¿½ï¿½È¡UARTÓ²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+BOOL    WINAPI  CH347Uart_GetCfg(ULONG   iIndex,       // Ö¸ï¿½ï¿½ï¿½è±¸ï¿½ï¿½ï¿½
+								 PULONG  BaudRate,     // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+								 PUCHAR  ByteSize,     // ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½(5,6,7,8,16)
+								 PUCHAR  Parity,       // Ð£ï¿½ï¿½Î»(0ï¿½ï¿½None; 1ï¿½ï¿½Odd; 2ï¿½ï¿½Even; 3ï¿½ï¿½Mark; 4ï¿½ï¿½Space)
+								 PUCHAR  StopBits,     // Í£Ö¹Î»ï¿½ï¿½(0ï¿½ï¿½1Í£Ö¹Î»; 1ï¿½ï¿½1.5Í£Ö¹Î»; 2ï¿½ï¿½2Í£Ö¹Î»)ï¿½ï¿½
+								 PUCHAR  ByteTimeout); // ï¿½Ö½Ú³ï¿½Ê±
 
-// ÉèÖÃUARTÅäÖÃ								   
-BOOL  WINAPI   CH347Uart_Init(ULONG  iIndex,      // Ö¸¶¨Éè±¸ÐòºÅ
-							  DWORD  BaudRate,    // ²¨ÌØÂÊ
-							  UCHAR  ByteSize,    // Êý¾ÝÎ»Êý(5,6,7,8,16)
-							  UCHAR  Parity,      // Ð£ÑéÎ»(0£ºNone; 1£ºOdd; 2£ºEven; 3£ºMark; 4£ºSpace)
-							  UCHAR  StopBits,    // Í£Ö¹Î»Êý(0£º1Í£Ö¹Î»; 1£º1.5Í£Ö¹Î»; 2£º2Í£Ö¹Î»)£»
-							  UCHAR  ByteTimeout);// ×Ö½Ú³¬Ê±Ê±¼ä,µ¥Î»100uS
+// ï¿½ï¿½ï¿½ï¿½UARTï¿½ï¿½ï¿½ï¿½								   
+BOOL  WINAPI   CH347Uart_Init(ULONG  iIndex,      // Ö¸ï¿½ï¿½ï¿½è±¸ï¿½ï¿½ï¿½
+							  DWORD  BaudRate,    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+							  UCHAR  ByteSize,    // ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½(5,6,7,8,16)
+							  UCHAR  Parity,      // Ð£ï¿½ï¿½Î»(0ï¿½ï¿½None; 1ï¿½ï¿½Odd; 2ï¿½ï¿½Even; 3ï¿½ï¿½Mark; 4ï¿½ï¿½Space)
+							  UCHAR  StopBits,    // Í£Ö¹Î»ï¿½ï¿½(0ï¿½ï¿½1Í£Ö¹Î»; 1ï¿½ï¿½1.5Í£Ö¹Î»; 2ï¿½ï¿½2Í£Ö¹Î»)ï¿½ï¿½
+							  UCHAR  ByteTimeout);// ï¿½Ö½Ú³ï¿½Ê±Ê±ï¿½ï¿½,ï¿½ï¿½Î»100uS
 
-// ÉèÖÃUSBÊý¾Ý¶ÁÐ´µÄ³¬Ê±
-BOOL	WINAPI	CH347Uart_SetTimeout(ULONG			iIndex,         // Ö¸¶¨Éè±¸ÐòºÅ
-									 ULONG			iWriteTimeout,  // Ö¸¶¨USBÐ´³öÊý¾Ý¿éµÄ³¬Ê±Ê±¼ä,ÒÔºÁÃëmSÎªµ¥Î»,0xFFFFFFFFÖ¸¶¨²»³¬Ê±(Ä¬ÈÏÖµ)
-									 ULONG			iReadTimeout ); // Ö¸¶¨USB¶ÁÈ¡Êý¾Ý¿éµÄ³¬Ê±Ê±¼ä,ÒÔºÁÃëmSÎªµ¥Î»,0xFFFFFFFFÖ¸¶¨²»³¬Ê±(Ä¬ÈÏÖµ)
+// ï¿½ï¿½ï¿½ï¿½USBï¿½ï¿½ï¿½Ý¶ï¿½Ð´ï¿½Ä³ï¿½Ê±
+BOOL	WINAPI	CH347Uart_SetTimeout(ULONG			iIndex,         // Ö¸ï¿½ï¿½ï¿½è±¸ï¿½ï¿½ï¿½
+									 ULONG			iWriteTimeout,  // Ö¸ï¿½ï¿½USBÐ´ï¿½ï¿½ï¿½ï¿½ï¿½Ý¿ï¿½Ä³ï¿½Ê±Ê±ï¿½ï¿½,ï¿½Ôºï¿½ï¿½ï¿½mSÎªï¿½ï¿½Î»,0xFFFFFFFFÖ¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±(Ä¬ï¿½ï¿½Öµ)
+									 ULONG			iReadTimeout ); // Ö¸ï¿½ï¿½USBï¿½ï¿½È¡ï¿½ï¿½ï¿½Ý¿ï¿½Ä³ï¿½Ê±Ê±ï¿½ï¿½,ï¿½Ôºï¿½ï¿½ï¿½mSÎªï¿½ï¿½Î»,0xFFFFFFFFÖ¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±(Ä¬ï¿½ï¿½Öµ)
 
-// ´®¿Ú¶Á
-BOOL  WINAPI   CH347Uart_Read(ULONG			iIndex,    // Ö¸¶¨Éè±¸ÐòºÅ
-							  PVOID			oBuffer,   // Ö¸ÏòÒ»¸ö×ã¹»´óµÄ»º³åÇø,ÓÃÓÚ±£´æ¶ÁÈ¡µÄÊý¾Ý
-							  PULONG	    ioLength );// Ö¸Ïò³¤¶Èµ¥Ôª,ÊäÈëÊ±Îª×¼±¸¶ÁÈ¡µÄ³¤¶È,·µ»ØºóÎªÊµ¼Ê¶ÁÈ¡µÄ³¤¶È
-// ´®¿ÚÐ´
-BOOL  WINAPI   CH347Uart_Write(ULONG		iIndex,    // Ö¸¶¨Éè±¸ÐòºÅ
-							   PVOID		iBuffer,   // Ö¸ÏòÒ»¸ö»º³åÇø,·ÅÖÃ×¼±¸Ð´³öµÄÊý¾Ý
-							   PULONG		ioLength );// Ö¸Ïò³¤¶Èµ¥Ôª,ÊäÈëÊ±Îª×¼±¸Ð´³öµÄ³¤¶È,·µ»ØºóÎªÊµ¼ÊÐ´³öµÄ³¤¶È
+// ï¿½ï¿½ï¿½Ú¶ï¿½
+BOOL  WINAPI   CH347Uart_Read(ULONG			iIndex,    // Ö¸ï¿½ï¿½ï¿½è±¸ï¿½ï¿½ï¿½
+							  PVOID			oBuffer,   // Ö¸ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ã¹»ï¿½ï¿½Ä»ï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½Ú±ï¿½ï¿½ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+							  PULONG	    ioLength );// Ö¸ï¿½ò³¤¶Èµï¿½Ôª,ï¿½ï¿½ï¿½ï¿½Ê±Îª×¼ï¿½ï¿½ï¿½ï¿½È¡ï¿½Ä³ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½Øºï¿½ÎªÊµï¿½Ê¶ï¿½È¡ï¿½Ä³ï¿½ï¿½ï¿½
+// ï¿½ï¿½ï¿½ï¿½Ð´
+BOOL  WINAPI   CH347Uart_Write(ULONG		iIndex,    // Ö¸ï¿½ï¿½ï¿½è±¸ï¿½ï¿½ï¿½
+							   PVOID		iBuffer,   // Ö¸ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½×¼ï¿½ï¿½Ð´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+							   PULONG		ioLength );// Ö¸ï¿½ò³¤¶Èµï¿½Ôª,ï¿½ï¿½ï¿½ï¿½Ê±Îª×¼ï¿½ï¿½Ð´ï¿½ï¿½ï¿½Ä³ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½Øºï¿½ÎªÊµï¿½ï¿½Ð´ï¿½ï¿½ï¿½Ä³ï¿½ï¿½ï¿½
 
-// ²éÑ¯¶Á»º³åÇøÓÐ¶àÉÙ×Ö½ÚÎ´È¡£¨ÊÊÓÃÓÚHIDÄ£Ê½´®¿Ú£©
-BOOL WINAPI CH347Uart_QueryBufUpload(ULONG			iIndex,        // Ö¸¶¨Éè±¸ÐòºÅ
-									 LONGLONG       *RemainBytes); // ¶Á»º³åÇøÎ´È¡×Ö½ÚÊý
+// ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¶ï¿½ï¿½ï¿½ï¿½Ö½ï¿½Î´È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½HIDÄ£Ê½ï¿½ï¿½ï¿½Ú£ï¿½
+BOOL WINAPI CH347Uart_QueryBufUpload(ULONG			iIndex,        // Ö¸ï¿½ï¿½ï¿½è±¸ï¿½ï¿½ï¿½
+									 LONGLONG       *RemainBytes); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î´È¡ï¿½Ö½ï¿½ï¿½ï¿½
 
-// »ñÈ¡Éè±¸ÐÅÏ¢
+// ï¿½ï¿½È¡ï¿½è±¸ï¿½ï¿½Ï¢
 BOOL WINAPI CH347Uart_GetDeviceInfor(ULONG iIndex,mDeviceInforS *DevInformation);
 
 /********I2C***********/
-// I2CÉèÖÃ
-BOOL	WINAPI	CH347I2C_Set(ULONG			iIndex,   // Ö¸¶¨Éè±¸ÐòºÅ
-							 ULONG			iMode );  // Ö¸¶¨Ä£Ê½,¼ûÏÂÐÐ
-// Î»0-Î»2: I2C½Ó¿ÚËÙ¶È/SCLÆµÂÊ, 000=µÍËÙ/20KHz,001=±ê×¼/100KHz(Ä¬ÈÏÖµ),010=¿ìËÙ/400KHz,011=¸ßËÙ/750KHz,100=µÍËÙ/50KHz,101=±ê×¼/200KHz£¬110=¿ìËÙ/1MHz
-// ÆäËü±£Áô,±ØÐëÎª0
+// I2Cï¿½ï¿½ï¿½ï¿½
+BOOL	WINAPI	CH347I2C_Set(ULONG			iIndex,   // Ö¸ï¿½ï¿½ï¿½è±¸ï¿½ï¿½ï¿½
+							 ULONG			iMode );  // Ö¸ï¿½ï¿½Ä£Ê½,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+// Î»0-Î»2: I2Cï¿½Ó¿ï¿½ï¿½Ù¶ï¿½/SCLÆµï¿½ï¿½, 000=ï¿½ï¿½ï¿½ï¿½/20KHz,001=ï¿½ï¿½×¼/100KHz(Ä¬ï¿½ï¿½Öµ),010=ï¿½ï¿½ï¿½ï¿½/400KHz,011=ï¿½ï¿½ï¿½ï¿½/750KHz,100=ï¿½ï¿½ï¿½ï¿½/50KHz,101=ï¿½ï¿½×¼/200KHzï¿½ï¿½110=ï¿½ï¿½ï¿½ï¿½/1MHz
+// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½Îª0
 
-// ÉèÖÃI2CÊ±ÖÓÑÓÕ¹¹¦ÄÜ
-BOOL	WINAPI	CH347I2C_SetStretch(ULONG			iIndex,   // Ö¸¶¨Éè±¸ÐòºÅ
-									BOOL			iEnable); // 0=¹Ø±ÕÊ±ÖÓÑÓÕ¹¹¦ÄÜ£¨Ä¬ÈÏ¹Ø±Õ£©£»1=¿ªÆôÊ±ÖÓÑÓÕ¹¹¦ÄÜ
+// ï¿½ï¿½ï¿½ï¿½I2CÊ±ï¿½ï¿½ï¿½ï¿½Õ¹ï¿½ï¿½ï¿½ï¿½
+BOOL	WINAPI	CH347I2C_SetStretch(ULONG			iIndex,   // Ö¸ï¿½ï¿½ï¿½è±¸ï¿½ï¿½ï¿½
+									BOOL			iEnable); // 0=ï¿½Ø±ï¿½Ê±ï¿½ï¿½ï¿½ï¿½Õ¹ï¿½ï¿½ï¿½Ü£ï¿½Ä¬ï¿½Ï¹Ø±Õ£ï¿½ï¿½ï¿½1=ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½Õ¹ï¿½ï¿½ï¿½ï¿½
 
-// ÉèÖÃÓ²¼þÒì²½ÑÓÊ±,µ÷ÓÃºóºÜ¿ì·µ»Ø,¶øÔÚÏÂÒ»¸öÁ÷²Ù×÷Ö®Ç°ÑÓÊ±Ö¸¶¨ºÁÃëÊý
-BOOL	WINAPI	CH347I2C_SetDelaymS(ULONG			iIndex,       // Ö¸¶¨Éè±¸ÐòºÅ
-									ULONG			iDelay ) ;    // Ö¸¶¨ÑÓÊ±µÄºÁÃëÊý
+// ï¿½ï¿½ï¿½ï¿½Ó²ï¿½ï¿½ï¿½ì²½ï¿½ï¿½Ê±,ï¿½ï¿½ï¿½Ãºï¿½Ü¿ì·µï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö®Ç°ï¿½ï¿½Ê±Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+BOOL	WINAPI	CH347I2C_SetDelaymS(ULONG			iIndex,       // Ö¸ï¿½ï¿½ï¿½è±¸ï¿½ï¿½ï¿½
+									ULONG			iDelay ) ;    // Ö¸ï¿½ï¿½ï¿½ï¿½Ê±ï¿½Äºï¿½ï¿½ï¿½ï¿½ï¿½
 
-// ÉèÖÃI2CÒý½ÅÇý¶¯Ä£Ê½
-BOOL	WINAPI CH347I2C_SetDriverMode(ULONG			iIndex,		  // Ö¸¶¨Éè±¸ÐòºÅ
-									  UCHAR			iMode);		  // 0=¿ªÂ©Ä£Ê½£»1=ÍÆÍìÄ£Ê½
+// ï¿½ï¿½ï¿½ï¿½I2Cï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä£Ê½
+BOOL	WINAPI CH347I2C_SetDriverMode(ULONG			iIndex,		  // Ö¸ï¿½ï¿½ï¿½è±¸ï¿½ï¿½ï¿½
+									  UCHAR			iMode);		  // 0=ï¿½ï¿½Â©Ä£Ê½ï¿½ï¿½1=ï¿½ï¿½ï¿½ï¿½Ä£Ê½
 
-// ´¦ÀíI2CÊý¾ÝÁ÷,2Ïß½Ó¿Ú,Ê±ÖÓÏßÎªSCLÒý½Å,Êý¾ÝÏßÎªSDAÒý½Å
-BOOL	WINAPI	CH347StreamI2C( ULONG			iIndex,        // Ö¸¶¨Éè±¸ÐòºÅ
-							    ULONG			iWriteLength,  // ×¼±¸Ð´³öµÄÊý¾Ý×Ö½ÚÊý
-							    PVOID			iWriteBuffer,  // Ö¸ÏòÒ»¸ö»º³åÇø,·ÅÖÃ×¼±¸Ð´³öµÄÊý¾Ý,Ê××Ö½ÚÍ¨³£ÊÇI2CÉè±¸µØÖ·¼°¶ÁÐ´·½ÏòÎ»
-							    ULONG			iReadLength,   // ×¼±¸¶ÁÈ¡µÄÊý¾Ý×Ö½ÚÊý
-							    PVOID			oReadBuffer ); // Ö¸ÏòÒ»¸ö»º³åÇø,·µ»ØºóÊÇ¶ÁÈëµÄÊý¾Ý
+// ï¿½ï¿½ï¿½ï¿½I2Cï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,2ï¿½ß½Ó¿ï¿½,Ê±ï¿½ï¿½ï¿½ï¿½ÎªSCLï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÎªSDAï¿½ï¿½ï¿½ï¿½
+BOOL	WINAPI	CH347StreamI2C( ULONG			iIndex,        // Ö¸ï¿½ï¿½ï¿½è±¸ï¿½ï¿½ï¿½
+							    ULONG			iWriteLength,  // ×¼ï¿½ï¿½Ð´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö½ï¿½ï¿½ï¿½
+							    PVOID			iWriteBuffer,  // Ö¸ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½×¼ï¿½ï¿½Ð´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½Ö½ï¿½Í¨ï¿½ï¿½ï¿½ï¿½I2Cï¿½è±¸ï¿½ï¿½Ö·ï¿½ï¿½ï¿½ï¿½Ð´ï¿½ï¿½ï¿½ï¿½Î»
+							    ULONG			iReadLength,   // ×¼ï¿½ï¿½ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö½ï¿½ï¿½ï¿½
+							    PVOID			oReadBuffer ); // Ö¸ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½Øºï¿½ï¿½Ç¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
-// ´¦ÀíI2CÊý¾ÝÁ÷,2Ïß½Ó¿Ú,Ê±ÖÓÏßÎªSCLÒý½Å,Êý¾ÝÏßÎªSDAÒý½Å
-BOOL	WINAPI	CH347StreamI2C_RetACK(  // ´¦ÀíI2CÊý¾ÝÁ÷,2Ïß½Ó¿Ú,Ê±ÖÓÏßÎªSCLÒý½Å,Êý¾ÝÏßÎªSDAÒý½Å(×¼Ë«ÏòI/O),ËÙ¶ÈÔ¼56K×Ö½Ú,²¢·µ»ØÖ÷»ú¶Ë»ñÈ¡µ½µÄACKÊýÁ¿
-									  ULONG			iIndex,        // Ö¸¶¨Éè±¸ÐòºÅ
-									  ULONG			iWriteLength,  // ×¼±¸Ð´³öµÄÊý¾Ý×Ö½ÚÊý
-									  PVOID			iWriteBuffer,  // Ö¸ÏòÒ»¸ö»º³åÇø,·ÅÖÃ×¼±¸Ð´³öµÄÊý¾Ý,Ê××Ö½ÚÍ¨³£ÊÇI2CÉè±¸µØÖ·¼°¶ÁÐ´·½ÏòÎ»
-									  ULONG			iReadLength,   // ×¼±¸¶ÁÈ¡µÄÊý¾Ý×Ö½ÚÊý
-									  PVOID			oReadBuffer,   // Ö¸ÏòÒ»¸ö»º³åÇø,·µ»ØºóÊÇ¶ÁÈëµÄÊý¾Ý
-									  PULONG		rAckCount);    // Ö¸Ïò¶ÁÐ´·µ»ØµÄACKÖµ
+// ï¿½ï¿½ï¿½ï¿½I2Cï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,2ï¿½ß½Ó¿ï¿½,Ê±ï¿½ï¿½ï¿½ï¿½ÎªSCLï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÎªSDAï¿½ï¿½ï¿½ï¿½
+BOOL	WINAPI	CH347StreamI2C_RetACK(  // ï¿½ï¿½ï¿½ï¿½I2Cï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,2ï¿½ß½Ó¿ï¿½,Ê±ï¿½ï¿½ï¿½ï¿½ÎªSCLï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÎªSDAï¿½ï¿½ï¿½ï¿½(×¼Ë«ï¿½ï¿½I/O),ï¿½Ù¶ï¿½Ô¼56Kï¿½Ö½ï¿½,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ë»ï¿½È¡ï¿½ï¿½ï¿½ï¿½ACKï¿½ï¿½ï¿½ï¿½
+									  ULONG			iIndex,        // Ö¸ï¿½ï¿½ï¿½è±¸ï¿½ï¿½ï¿½
+									  ULONG			iWriteLength,  // ×¼ï¿½ï¿½Ð´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö½ï¿½ï¿½ï¿½
+									  PVOID			iWriteBuffer,  // Ö¸ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½×¼ï¿½ï¿½Ð´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½Ö½ï¿½Í¨ï¿½ï¿½ï¿½ï¿½I2Cï¿½è±¸ï¿½ï¿½Ö·ï¿½ï¿½ï¿½ï¿½Ð´ï¿½ï¿½ï¿½ï¿½Î»
+									  ULONG			iReadLength,   // ×¼ï¿½ï¿½ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö½ï¿½ï¿½ï¿½
+									  PVOID			oReadBuffer,   // Ö¸ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½Øºï¿½ï¿½Ç¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+									  PULONG		rAckCount);    // Ö¸ï¿½ï¿½ï¿½Ð´ï¿½ï¿½ï¿½Øµï¿½ACKÖµ
 
 #ifndef _CH341_DLL_H
-typedef	enum	_EEPROM_TYPE {// EEPROMÐÍºÅ
+typedef	enum	_EEPROM_TYPE {// EEPROMï¿½Íºï¿½
 	ID_24C01,
 	ID_24C02,
 	ID_24C04,
@@ -609,32 +609,32 @@ typedef	enum	_EEPROM_TYPE {// EEPROMÐÍºÅ
 } EEPROM_TYPE;
 #endif
 
-// ´ÓEEPROMÖÐ¶ÁÈ¡Êý¾Ý¿é
-BOOL	WINAPI	CH347ReadEEPROM(ULONG			iIndex,     // Ö¸¶¨Éè±¸ÐòºÅ
-								EEPROM_TYPE		iEepromID,  // Ö¸¶¨EEPROMÐÍºÅ
-								ULONG			iAddr,      // Ö¸¶¨Êý¾Ýµ¥ÔªµÄµØÖ·
-								ULONG			iLength,    // ×¼±¸¶ÁÈ¡µÄÊý¾Ý×Ö½ÚÊý
-								PUCHAR			oBuffer );  // Ö¸ÏòÒ»¸ö»º³åÇø,·µ»ØºóÊÇ¶ÁÈëµÄÊý¾Ý
-// ÏòEEPROMÖÐÐ´ÈëÊý¾Ý¿é
-BOOL	WINAPI	CH347WriteEEPROM(ULONG			iIndex,     // Ö¸¶¨Éè±¸ÐòºÅ
-								 EEPROM_TYPE	iEepromID,  // Ö¸¶¨EEPROMÐÍºÅ
-								 ULONG			iAddr,      // Ö¸¶¨Êý¾Ýµ¥ÔªµÄµØÖ·
-								 ULONG			iLength,    // ×¼±¸Ð´³öµÄÊý¾Ý×Ö½ÚÊý
-								 PUCHAR			iBuffer );  // Ö¸ÏòÒ»¸ö»º³åÇø,·ÅÖÃ×¼±¸Ð´³öµÄÊý¾Ý
+// ï¿½ï¿½EEPROMï¿½Ð¶ï¿½È¡ï¿½ï¿½ï¿½Ý¿ï¿½
+BOOL	WINAPI	CH347ReadEEPROM(ULONG			iIndex,     // Ö¸ï¿½ï¿½ï¿½è±¸ï¿½ï¿½ï¿½
+								EEPROM_TYPE		iEepromID,  // Ö¸ï¿½ï¿½EEPROMï¿½Íºï¿½
+								ULONG			iAddr,      // Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½Ýµï¿½Ôªï¿½Äµï¿½Ö·
+								ULONG			iLength,    // ×¼ï¿½ï¿½ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö½ï¿½ï¿½ï¿½
+								PUCHAR			oBuffer );  // Ö¸ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½Øºï¿½ï¿½Ç¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+// ï¿½ï¿½EEPROMï¿½ï¿½Ð´ï¿½ï¿½ï¿½ï¿½ï¿½Ý¿ï¿½
+BOOL	WINAPI	CH347WriteEEPROM(ULONG			iIndex,     // Ö¸ï¿½ï¿½ï¿½è±¸ï¿½ï¿½ï¿½
+								 EEPROM_TYPE	iEepromID,  // Ö¸ï¿½ï¿½EEPROMï¿½Íºï¿½
+								 ULONG			iAddr,      // Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½Ýµï¿½Ôªï¿½Äµï¿½Ö·
+								 ULONG			iLength,    // ×¼ï¿½ï¿½Ð´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö½ï¿½ï¿½ï¿½
+								 PUCHAR			iBuffer );  // Ö¸ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½×¼ï¿½ï¿½Ð´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
-//ÉèÖÃµÚ8Î»Ê±ÖÓµÍÖÜÆÚÑÓÊ±Ê±¼ä£¬½öÊÊÓÃÓÚCH347T
-BOOL WINAPI CH347I2C_SetAckClk_DelayuS(ULONG iIndex,	// Ö¸¶¨Éè±¸ÐòºÅ
-									   ULONG iDelay);	// Ö¸¶¨ÑÓÊ±µÄÎ¢ÃëÊý
+//ï¿½ï¿½ï¿½Ãµï¿½8Î»Ê±ï¿½Óµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±Ê±ï¿½ä£¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½CH347T
+BOOL WINAPI CH347I2C_SetAckClk_DelayuS(ULONG iIndex,	// Ö¸ï¿½ï¿½ï¿½è±¸ï¿½ï¿½ï¿½
+									   ULONG iDelay);	// Ö¸ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½Î¢ï¿½ï¿½ï¿½ï¿½
 
-// ¸Ãº¯ÊýÓÃÓÚ²éÑ¯Ö¸¶¨Ë÷ÒýµÄCH339WÐ¾Æ¬µ±Ç°¸÷¸ö½Ó¿Ú¹¦ÄÜµÄÆôÓÃ×´Ì¬¡£
-// ·µ»ØÖµÎ»¶¨Òå£º
-//    Î»7 (0x80): USB×ªJTAGÊ¹ÄÜ×´Ì¬£¨1=Ê¹ÄÜ£¬0=½ûÓÃ£©
-//    Î»6 (0x40): USB×ªSPIÊ¹ÄÜ×´Ì¬£¨1=Ê¹ÄÜ£¬0=½ûÓÃ£©
-//    Î»5 (0x20): USB×ªUARTÊ¹ÄÜ£¨²»´øÁ÷¿Ø£©£¨1=Ê¹ÄÜ£¬0=½ûÓÃ£©
-//    Î»4 (0x10): USB×ªUARTÁ÷¿ØÊ¹ÄÜ£¨1=Ê¹ÄÜ£¬0=½ûÓÃ£©
-//    Î»3 (0x08): USB×ªI2CÊ¹ÄÜ×´Ì¬£¨1=Ê¹ÄÜ£¬0=½ûÓÃ£©
-//    Î»2-Î»0: ±£ÁôÎ»
-UCHAR	WINAPI	CH339GetChipFuncState( ULONG iIndex );	// Ö¸¶¨Éè±¸ÐòºÅ
+// ï¿½Ãºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú²ï¿½Ñ¯Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½CH339WÐ¾Æ¬ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½ï¿½Ó¿Ú¹ï¿½ï¿½Üµï¿½ï¿½ï¿½ï¿½ï¿½×´Ì¬ï¿½ï¿½
+// ï¿½ï¿½ï¿½ï¿½ÖµÎ»ï¿½ï¿½ï¿½å£º
+//    Î»7 (0x80): USB×ªJTAGÊ¹ï¿½ï¿½×´Ì¬ï¿½ï¿½1=Ê¹ï¿½Ü£ï¿½0=ï¿½ï¿½ï¿½Ã£ï¿½
+//    Î»6 (0x40): USB×ªSPIÊ¹ï¿½ï¿½×´Ì¬ï¿½ï¿½1=Ê¹ï¿½Ü£ï¿½0=ï¿½ï¿½ï¿½Ã£ï¿½
+//    Î»5 (0x20): USB×ªUARTÊ¹ï¿½Ü£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø£ï¿½ï¿½ï¿½1=Ê¹ï¿½Ü£ï¿½0=ï¿½ï¿½ï¿½Ã£ï¿½
+//    Î»4 (0x10): USB×ªUARTï¿½ï¿½ï¿½ï¿½Ê¹ï¿½Ü£ï¿½1=Ê¹ï¿½Ü£ï¿½0=ï¿½ï¿½ï¿½Ã£ï¿½
+//    Î»3 (0x08): USB×ªI2CÊ¹ï¿½ï¿½×´Ì¬ï¿½ï¿½1=Ê¹ï¿½Ü£ï¿½0=ï¿½ï¿½ï¿½Ã£ï¿½
+//    Î»2-Î»0: ï¿½ï¿½ï¿½ï¿½Î»
+UCHAR	WINAPI	CH339GetChipFuncState( ULONG iIndex );	// Ö¸ï¿½ï¿½ï¿½è±¸ï¿½ï¿½ï¿½
 
 #ifdef __cplusplus
 }
