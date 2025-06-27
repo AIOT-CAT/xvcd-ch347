@@ -139,7 +139,7 @@ int handle_data(dev_ctx *ch347_ctx, socket_t fd, unsigned long frequency)
 
             printf("Get the period:%d.\n", period);
 
-            actPeriod = io_set_period(ch347_ctx, (unsigned int)period);
+            actPeriod = io_set_period(ch347_ctx, frequency);
 
             if (actPeriod < 0) {
                 fprintf(stderr, "Error while setting the JTAG TCK period\n");
@@ -219,7 +219,7 @@ int handle_data(dev_ctx *ch347_ctx, socket_t fd, unsigned long frequency)
                 jtag_state = jtag_step(jtag_state, tms);
             }
 
-            if (io_scan(ch347_ctx, buffer, buffer + nr_bytes, result, len, jtag_state) < 0) {
+            if (io_scan(ch347_ctx, buffer, buffer + nr_bytes, result, len) < 0) {
                 fprintf(stderr, "io_scan failed\n");
                 exit(1);
             }

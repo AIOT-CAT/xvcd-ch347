@@ -28,8 +28,8 @@ enum {
 };
 
 int io_init(dev_ctx *ch347_ctx);
-int io_set_period(dev_ctx *ch347_ctx, unsigned int period);
-int io_scan(dev_ctx *ch347_ctx, const unsigned char* tms, const unsigned char* tdi, unsigned char* tdo, int len, int state);
+int io_set_period(dev_ctx *ch347_ctx, unsigned long frequency);
+int io_scan(dev_ctx *ch347_ctx, const unsigned char* tms, const unsigned char* tdi, unsigned char* tdo, int len);
 void io_close(dev_ctx *ch347_ctx);
 
 int usb_xfer(dev_ctx *ch347_ctx, unsigned wlen, unsigned rlen, unsigned *ract, bool defer);

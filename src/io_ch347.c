@@ -48,17 +48,18 @@ int io_init(dev_ctx *ch347_ctx)
     return 0;
 }
 
-int io_set_period(dev_ctx *ch347_ctx, unsigned int period)
+int io_set_period(dev_ctx *ch347_ctx, unsigned long frequency)
 {
     int i = 0;
     int clockIndex = 0;
     int RetVal;
-    long clock_rate = 1000000000 / period;
+    int period;
+    unsigned long clock_rate = frequency;
     int speed_clock[] = {KHZ(468.75), KHZ(937.5), MHZ(1.875), MHZ(3.75), MHZ(7.5), MHZ(15), MHZ(30), MHZ(60)};
     // int speed_clock[] = {MHZ(1.875), MHZ(3.75), MHZ(7.5), MHZ(15), MHZ(30), MHZ(60)};
 
     for (i = 0; i < sizeof(speed_clock) / sizeof(int); i++) {
-        if (clock_rate < speed_clock[i]) {
+        if (clock_rate <= speed_clock[i]) {
             clockIndex = i;
             break;
         }
@@ -67,7 +68,7 @@ int io_set_period(dev_ctx *ch347_ctx, unsigned int period)
         clockIndex = 7;
     }
     RetVal = ch347_jtag_init(ch347_ctx, clockIndex);
-    if (!RetVal) {
+    if (RetVal == -1) {
         printf("CH347 Set Clock failed\n");
         return -1;
     }
@@ -183,7 +184,7 @@ bool is_all_zero(const uint8_t *ptr, size_t size)
     return true;
 }
 
-int io_scan(dev_ctx *ch347_ctx, const unsigned char *TMS, const unsigned char *TDI, unsigned char *TDO, int bits, int state)
+int io_scan(dev_ctx *ch347_ctx, const unsigned char *TMS, const unsigned char *TDI, unsigned char *TDO, int bits)
 {
     unsigned char v;
     unsigned char CmdBuffer[2 * 16384 + 512];
@@ -201,20 +202,30 @@ int io_scan(dev_ctx *ch347_ctx, const unsigned char *TMS, const unsigned char *T
     }
 
     DI = DII = BI = 0;
-    // TODO：状态为shift_dr或shift_ir，但tms仍有可能不全为0
-    if ((state == shift_dr || state == shift_ir) && is_all_zero(TMS, (bits + 7) / 8)) {
+    if (is_all_zero(TMS, (bits + 7) / 8)) {
         // set tck to low
         v = TCK_L | TMS_L | TDI_L;
         unsigned char settck[] = {0xD2, 0x01, 0x00, 0x00};
+        // should return D2 D0 00
         int len = 4;
         if (!ch347_write(ch347_ctx, settck, &len) || len != 4) {
             printf("%d : CH347WriteData failed.\n", __LINE__);
             return -1;
         }
+        memset(settck, 0, sizeof(settck));
         len = 10;
         if (!ch347_read(ch347_ctx, settck, &len)) {
             printf("%d : CH347ReadData failed.\n", __LINE__);
             return -1;
+        }
+        if (len < 3) {
+            for (int times = 0;times < 3;times++) {
+                len = 10;
+                if (!ch347_read(ch347_ctx, settck, &len)) {
+                    printf("%d : CH347ReadData failed.\n", __LINE__);
+                    return -1;
+                }
+            }
         }
         return writeTDI(ch347_ctx, TDI, TDO, bits, false);
     }
