@@ -1,18 +1,18 @@
 #ifndef _CH347_XVCD_API_H_
 #define _CH347_XVCD_API_H_
 
-#if defined(__WIN32__) || defined(__CYGWIN__)
-    #define PLATFORM_WINDOWS  1
-    #define _CRT_SECURE_NO_WARNINGS
-    #define _WINSOCK_DEPRECATED_NO_WARNINGS
+#if defined(_WIN32) || defined(__CYGWIN__)|| defined(__CYGWIN32__) || defined(__CYGWIN64__) || defined(__MSYS__)
+    #define  PLATFORM_WINDOWS  1
+    #define  _CRT_SECURE_NO_WARNINGS
+    #define  _WINSOCK_DEPRECATED_NO_WARNINGS
     #include <winsock2.h>
     #include <ws2tcpip.h>
     #include <io.h>
     #include <process.h>
-    #pragma comment(lib, "Ws2_32.lib")
+    #pragma  comment(lib, "Ws2_32.lib")
     #include "CH347DLL.H"
 #else
-    #define PLATFORM_UNIX 1
+    #define  PLATFORM_UNIX 1
     #include <sys/socket.h>
     #include <netinet/in.h>
     #include <netinet/tcp.h>
@@ -53,32 +53,20 @@
 
 #define HW_TDO_BUF_SIZE              4096
 #define SF_PACKET_BUF_SIZE           51200 /* Command packet length */
-#define UCMDPKT_DATA_MAX_BYTES_USBHS 507   /* The data length contained in each
-					      command packet during USB
-					      high-speed operation */
-#define UCMDPKT_DATA_MAX_BITS_USBHS  248    /* bit mode transfer 248 byte */
-#define USBC_PACKET_USBHS            512   /* Maximum data length per packet at
-					      USB high speed */
-#define USBC_PACKET_USBHS_SINGLE     510   /* usb high speed max
-					      package length */
+#define UCMDPKT_DATA_MAX_BYTES_USBHS 507   /* The data length contained in each command packet during USB high-speed operation */
+#define UCMDPKT_DATA_MAX_BITS_USBHS  248   /* bit mode transfer 248 byte */
+#define USBC_PACKET_USBHS            512   /* Maximum data length per packet at USB high speed */
+#define USBC_PACKET_USBHS_SINGLE     510   /* usb high speed max package length */
 #define CH347_CMD_HEADER             3     /* Protocol header length */
-
-#define CH347_CMD_HEADER 3 /* 协议包头长度 */
-/* Protocol transmission format: CMD (1 byte)+Length (2 bytes)+Data */
-#define CH347_CMD_INFO_RD            0xCA /* Parameter acquisition, used to
-					     obtain firmware version,
-					     JTAG interface related parameters,
-					     etc */
-#define CH347_CMD_JTAG_INIT          0xD0 /* JTAG Interface Initialization
-					     Command */
-#define CH347_CMD_JTAG_BIT_OP        0xD1 /* JTAG interface pin bit control
-					     command */
-#define CH347_CMD_JTAG_BIT_OP_RD     0xD2 /* JTAG interface pin bit control and
-					     read commands */
-#define CH347_CMD_JTAG_DATA_SHIFT    0xD3 /* JTAG interface data shift
-					     command */
-#define CH347_CMD_JTAG_DATA_SHIFT_RD 0xD4 /* JTAG interface data shift and read
-					     command */
+#define CH347_CMD_HEADER             3     /* 协议包头长度
+                                              Protocol transmission format: CMD (1 byte) + Length (2 bytes) + Data */
+#define CH347_CMD_INFO_RD            0xCA  /* Parameter acquisition, used to obtain firmware version,
+                                              TAG interface related parameters, etc */
+#define CH347_CMD_JTAG_INIT          0xD0  /* JTAG Interface Initialization Command */
+#define CH347_CMD_JTAG_BIT_OP        0xD1  /* JTAG interface pin bit control command */
+#define CH347_CMD_JTAG_BIT_OP_RD     0xD2  /* JTAG interface pin bit control and read commands */
+#define CH347_CMD_JTAG_DATA_SHIFT    0xD3  /* JTAG interface data shift command */
+#define CH347_CMD_JTAG_DATA_SHIFT_RD 0xD4  /* JTAG interface data shift and read command */
 
 typedef struct ch347_dev_info {
     uint16_t usb_vid;
