@@ -8,9 +8,9 @@ xvcd_ch347 of XVC (Xilinx Virtual Cable) protocol based on xvcd (https://github.
 
 ### Windows
 
-First please make shure you have Git and Visual Studio (Need license for commercial usage) or Build Tools for Visual Studio (Free provided by Microsoft) installed.
+First, ensure you have Git and either Visual Studio (requires a license for commercial use) or Build Tools for Visual Studio (free from Microsoft) installed.
 
-Open "Developer Powershell for Visual Studio" and run the following commands:
+Open **Developer PowerShell for Visual Studio** and run the following commands:
 
 ```powershell
 git clone https://github.com/AIOT-CAT/xvcd-ch347.git
@@ -20,7 +20,7 @@ cmake ..
 cmake --build . --config Release
 ```
 
-Regarding CH347DLLA64.DLL, you can obtain it from here : https://www.wch.cn/downloads/CH341PAR_ZIP.html .
+To obtain `CH347DLLA64.DLL`, download it from: [https://www.wch.cn/downloads/CH341PAR\_ZIP.html](https://www.wch.cn/downloads/CH341PAR_ZIP.html).
 
 ### Linux
 
