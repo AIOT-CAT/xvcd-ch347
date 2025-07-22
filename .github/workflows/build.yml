@@ -32,7 +32,7 @@ jobs:
         with:
           name: xvcd_ch347_linux_builds
           path: |
-            build/Release/xvcd_ch347_Linux
+            build/xvcd_ch347_Linux
 
   build-windows:
     runs-on: windows-latest
@@ -53,10 +53,47 @@ jobs:
           cmake -B build_win32 -A win32
           cmake --build build_win32 --config Release
 
+      - name: Ensure required DLLs
+        run: |
+          Add-Type -Assembly System.IO.Compression.FileSystem
+
+          # Download CH341PAR.ZIP into memory
+          $response = Invoke-WebRequest -Uri "https://www.wch.cn/download/file?id=7" -UseBasicParsing
+          $stream = New-Object System.IO.MemoryStream
+          $stream.Write($response.Content, 0, $response.RawContentLength)
+          $stream.Seek(0, 'Begin') | Out-Null
+
+          # Open ZipArchive from memory
+          $archive = [System.IO.Compression.ZipArchive]::new($stream, [System.IO.Compression.ZipArchiveMode]::Read)
+
+          # Helper function to extract single file
+          function Extract-File($entryName, $outputPath) {
+            $entry = $archive.Entries | Where-Object { $_.FullName -ieq $entryName }
+            $outputFile = Join-Path $outputPath $entry.Name
+            if ($entry -eq $null) {
+              Write-Error "Entry $entryName not found in archive"
+              exit 1
+            }
+            [IO.Compression.ZipFileExtensions]::ExtractToFile($entry, $outputFile)
+            Write-Host "Extracted $entryName to $outputFile"
+          }
+
+          # Extract the two DLLs
+          [System.Environment]::CurrentDirectory = (Get-Location).Path
+          Extract-File "CH341PAR/CH347DLLA64.DLL" "build_x64/Release"
+          Extract-File "CH341PAR/CH347DLL.DLL" "build_win32/Release"
+
+          # Cleanup
+          $archive.Dispose()
+          $stream.Dispose()
+
+
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
         with:
           name: xvcd_ch347_windows_builds
           path: |
             build_x64/Release/xvcd_ch347_amd64.exe
+            build_x64/Release/CH347DLLA64.DLL
             build_win32/Release/xvcd_ch347_i386.exe
+            build_win32/Release/CH347DLL.DLL
