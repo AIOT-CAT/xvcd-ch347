@@ -1,0 +1,62 @@
+name: Build xvcd-ch347
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build-linux:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libusb-1.0-0-dev build-essential cmake
+
+      - name: Configure CMake
+        run: |
+          mkdir -p build
+          cd build
+          cmake ..
+
+      - name: Build
+        run: |
+          cd build
+          make
+      
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: xvcd_ch347_linux_builds
+          path: |
+            build/Release/xvcd_ch347_Linux
+
+  build-windows:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Add MSBuild to PATH
+        uses: microsoft/setup-msbuild@v2
+
+      - name: Build x64 Release
+        run: |
+          cmake -B build_x64 -A x64
+          cmake --build build_x64 --config Release
+
+      - name: Build x86 Release
+        run: |
+          cmake -B build_win32 -A win32
+          cmake --build build_win32 --config Release
+
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: xvcd_ch347_windows_builds
+          path: |
+            build_x64/Release/xvcd_ch347_amd64.exe
+            build_win32/Release/xvcd_ch347_i386.exe
