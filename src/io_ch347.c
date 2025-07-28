@@ -240,16 +240,19 @@ int io_scan(dev_ctx *ch347_ctx, const unsigned char *TMS, const unsigned char *T
         CmdBuffer[BI++] = (unsigned char)(((length * 2) >> 8) & 0xFF);
 
         for (i = 0; i < length; ++i) {
-            v = TCK_L | TMS_L | TDI_L;
-            if (TMS[nb8 + (i / 8)] & (1 << (i & 7))) {
-                v |= TMS_H;
-            }
-            if (TDI[nb8 + (i / 8)] & (1 << (i & 7))) {
-                v |= TDI_H;
-            }
-            CmdBuffer[BI++] = v;
-            CmdBuffer[BI++] = v | TCK_H;
-        }
+			v = TCK_L | TMS_L | TDI_L;
+			if (TMS[nb8 + (i / 8)] & (1 << (i & 7))) {
+				v |= TMS_H;
+			}
+			if (TDI[nb8 + (i / 8)] & (1 << (i & 7))) {
+				v |= TDI_H;
+			}
+			CmdBuffer[BI++] = v;
+			CmdBuffer[BI++] = v | TCK_H;
+		}
+		CmdBuffer[BI++] = v & ~TCK_H;
+		CmdBuffer[1] = BI - 3;
+		CmdBuffer[2] = (BI - 3) >> 8;
 
         // 添加用于处理大包数据时组包操作参数
         RetVal = ch347_write(ch347_ctx, CmdBuffer, &BI);
