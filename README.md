@@ -31,7 +31,7 @@ sudo apt-get update
 sudo apt-get install libusb-1.0-0-dev
 # This installs libusb 0.0.1, no need to install unless you clear what you are doing.
 # sudo apt-get install libusb-dev
-sudo apt install build-essentials cmake
+sudo apt install build-essential cmake
 ```
 
 or you can install libusb manually from: https://github.com/libusb/libusb.git
