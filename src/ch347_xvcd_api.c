@@ -167,6 +167,13 @@ int ch347_jtag_init(dev_ctx *ch347_ctx, uint8_t clock)
 int ch347_write(dev_ctx *ch347_ctx, uint8_t *data, uint32_t *len)
 {
     int ret = 0;
+
+    if (data[0] != CH347_CMD_JTAG_DATA_SHIFT_RD && data[0] != CH347_CMD_JTAG_DATA_SHIFT) {
+        for (int i = 3; i < *len; i++) {
+            data[i] |= TRST_H;
+        }
+    }
+
 #if PLATFORM_WINDOWS
     ULONG length = *len;
     ret = CH347WriteData(ch347_ctx->usb_index, data, &length);
