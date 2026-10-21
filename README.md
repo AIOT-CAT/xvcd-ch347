@@ -44,6 +44,19 @@ cmake ..
 make
 ```
 
+## Xilinx Vivado Connect Example
+
+tcl command
+```
+# Open & link server
+connect_hw_server -url localhost:3121
+open_hw_target -xvc_url 127.0.0.1:2542
+```
+```
+# Close server
+disconnect_hw_server localhost:3121
+```
+
 ## FAQ
 
 1. **About clock**
